@@ -15,7 +15,7 @@ def config_reports( conf ):
     """
     conf.parameters.Report_Event_Recorder_Events = [
       "NewInfectionEvent",
-      "HIVSymptomatic",
+      "NewlySymptomatic",
       "STIDebut",
       "CSW_Uptake",
       "CSW_Dropout",

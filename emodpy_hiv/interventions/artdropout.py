@@ -1,24 +1,40 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
 
-def new_intervention( camp ):
+from typing import List
+
+
+def new_intervention( camp, intervention_name: str = None, disqualifying_properties: List[str] = None,
+                     new_property_value: str = None):
     """
     ARTDropout intervention wrapper. Just the intervention. No configuration yet.
     """
     intervention = s2c.get_class_with_defaults( "ARTDropout", camp.schema_path )
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
     return intervention
+
 
 def new_intervention_event( 
         camp, 
         start_day=1, 
         coverage=1.0, 
-        node_ids=None
+        node_ids=None,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     ARTDropout intervention as complete (scheduled) event.
     """
-    art_iv = new_intervention( camp )
+    art_iv = new_intervention( camp,
+                               intervention_name=intervention_name,
+                               disqualifying_properties=disqualifying_properties,
+                               new_property_value=new_property_value
+                               )
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

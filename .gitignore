@@ -73,6 +73,7 @@ instance/
 docs/_build/
 docs/emodpy_hiv*
 docs/external/*.rst
+docs/modules.rst
 
 # PyBuilder
 target/

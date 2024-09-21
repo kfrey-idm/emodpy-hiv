@@ -1,25 +1,38 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
+
+from typing import List
+
 
 def new_diagnostic(
         camp,
         Positive_Event,
-        Negative_Event
+        Negative_Event,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
         Wrapper function to create and return a HIVRapidHIVDiagnostic intervention. 
 
         Args:
             camp: emod_api.campaign object with schema_path set.
+            intervention_name (str): The name of the intervention.
+            disqualifying_properties (list of str): A list of IndividualProperty key:value pairs that cause an intervention to be aborted
+            new_property_value (str): An optional IndividualProperty key:value pair that will be assigned when the intervention is distributed.
             
 
         Returns:
             ReadOnlyDict: Schema-based smart dictionary representing a new
     """
     intervention = s2c.get_class_with_defaults( "HIVRapidHIVDiagnostic", camp.schema_path )
-    intervention.Positive_Diagnosis_Event = camp.get_event( Positive_Event, old=True )
-    intervention.Negative_Diagnosis_Event = camp.get_event( Negative_Event, old=True )
+    intervention.Positive_Diagnosis_Event = camp.get_send_trigger( Positive_Event, old=True )
+    intervention.Negative_Diagnosis_Event = camp.get_send_trigger( Negative_Event, old=True )
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
 
     return intervention
 
@@ -30,12 +43,17 @@ def new_intervention_event(
         neg_event,
         start_day=1, 
         coverage=1.0, 
-        node_ids=None
+        node_ids=None,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     Diagnostic as scheduled event.
     """
-    diag = new_diagnostic( camp, pos_event, neg_event )
+    diag = new_diagnostic( camp, pos_event, neg_event, intervention_name=intervention_name,
+                           disqualifying_properties=disqualifying_properties,
+                           new_property_value=new_property_value)
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

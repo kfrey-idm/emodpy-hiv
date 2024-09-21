@@ -12,7 +12,7 @@ import emodpy_hiv.demographics.DemographicsTemplates as DT
 
 parent = Path(__file__).resolve().parent
 sys.path.append(str(parent))
-import schema_path_file
+import manifest
 
 
 class RelType(Enum):
@@ -23,7 +23,7 @@ class RelType(Enum):
 
 
 class HIVDemographicsTest(unittest.TestCase):
-    schema_path = schema_path_file.schema_path
+    schema_path = manifest.schema_path
 
     # region unittest setup and teardown method
     @classmethod
@@ -32,11 +32,9 @@ class HIVDemographicsTest(unittest.TestCase):
 
     def setUp(self):
         print(f"running {self._testMethodName}:")
-        pass
 
     def tearDown(self):
         print("end of test\n")
-        pass
     # endregion
 
     # region unittests
@@ -62,7 +60,6 @@ class HIVDemographicsTest(unittest.TestCase):
         self.assertEqual(node_attributes['InitialPopulation'], pop)
         self.assertEqual(node_attributes["Latitude"], lat)
         self.assertEqual(node_attributes["Longitude"], lon)
-        pass
 
     def test_from_pop_csv(self):
         """
@@ -135,8 +132,8 @@ class HIVDemographicsTest(unittest.TestCase):
         demog.mortality(parent / "inputs" / "Malawi_male_mortality.csv",
                         parent / "inputs" / "Malawi_female_mortality.csv", predict_horizon=2060,
                         results_scale_factor=1.0/340.0, csv_out=True)
-        male_input = pd.read_csv(parent / "inputs" / "Malawi_male_mortality.csv")
-        female_input = pd.read_csv(parent / "inputs" / "Malawi_male_mortality.csv")
+        # male_input = pd.read_csv(parent / "inputs" / "Malawi_male_mortality.csv")
+        # female_input = pd.read_csv(parent / "inputs" / "Malawi_male_mortality.csv")
         output = demog.raw['Defaults']
 
         # Check population group consistency

@@ -28,6 +28,16 @@ if sys.platform in ["linux", "darwin"]:
 else:
     subprocess.check_output(["make.bat", "generate-api"], cwd=os.path.dirname(os.path.abspath(__file__)))
 
+# Rename "emodpy-hiv" to "API reference"
+filename = 'modules.rst' # This must match the Makefile
+with open(filename) as f: # Read existing file
+    lines = f.readlines()
+lines[0] = "API reference\n" # Blast away the existing heading and replace with this
+lines[1] = "=============\n" # Ensure the heading is the right length
+with open(filename, "w") as f: # Write new file
+    f.writelines(lines)
+
+
 # -- General configuration ------------------------------------------------
 
 tags.add('emodpyhiv')
@@ -49,7 +59,28 @@ extensions = [
     'sphinxcontrib.programoutput',
     'sphinx.ext.intersphinx',
     'sphinxext.remoteliteralinclude',
-    'sphinx_copybutton'
+    'sphinx_copybutton',
+    'myst_parser',
+    'sphinx_search.extension', # search across multiple docsets in domain
+    'sphinx.ext.viewcode', # link to view source code
+    'myst_parser', # source files written in MD or RST
+]
+
+myst_enable_extensions = [
+    "amsmath",
+    "attrs_inline",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
 ]
 
 plantuml = 'plantweb'
@@ -71,8 +102,7 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
 
 # The encoding of source files.
 #
@@ -105,7 +135,7 @@ author = u'Institute for Disease Modeling'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -197,16 +227,12 @@ html_favicon = "images/favicon.ico"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
+
 html_static_path = ['_static']
 
-html_context = {
-    'css_files': [
-        '_static/theme_overrides.css',
-        '_static/copy_button.css'
-        ]
-}
+html_css_files = ['theme_overrides.css']
 
-html_js_files = ['show_block_by_os.js']
+html_js_files = ['show_block_by_os.js'] 
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -263,6 +289,22 @@ html_show_sphinx = False
 # base URL from which the finished HTML is served.
 #
 html_use_opensearch = 'www.idmod.org/docs/'
+
+# -- RTD Sphinx search for searching across the entire domain, default parent -------------
+
+if os.environ.get('READTHEDOCS') == 'True':
+
+    search_project_parent = "institute-for-disease-modeling-idm"
+    search_project = os.environ["READTHEDOCS_PROJECT"]
+    search_version = os.environ["READTHEDOCS_VERSION"]
+
+    rtd_sphinx_search_default_filter = f"subprojects:{search_project}/{search_version}"
+
+    rtd_sphinx_search_filters = {
+        "Search this project": f"project:{search_project}/{search_version}",
+        "Search all IDM docs": f"subprojects:{search_project_parent}/{search_version}",
+    }
+
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = None

@@ -1,7 +1,9 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
 from . import utils as hiv_utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
+
+from typing import List
 
 def new_diagnostic(
         camp,
@@ -9,7 +11,10 @@ def new_diagnostic(
         Negative_Event,
         Threshold_TVMap,
         IP_TVMap,
-        IAT_TVMap
+        IAT_TVMap,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
         Wrapper function to create and return a HIVARTStagingByCD4Diagnostic intervention. 
@@ -31,6 +36,11 @@ def new_diagnostic(
     hiv_utils.set_tvmap_lists_from_map( IAT_TVMap, intervention.If_Active_TB )
     hiv_utils.set_tvmap_lists_from_map( Threshold_TVMap, intervention.Threshold )
 
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
+
     return intervention
 
 
@@ -43,12 +53,17 @@ def new_intervention_event(
         tb_tvmap,
         start_day=1, 
         coverage=1.0, 
-        node_ids=None
+        node_ids=None,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     Diagnostic as scheduled event.
     """
-    diag = new_diagnostic( camp, pos_event, neg_event, thresh_tvmap, pregnant_tvmap, tb_tvmap )
+    diag = new_diagnostic( camp, pos_event, neg_event, thresh_tvmap, pregnant_tvmap, tb_tvmap,
+                           intervention_name=intervention_name, disqualifying_properties=disqualifying_properties,
+                           new_property_value=new_property_value)
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

@@ -69,10 +69,6 @@ Installation instructions
 
         pip install emodpy-hiv
 
-    If you are on Python 3.6, also run::
-
-        pip install dataclasses
-
     If you are on Linux, also run::
 
         pip install keyrings.alt

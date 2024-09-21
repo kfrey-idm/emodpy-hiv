@@ -1,10 +1,15 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
+
+from typing import List
 
 def new_diagnostic(
         camp,
-        choices
+        choices,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
         Wrapper function to create and return a HIVRandomChoice intervention. 
@@ -12,20 +17,27 @@ def new_diagnostic(
         Args:
             camp: emod_api.campaign object with schema_path set.
             choices: dict of events:probability, with probs summing up to 1.0
+            intervention_name (str): The name of the intervention.
+            disqualifying_properties (list of str): A list of IndividualProperty key:value pairs that cause an intervention to be aborted
+            new_property_value (str): An optional IndividualProperty key:value pair that will be assigned when the intervention is distributed.
             
 
         Returns:
             ReadOnlyDict: Schema-based smart dictionary representing a new
     """
     intervention = s2c.get_class_with_defaults( "HIVRandomChoice", camp.schema_path )
-    # We should probably check that choices is correctly formatted. 
-    e2p = s2c.get_class_with_defaults( "idmType:Event2ProbabilityType", camp.schema_path )
-    new_choices = {}
+    # We should probably check that choices is correctly formatted.
+    choice_names = []
+    choice_probabilities = []
     for key, value in choices.items():
-        e2p.Event = camp.get_event( key, old=True )
-        e2p.Probability = value 
-        new_choices.update( { key: value } )
-    intervention.Choices = new_choices
+        choice_names.append(camp.get_send_trigger(key, old=True))
+        choice_probabilities.append(value)
+    intervention.Choice_Names = choice_names
+    intervention.Choice_Probabilities = choice_probabilities
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
 
     return intervention
 
@@ -35,12 +47,17 @@ def new_intervention_event(
         choices,
         start_day=1, 
         coverage=1.0, 
-        node_ids=None
+        node_ids=None,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     Diagnostic as scheduled event.
     """
-    diag = new_diagnostic( camp, choices )
+    diag = new_diagnostic( camp, choices, intervention_name=intervention_name,
+                           disqualifying_properties=disqualifying_properties,
+                           new_property_value=new_property_value)
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

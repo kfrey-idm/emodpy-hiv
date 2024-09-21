@@ -42,12 +42,12 @@ class HIVDemographics(Demog.Demographics):
         super().SetDefaultNodeAttributes(birth=True)
         hiv_dt.add_default_society(self)
 
-    def fertility(self, path_to_csv):
+    def fertility(self, path_to_csv, verbose=False):
         """
         Set fertility based on data. Simulation shall concist of individual pregnancies with rates by 
         woman's age and year-of-simulation using data from provided csv.
         """
-        super().SetDefaultFromTemplate(dt.get_fert_dist(path_to_csv), dt._set_fertility_age_year)
+        super().SetDefaultFromTemplate(dt.get_fert_dist(path_to_csv, verbose=verbose), dt._set_fertility_age_year)
 
     def mortality(
                 self,
@@ -268,9 +268,9 @@ def from_pop_csv(pop_filename_in, pop_filename_out="spatial_gridded_pop_dir", si
         site: A string to identify the country, village, or trial site.
 
     Returns:
-        A :py:class:`~emodpy_malaria.demographics.HIVDemographics` instance.
+        A :py:class:`~emodpy_hiv.demographics.HIVDemographics` instance.
     """
-    generic_demog = Demog.from_pop_csv(pop_filename_in, pop_filename_out, site)
+    generic_demog = Demog.from_pop_csv(pop_filename_in=pop_filename_in, pop_filename_out=pop_filename_out, site=site)
     nodes = generic_demog.nodes
     return HIVDemographics(nodes=nodes, idref=site)
 

@@ -1,7 +1,10 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
 from . import utils as hiv_utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
+
+from typing import List
+
 
 def new_diagnostic(
         camp,
@@ -12,7 +15,10 @@ def new_diagnostic(
         abw_tvmap,
         cua_tvmap,
         cbt_tvmap,
-        cbw_tvmap
+        cbw_tvmap,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
         Wrapper function to create and return a HIVARTStagingCD4AgnosticDiagnostic intervention. 
@@ -34,7 +40,10 @@ def new_diagnostic(
     hiv_utils.set_tvmap_lists_from_map( cua_tvmap, intervention.Child_Treat_Under_Age_In_Years_Threshold )
     hiv_utils.set_tvmap_lists_from_map( cbt_tvmap, intervention.Child_By_TB )
     hiv_utils.set_tvmap_lists_from_map( cbw_tvmap, intervention.Child_By_WHO_Stage )
-
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
     return intervention
 
 
@@ -50,12 +59,17 @@ def new_intervention_event(
         cbw_tvmap,
         start_day=1, 
         coverage=1.0, 
-        node_ids=None
+        node_ids=None,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     Diagnostic as scheduled event.
     """
-    diag = new_diagnostic( camp, pos_event, neg_event, abp_tvmap, abt_tvmap, abw_tvmap, cua_tvmap, cbt_tvmap, cbw_tvmap )
+    diag = new_diagnostic( camp, pos_event, neg_event, abp_tvmap, abt_tvmap, abw_tvmap, cua_tvmap, cbt_tvmap, cbw_tvmap,
+                           intervention_name=intervention_name, disqualifying_properties=disqualifying_properties,
+                           new_property_value=new_property_value)
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

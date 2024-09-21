@@ -56,9 +56,7 @@ clean:
 
 generate-api: 
 	-rm modules.rst
-	-rm emodpy_hiv_index.rst
 	sphinx-apidoc -f -e -M -o . ../emodpy_hiv
-	mv modules.rst emodpy_hiv_index.rst 
 
 .PHONY: html
 html:
@@ -235,3 +233,10 @@ dummy:
 	$(SPHINXBUILD) -b dummy $(ALLSPHINXOPTS) $(BUILDDIR)/dummy
 	@echo
 	@echo "Build finished. Dummy builder generates no files."
+	
+.PHONY: htmlnobreak
+htmlnobreak:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) --keep-going $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+

@@ -18,32 +18,36 @@ def DistributeIVByRefTrack(
         Target_Age_Max=125*365,
         Target_Gender="All",
         Update_Period=None,
-        IV_Tracking_Name=None
-    ):
+        IV_Tracking_Name=None,
+        Target_Disease_State=None):
 
     """
-        Wrapper function to create and return a ScheduledCampaignEvent intervention. 
-        The alternative to a ScheduledCampaignEvent is a TriggeredCampaignEvent.
+    Wrapper function to create and return a ScheduledCampaignEvent intervention.
+    The alternative to a ScheduledCampaignEvent is a TriggeredCampaignEvent.
 
-        Args:
-            camp: emod_api.campaign object with schema_path set.
-            Start_Day: When to start.
-            Intervention: Valid intervention to be distributed together as necessary to track coverage targets. Can be single intervention or list (list is useful where you want a co-event). If list, actual intervention should be first.
-            Event_Name: Name for overall campaign event, of not functional meaning.
-            node_ids: Nodes to target with this intervention, return from utils.do_nodes().
-            Property_Restrictions: Individual Properties a person must have to receive the intervention(s).
-            Number_Repetitions: N/A 
-            Timesteps_Between_Repetitions: N/A 
-            Target_Demographic: Everyone, ExplicitAgeRanges, etc.
-            Target_Age_Min: Minimum age (in years).
-            Target_Age_Max: Maximum age (in years).
-            Target_Gender: All, Male, or Female.
-            Update_Period: Number representing how frequently the distributions are done.
-            IV_Tracking_Name: Optional string parameter to distinguish one intervention from another if you're doing multiple campaigns with the same underlying intervention.
+    Args:
+        camp: emod_api.campaign object with schema_path set.
+        Start_Day: When to start.
+        Intervention: Valid intervention to be distributed together as necessary to track coverage targets. Can be single intervention or list (list is useful where you want a co-event). If list, actual intervention should be first.
+        Event_Name: Name for overall campaign event, of not functional meaning.
+        node_ids: Nodes to target with this intervention, return from utils.do_nodes().
+        Property_Restrictions: Individual Properties a person must have to receive the intervention(s).
+        Number_Repetitions: N/A
+        Timesteps_Between_Repetitions: N/A
+        Target_Demographic: Everyone, ExplicitAgeRanges, etc.
+        Target_Age_Min: Minimum age (in years).
+        Target_Age_Max: Maximum age (in years).
+        Target_Gender: All, Male, or Female.
+        Update_Period: Number representing how frequently the distributions are done.
+        IV_Tracking_Name: Optional string parameter to distinguish one intervention from another if you're doing multiple campaigns with the same underlying intervention.
+        Target_Disease_State: Optional string parameter to specify the disease state to target with this
+            intervention. Default to None which means Everyone. Possible values are: "Everyone", "HIV_Positive",
+            "HIV_Negative", "Tested_Positive", "Tested_Negative", "Not_Tested_Or_Tested_Negative".
 
-        Returns:
-            ReadOnlyDict: Schema-based smart dictionary representing a new 
-            ScheduledCampaignEvent intervention ready to be added to a campaign.
+    Returns:
+        ReadOnlyDict: Schema-based smart dictionary representing a new
+        ScheduledCampaignEvent intervention ready to be added to a campaign.
+
     """
     global schema_path
     schema_path = ( camp.schema_path if camp is not None else schema_path )
@@ -83,8 +87,11 @@ def DistributeIVByRefTrack(
 
     hiv_utils.set_tvmap_lists_from_map( TVMap, coordinator.Time_Value_Map )
 
-    if Update_Period:
+    if Update_Period is not None:
         coordinator.Update_Period = Update_Period
+
+    if Target_Disease_State is not None:
+        coordinator.Target_Disease_State = Target_Disease_State
 
     event.Nodeset_Config = utils.do_nodes( camp.schema_path, node_ids )
     hiv_utils.declutter( event )

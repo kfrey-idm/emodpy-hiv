@@ -28,5 +28,5 @@
 .. |DT| replace:: DTK-Tools
 .. |COMPS_l| replace:: COmputational Modeling Platform Service (COMPS)
 .. |COMPS_s| replace:: COMPS
-.. |Python_supp| replace:: Python 3.6.2 or 3.7 64-bit
+.. |Python_supp| replace:: Python 3.9 64-bit
 

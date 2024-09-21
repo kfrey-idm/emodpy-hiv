@@ -2,7 +2,7 @@ import os
 import pathlib
 dirs = os.listdir()
 input_files = list()
-skips = [ "rakai-optimtool", "rakai", "demo_scenario", "campaign_sweep", "demographics_sweep" ]
+skips = [ "rakai-optimtool", "rakai", "demo_scenario", "campaign_sweep", "demographics_sweep", "start_here--cluster" ]
 for dir in dirs:
     if dir in skips:
         continue
@@ -28,12 +28,17 @@ rule start_here:
             shell( "pushd start_here && python example.py && popd" )
         else:
             shell( "pushd start_here && python3 example.py && popd" )
-        #try:
-            #os.chdir( "start_here" )
-            #import example
-            #example.run()
-        #finally:
-            #os.chdir( home_base )
+rule prep:
+    """run prep example"""
+    input:
+    params:
+        expand("{use_vpn}", use_vpn=config["use_vpn"])
+    output: str(pathlib.PurePath( "prep", "COMPS_ID"))
+    run:
+        if os.name == "nt":
+            shell( "pushd prep && python example.py && popd" )
+        else:
+            shell( "pushd prep && python3 example.py && popd" )
 rule demo_scenario:
     """run demo_scenario example"""
     input:

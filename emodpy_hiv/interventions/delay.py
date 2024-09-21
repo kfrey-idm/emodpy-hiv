@@ -1,6 +1,9 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
+
+from typing import List
+
 
 def new_delay(
         camp,
@@ -9,7 +12,10 @@ def new_delay(
         Coverage=1,
         Delay=1,
         Shelf_Life=36500,
-        Name=""
+        Name="",
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
         Wrapper function to create and return a HIVDelayedIntervention intervention. 
@@ -25,12 +31,16 @@ def new_delay(
     intervention.Broadcast_Event = Bcast_Event 
     intervention.Broadcast_On_Expiration_Event =  Expire_Event
     intervention.Coverage = Coverage
-    intervention.Delay_Period = Delay
+    intervention.Delay_Period_Constant = Delay
     intervention.Expiration_Period = Shelf_Life
     if Name=="":
         Name = "HIVDelayedIntervention"
     intervention.Intervention_Name = Name
     intervention.Dont_Allow_Duplicates = 1
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
 
     return intervention
 
@@ -41,12 +51,18 @@ def new_intervention_event(
         expire_event="",
         coverage=1,
         delay=1,
-        shelf_life=0
+        shelf_life=0,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     Delay as scheduled event.
     """
-    diag = new_delay( camp, bcast_event, expire_event, coverage, delay, shelf_life )
+    diag = new_delay( camp, bcast_event, expire_event, coverage, delay, shelf_life,
+                      intervention_name=intervention_name, disqualifying_properties=disqualifying_properties,
+                      new_property_value=new_property_value
+                      )
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

@@ -1,14 +1,15 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
+
+from typing import List
 
 def new_diagnostic(
         camp,
         Positive_Event,
-        Base_Sensitivity=1,
-        Base_Specificity=1,
-        Days_To_Diagnosis=0,
-        Treatment_Fraction=1
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
         Wrapper function to create and return a HIVDrawBlood intervention. 
@@ -21,12 +22,11 @@ def new_diagnostic(
             ReadOnlyDict: Schema-based smart dictionary representing a new
     """
     intervention = s2c.get_class_with_defaults( "HIVDrawBlood", camp.schema_path )
-    intervention.Base_Sensitivity = Base_Sensitivity 
-    intervention.Base_Specificity = Base_Specificity 
     intervention.Positive_Diagnosis_Event = camp.get_event( Positive_Event, True )
-    # Schema is wrong here due to convenient inheritance. No choice but to hardcode this special knowledge
-    intervention.pop( "Negative_Diagnosis_Event" )
-
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
     return intervention
 
 
@@ -35,12 +35,17 @@ def new_intervention_event(
         pos_event,
         start_day=1, 
         coverage=1.0, 
-        node_ids=None
+        node_ids=None,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     Diagnostic as scheduled event.
     """
-    diag = new_diagnostic( camp, pos_event )
+    diag = new_diagnostic( camp, pos_event,
+                           intervention_name=intervention_name, disqualifying_properties=disqualifying_properties,
+                           new_property_value=new_property_value)
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

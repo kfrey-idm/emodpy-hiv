@@ -1,4 +1,3 @@
 -i https://packages.idmod.org/api/pypi/pypi-production/simple
 emodpy~=1.15
-emod-hiv==0.0.4
-numpy
+emod-hiv==1.0.2

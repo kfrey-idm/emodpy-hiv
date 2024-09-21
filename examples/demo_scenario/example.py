@@ -108,15 +108,15 @@ def build_camp():
     - Each function populates campaign.json, not that you have to know that, with intervention structures that 
       say 'If you hear this signal, do this other thing'.
 
-    1) add_choice( camp, sympto_signal="HIVSymptomatic", get_tested_signal="GetTested" )
+    1) add_choice( camp, sympto_signal="NewlySymptomatic", get_tested_signal="GetTested" )
        Intent: Some people who feel sick go to doctor. (Some don't.)
-       Listen for a 'HIVSymptomatic' signal, and 'toss a coin', and immediately broacast a 'GetTested' signal
+       Listen for a 'NewlySymptomatic' signal, and 'toss a coin', and immediately broacast a 'GetTested' signal
        for those who get 'heads'. More literally, 50% of folks broadcast 'GetTested', and the other 50% broadcast
        'Ignore'. The probs and 'Ignore' are hard-coded right now but of course don't have to be.
 
     2) add_test( camp, get_tested_signal="GetTested" )
        Intent: People who go to doctor get tested.
-       Listen for a 'HIVSymptomatic' signal, and administer an HIV RapidDiagonstic intervention. 30 days later,
+       Listen for a 'NewlySymptomatic' signal, and administer an HIV RapidDiagonstic intervention. 30 days later,
        broadcast an 'HIVPositiveTest' signal for the +ves, and an 'HIVNegativeTest' for the -ves. Since the current
        design starts with NewInfectionEvent, 100% of those tested will be +ve unless we have false negatives.
 

@@ -1,24 +1,43 @@
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
-import json
+from emodpy_hiv.interventions.utils import set_intervention_properties
 
-def new_intervention( camp ):
+from typing import List
+
+
+def new_intervention(camp, reduced_acquire=0.6, distributed_event='', intervention_name: str = None,
+                     disqualifying_properties: List[str] = None, new_property_value: str = None):
     """
     MaleCircumcision intervention wrapper. Just the intervention. No configuration yet.
     """
-    intervention = s2c.get_class_with_defaults( "MaleCircumcision", camp.schema_path )
+    intervention = s2c.get_class_with_defaults("MaleCircumcision", camp.schema_path)
+    intervention.Circumcision_Reduced_Acquire = reduced_acquire
+    if distributed_event :
+        intervention.Distributed_Event_Trigger = camp.get_send_trigger(distributed_event, True)
+    set_intervention_properties(intervention,
+                                intervention_name=intervention_name,
+                                disqualifying_properties=disqualifying_properties,
+                                new_property_value=new_property_value)
     return intervention
+
 
 def new_intervention_event( 
         camp, 
         start_day=1, 
         coverage=1.0, 
-        node_ids=None
+        node_ids=None,
+        intervention_name: str = None,
+        disqualifying_properties: List[str] = None,
+        new_property_value: str = None
     ):
     """
     VMMC intervention as complete (scheduled) event.
     """
-    iv = new_intervention( camp )
+    iv = new_intervention( camp,
+                           intervention_name=intervention_name,
+                           disqualifying_properties=disqualifying_properties,
+                           new_property_value=new_property_value
+                           )
 
     # Coordinator
     coordinator = s2c.get_class_with_defaults( "StandardEventCoordinator", camp.schema_path )

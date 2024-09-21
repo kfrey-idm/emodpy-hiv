@@ -1,11 +1,11 @@
 ===========================
-Welcome to |EMODPY_hiv|
+|EMODPY_hiv| documentation
 ===========================
 
 |EMODPY_hiv| is a collection of Python scripts and utilities created to
 streamline user interactions with |EMOD_s| and |IT_s| for modeling generic
 diseases. Much of  the functionality is inherited from the
-:doc:`emod_api:emod_api_index` and :doc:`emodpy:emodpy_index` packages.
+:doc:`emod_api:emod_api` and :doc:`emodpy:emodpy`.
 
 Additional information about how to use |IT_s| can be found at in
 :doc:`idmtools:index`.  Additional information about |EMOD_s| HIV
@@ -24,7 +24,7 @@ disease transmission model.
 
    installation
    faq
-   emodpy_hiv_index
+   modules
 
 .. toctree::
    :maxdepth: 3
@@ -36,4 +36,3 @@ disease transmission model.
    emod-api <https://docs.idmod.org/projects/emod-api/en/latest/>
    emodpy <https://docs.idmod.org/projects/emodpy/en/latest/>
    idmtools <https://docs.idmod.org/projects/idmtools/en/latest/>
-   pyCOMPS <https://docs.idmod.org/projects/pycomps/en/latest/>

@@ -61,7 +61,7 @@ def add_sti_coinfection_complex( camp, low_coverage=0.1, med_coverage=0.3, high_
 def add_csw( camp ):
     # STIDebut -(HIVDelay)-> Uptake -(PVC)-> Dropout (PVC)
     male_delayed_uptake = hiv_utils.broadcast_event_delayed( camp, "CSW_Uptake", delay={ "Delay_Period_Mean": ck.CSW_Male_Uptake_Delay, "Delay_Period_Std_Dev": 30.0 } )
-    female_delayed_uptake = hiv_utils.broadcast_event_delayed( camp, "CSW_Uptake", delay={ "Delay_Period": ck.CSW_Male_Uptake_Delay } )
+    female_delayed_uptake = hiv_utils.broadcast_event_delayed( camp, "CSW_Uptake", delay={ "Delay_Period_Constant": ck.CSW_Male_Uptake_Delay } )
 
     # 1: STIDebut->Uptake delay (males)
     add_triggered_event( camp, in_trigger="STIDebut", out_iv=male_delayed_uptake, event_name="Male CSW Debut->Uptake", coverage=ck.CSW_Male_Uptake_Coverage, target_sex="Male" )
@@ -70,8 +70,8 @@ def add_csw( camp ):
     add_triggered_event( camp, in_trigger="STIDebut", out_iv=female_delayed_uptake, event_name="Female CSW Debut->Uptake", coverage=ck.CSW_Female_Uptake_Coverage, target_sex="Female" )
 
     # 4: Uptake->Dropout delay (males)
-    male_delayed_dropout = hiv_utils.broadcast_event_delayed( camp, "CSW_Dropout", delay={ "Delay_Period": ck.CSW_Male_Dropout_Delay } )
-    female_delayed_dropout = hiv_utils.broadcast_event_delayed( camp, "CSW_Dropout", delay={ "Delay_Period": ck.CSW_Female_Dropout_Delay } )
+    male_delayed_dropout = hiv_utils.broadcast_event_delayed( camp, "CSW_Dropout", delay={ "Delay_Period_Constant": ck.CSW_Male_Dropout_Delay } )
+    female_delayed_dropout = hiv_utils.broadcast_event_delayed( camp, "CSW_Dropout", delay={ "Delay_Period_Constant": ck.CSW_Female_Dropout_Delay } )
 
     add_triggered_event( camp, in_trigger="CSW_Uptake", out_iv=male_delayed_dropout, event_name="Male CSW Uptake->Dropout", coverage=ck.CSW_Male_Dropout_Coverage, target_sex="Male" )
 
@@ -79,11 +79,11 @@ def add_csw( camp ):
     add_triggered_event( camp, in_trigger="CSW_Uptake", out_iv=female_delayed_dropout, event_name="Female CSW Uptake->Dropout", coverage=ck.CSW_Female_Dropout_Coverage, target_sex="Female" )
      
     # 3: Actually do the CSW Uptake (via PropertyValueChanger)
-    pvc_go_high = comm.PropertyValueChanger( camp, Target_Property_Key="Risk", Target_Property_Value="HIGH", New_Property_Value="" )
+    pvc_go_high = comm.PropertyValueChanger( camp, Target_Property_Key="Risk", Target_Property_Value="HIGH" )
     add_triggered_event( camp, in_trigger="CSW_Uptake", out_iv=pvc_go_high, event_name="CSW Uptake" )
 
     # 6: Actually do the CSW Dropout (via PropertyValueChanger)
-    pvc_go_med = comm.PropertyValueChanger( camp, Target_Property_Key="Risk", Target_Property_Value="MEDIUM", New_Property_Value="" )
+    pvc_go_med = comm.PropertyValueChanger( camp, Target_Property_Key="Risk", Target_Property_Value="MEDIUM" )
     add_triggered_event( camp, in_trigger="CSW_Dropout", out_iv=pvc_go_high, event_name="CSW Dropout" )
 
 
@@ -95,7 +95,7 @@ def _distribute_psk_tracker_by_age_and_sex( camp, min_age, max_age, sex, tvmap )
     # us target them with a "Faux Tested" intervention AND property.
     import emodpy_hiv.interventions.reftracker as reftracker
     # Listen for LatentStage events and set PositiveStatus
-    pvc_psk = comm.PropertyValueChanger( camp, Target_Property_Key="TestingStatus", Target_Property_Value="ELIGIBLE", New_Property_Value="" )
+    pvc_psk = comm.PropertyValueChanger( camp, Target_Property_Key="TestingStatus", Target_Property_Value="ELIGIBLE" )
     add_triggered_event( camp, in_trigger="HIVInfectionStageEnteredLatent", out_iv=pvc_psk, event_name="Set Eligible for Pos Status Known" )
 
     # Now, here's what we're going to do...
@@ -127,7 +127,7 @@ def _distribute_art_by_ref_counter_by_age_and_sex( camp, art_coverage, min_age, 
     import emodpy_hiv.interventions.reftracker as reftracker
     import emodpy_hiv.interventions.art as art
     new_art = art.new_intervention( camp )
-    delayed_dropout_iv = hiv_utils.broadcast_event_delayed( camp, "ARTDropout", delay={ "Delay_Period": ck.ART_Duration } ) # make this duration a bit more sophisticated
+    delayed_dropout_iv = hiv_utils.broadcast_event_delayed( camp, "ARTDropout", delay={ "Delay_Period_Constant": ck.ART_Duration } ) # make this duration a bit more sophisticated
     iv_tracking_name = None #"ART for " + sex + "s"
     # Old way of doing ART is ARTBasic + Delay->ARTDropout
 

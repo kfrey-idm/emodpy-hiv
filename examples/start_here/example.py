@@ -49,6 +49,7 @@ def set_param_fn( config ):
     config.parameters.Enable_Demographics_Reporting = 0  # just because I don't like our default for this
 
     # config hacks until schema fixes arrive
+    config.parameters.Incubation_Period_Exponential = 30 # this should NOT be necessary
     config.parameters.pop( "Serialized_Population_Filenames" )
     config.parameters.pop( "Serialization_Time_Steps" )
     config.parameters.Report_HIV_Event_Channels_List = []
@@ -57,6 +58,7 @@ def set_param_fn( config ):
     # This one is crazy! :(
     config.parameters.Maternal_Infection_Transmission_Probability = 0
     config.parameters['logLevel_default'] = "WARNING" # 'LogLevel_Default' is not in scheme, so need to use the old style dict keys
+    
 
     return config
 
@@ -101,6 +103,7 @@ def run_test():
     pl = RequirementsToAssetCollection( platform, requirements_path=manifest.requirements ) 
 
     task = EMODTask.from_default2(config_path="config.json", eradication_path=manifest.eradication_path, campaign_builder=build_camp, demog_builder=build_demog, schema_path=manifest.schema_file, param_custom_cb=set_param_fn, ep4_custom_cb=None)
+    task.set_sif(str(manifest.sif_path))  # set_sif() expects a string
 
     #task.common_assets.add_asset( demog_path )
 

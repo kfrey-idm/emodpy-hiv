@@ -9,7 +9,7 @@ def config_reports( conf ):
     ]
     conf.parameters.Report_Event_Recorder_Events = [
       "NewInfectionEvent",
-      "HIVSymptomatic",
+      "NewlySymptomatic",
       "StartTreatment",
       "StartedART",
       "GetTested",
