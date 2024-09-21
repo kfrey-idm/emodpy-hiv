@@ -1,0 +1,95 @@
+import os
+import pathlib
+dirs = os.listdir()
+input_files = list()
+skips = [ "rakai-optimtool", "rakai", "demo_scenario", "campaign_sweep", "demographics_sweep" ]
+for dir in dirs:
+    if dir in skips:
+        continue
+    if os.path.isdir(dir) and str(dir).startswith(".") == False:
+        input_files.append(str(pathlib.PurePath(dir, "COMPS_ID")))
+print(input_files)
+configfile: "snakemake_config.json"
+
+home_base = os.getcwd()
+
+rule run:
+    input: input_files
+    output:
+    shell: ""
+rule start_here:
+    """run start_here example"""
+    input:
+    params:
+        expand("{use_vpn}", use_vpn=config["use_vpn"])
+    output: str(pathlib.PurePath( "start_here", "COMPS_ID"))
+    run:
+        if os.name == "nt":
+            shell( "pushd start_here && python example.py && popd" )
+        else:
+            shell( "pushd start_here && python3 example.py && popd" )
+        #try:
+            #os.chdir( "start_here" )
+            #import example
+            #example.run()
+        #finally:
+            #os.chdir( home_base )
+rule demo_scenario:
+    """run demo_scenario example"""
+    input:
+    params:
+        expand("{use_vpn}", use_vpn=config["use_vpn"])
+    output: str(pathlib.PurePath( "demo_scenario", "COMPS_ID"))
+    run:
+        try:
+            os.chdir( "demo_scenario" )
+            import example
+            example.run()
+        finally:
+            os.chdir( home_base )
+rule campaign_sweep:
+    """run campaign_sweep example"""
+    input:
+    params:
+        expand("{use_vpn}", use_vpn=config["use_vpn"])
+    output: str(pathlib.PurePath( "campaign_sweep", "COMPS_ID"))
+    run:
+        try:
+            os.chdir( "campaign_sweep" )
+            import example
+            example.run()
+        finally:
+            os.chdir( home_base )
+rule demographics_sweep:
+    """run demographics_sweep example"""
+    input:
+    params:
+        expand("{use_vpn}", use_vpn=config["use_vpn"])
+    output: str(pathlib.PurePath( "demographics_sweep", "COMPS_ID"))
+    run:
+        try:
+            os.chdir( "demographics_sweep" )
+            import example
+            example.run()
+        finally:
+            os.chdir( home_base )
+rule rakai:
+    """run rakai example"""
+    input:
+    params:
+        expand("{use_vpn}", use_vpn=config["use_vpn"])
+    output: str(pathlib.PurePath( "rakai", "COMPS_ID"))
+    run:
+        try:
+            os.chdir( "rakai" )
+            import example
+            example.run()
+        finally:
+            os.chdir( home_base )
+rule clean:
+    input:
+    output:
+    run:
+        for input_file in input_files:
+            if os.path.exists( input_file ):
+                os.remove(input_file)
