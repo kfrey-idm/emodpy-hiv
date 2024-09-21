@@ -1,6 +1,6 @@
-==========================
-Frequently asked questions
-==========================
+===
+FAQ
+===
 
 As you get started with |EMODPY_hiv|, you may have questions. The most common
 questions are answered below. For questions related to functionality in related 

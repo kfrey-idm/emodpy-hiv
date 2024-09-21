@@ -6,6 +6,8 @@ assets_input_dir="Assets"
 plugins_folder="stash"
 output_dl_folder="COMPS_output_downloads"
 output_files_to_get=["output/ReportHIVByAgeAndGender.csv"]
-fertility="stash/data/Uganda_Fertility_Historical_Projection.csv"
-male_mortality="stash/data/Uganda_male_mortality.csv"
-female_mortality="stash/data/Uganda_female_mortality.csv"
+fertility="data/Uganda_Fertility_Historical_Projection.csv"
+male_mortality="data/Uganda_male_mortality.csv"
+female_mortality="data/Uganda_female_mortality.csv"
+
+sif_path = "../production_sif.id"

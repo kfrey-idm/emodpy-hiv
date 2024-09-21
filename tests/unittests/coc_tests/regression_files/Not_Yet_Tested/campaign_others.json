@@ -1,0 +1,1589 @@
+{
+    "Campaign_Name": "Campaign file for Zambia",
+    "Default_Campaign_Path": "campaign_StatusQuo_Reference_Tracking.json",
+    "Events": [
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "End_of_Control_Label",
+                        "Delay_Period_Constant": 730,
+                        "Delay_Period_Distribution": "CONSTANT_DISTRIBUTION",
+                        "Intervention_Name": "DMPA_Impact_Control_Group",
+                        "New_Property_Value": "",
+                        "class": "HIVDelayedIntervention"
+                    },
+                    "Target_Demographic": "ExplicitGender",
+                    "Target_Gender": "Female",
+                    "Trigger_Condition_List": [
+                        "Receive_Control_Intervention"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "DMPA Control Group",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2018,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "End_of_Intervention_Label",
+                        "Delay_Period_Constant": 730,
+                        "Delay_Period_Distribution": "CONSTANT_DISTRIBUTION",
+                        "Intervention_Name": "DMPA_Impact_Intervention_Group",
+                        "New_Property_Value": "",
+                        "class": "HIVDelayedIntervention"
+                    },
+                    "Target_Demographic": "ExplicitGender",
+                    "Target_Gender": "Female",
+                    "Trigger_Condition_List": [
+                        "Receive_DMPA_Intervention"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "DMPA Intervention Group Label",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2018,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Intervention_Name": "DMPA_Impact_Receive_Vaccine",
+                        "Vaccine_Type": "AcquisitionBlocking",
+                        "Waning_Config": {
+                            "Durability_Map": {
+                                "Times": [
+                                    0,
+                                    730,
+                                    731
+                                ],
+                                "Values": [
+                                    1.0,
+                                    1.0,
+                                    0.0
+                                ]
+                            },
+                            "Expire_At_Durability_Map_End": 1,
+                            "Initial_Effect": 0,
+                            "Initial_Effect__KP_Impact_of_Switching_from_DMPA": 0.2857,
+                            "class": "WaningEffectMapLinear"
+                        },
+                        "class": "SimpleVaccine"
+                    },
+                    "Target_Demographic": "ExplicitGender",
+                    "Target_Gender": "Female",
+                    "Trigger_Condition_List": [
+                        "Receive_DMPA_Intervention"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "DMPA Intervention Group",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2018,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "BEGIN": "PREP INTERVENTION",
+            "Event_Coordinator_Config": {
+                "End_Year": 2100,
+                "Intervention_Config": {
+                    "Cost_To_Consumer": 1.0,
+                    "Distributed_Event_Trigger": "Received_PrEP",
+                    "Intervention_Name": "PrEP",
+                    "Vaccine_Take": 1,
+                    "Vaccine_Type": "AcquisitionBlocking",
+                    "Waning_Config": {
+                        "Durability_Map": {
+                            "Times": [
+                                0,
+                                1825
+                            ],
+                            "Values": [
+                                0.73,
+                                0.73
+                            ]
+                        },
+                        "Expire_At_Durability_Map_End": 1,
+                        "Initial_Effect": 1,
+                        "class": "WaningEffectMapLinear"
+                    },
+                    "Waning_Config__KP_PrEP_HIGH_Waning": "<-- MARKER",
+                    "class": "ControlledVaccine"
+                },
+                "Property_Restrictions": [
+                    "Risk:HIGH"
+                ],
+                "Target_Age_Max": 1,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Disease_State": "HIV_Negative",
+                "Target_Gender": "Female",
+                "Time_Value_Map": {
+                    "Times": [
+                        2017,
+                        2020
+                    ],
+                    "Values": [
+                        0.0,
+                        0.0
+                    ]
+                },
+                "Update_Period": 7.01923076923,
+                "class": "ReferenceTrackingEventCoordinatorHIV"
+            },
+            "Event_Coordinator_Config__KP_PrEP_HIGH_Event": "<-- MARKER",
+            "Event_Name": "PrEP Reference Tracking [HIGH]",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2099,
+            "Start_Year__KP_PrEP_HIGH_Start_Year": "<-- MARKER",
+            "class": "CampaignEventByYear"
+        },
+        {
+            "END": "PREP INTERVENTION",
+            "Event_Coordinator_Config": {
+                "End_Year": 2100,
+                "Intervention_Config": {
+                    "Cost_To_Consumer": 1.0,
+                    "Distributed_Event_Trigger": "Received_PrEP",
+                    "Intervention_Name": "PrEP",
+                    "Vaccine_Take": 1,
+                    "Vaccine_Type": "AcquisitionBlocking",
+                    "Waning_Config": {
+                        "Durability_Map": {
+                            "Times": [
+                                0,
+                                1825
+                            ],
+                            "Values": [
+                                0.73,
+                                0.73
+                            ]
+                        },
+                        "Expire_At_Durability_Map_End": 1,
+                        "Initial_Effect": 1,
+                        "class": "WaningEffectMapLinear"
+                    },
+                    "Waning_Config__KP_PrEP_MED_Waning": "<-- MARKER",
+                    "class": "ControlledVaccine"
+                },
+                "Property_Restrictions": [
+                    "Risk:MEDIUM"
+                ],
+                "Target_Age_Max": 1,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Disease_State": "HIV_Negative",
+                "Target_Gender": "Female",
+                "Time_Value_Map": {
+                    "Times": [
+                        2017,
+                        2020
+                    ],
+                    "Values": [
+                        0.0,
+                        0.0
+                    ]
+                },
+                "Update_Period": 7.01923076923,
+                "class": "ReferenceTrackingEventCoordinatorHIV"
+            },
+            "Event_Coordinator_Config__KP_PrEP_MED_Event": "<-- MARKER",
+            "Event_Name": "PrEP Reference Tracking [MEDIUM]",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2099,
+            "Start_Year__KP_PrEP_MED_Start_Year": "<-- MARKER",
+            "class": "CampaignEventByYear"
+        },
+        {
+            "BEGIN": "VMMC PROGRAM BY AGE AND PROVINCE USING NCHOOSER",
+            "Event_Coordinator_Config": {
+                "Distributions": [
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2010.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            211,
+                            1292
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2010.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2011.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            294,
+                            1000
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2011.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2012.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            200,
+                            4498,
+                            11210,
+                            133
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2012.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2013.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            1079,
+                            9533,
+                            16314,
+                            221
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2013.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2014.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            215,
+                            10734,
+                            18020,
+                            433
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2014.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2015.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            0,
+                            8064,
+                            25054,
+                            179
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2015.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    }
+                ],
+                "Intervention_Config": {
+                    "Circumcision_Reduced_Acquire": 0.6,
+                    "Cost_To_Consumer": 0,
+                    "Distributed_Event_Trigger": "Program_VMMC",
+                    "Intervention_Name": "Any_MC",
+                    "class": "MaleCircumcision"
+                },
+                "class": "NChooserEventCoordinatorHIV"
+            },
+            "Event_Name": "NChooser to produce specified number of program VMMCs in Central Province, Zambia",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Year": 2008,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Distributions": [
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2009.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            0,
+                            538
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2009.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2010.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            813,
+                            3192
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2010.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2011.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            788,
+                            2974
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2011.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2012.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            585,
+                            22906,
+                            27378,
+                            147
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2012.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2013.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            734,
+                            37500,
+                            68967,
+                            194
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2013.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2014.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            1036,
+                            34458,
+                            56370,
+                            324
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2014.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2015.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            0,
+                            21166,
+                            24809,
+                            159
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2015.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    }
+                ],
+                "Intervention_Config": {
+                    "Circumcision_Reduced_Acquire": 0.6,
+                    "Cost_To_Consumer": 0,
+                    "Distributed_Event_Trigger": "Program_VMMC",
+                    "Intervention_Name": "Any_MC",
+                    "class": "MaleCircumcision"
+                },
+                "class": "NChooserEventCoordinatorHIV"
+            },
+            "Event_Name": "NChooser to produce specified number of program VMMCs in Copperbelt Province, Zambia",
+            "Nodeset_Config": {
+                "Node_List": [
+                    2
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Year": 2008,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Distributions": [
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2009.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            165,
+                            283
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2009.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2010.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            634,
+                            1249
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2010.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 14.99999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.99999,
+                                "Min": 15
+                            }
+                        ],
+                        "End_Year": 2011.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            224,
+                            531
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2011.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2012.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            0,
+                            1494,
+                            6249,
+                            0
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2012.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2013.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            183,
+                            3659,
+                            9783,
+                            148
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2013.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2014.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            604,
+                            13391,
+                            25868,
+                            180
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2014.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    },
+                    {
+                        "Age_Ranges_Years": [
+                            {
+                                "Max": 0.99999,
+                                "Min": 0
+                            },
+                            {
+                                "Max": 14.9999999,
+                                "Min": 1
+                            },
+                            {
+                                "Max": 49.9999,
+                                "Min": 15
+                            },
+                            {
+                                "Max": 64.9999,
+                                "Min": 50
+                            }
+                        ],
+                        "End_Year": 2015.999,
+                        "Num_Targeted_Females": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Num_Targeted_Males": [
+                            0,
+                            9029,
+                            18086,
+                            159
+                        ],
+                        "Property_Restrictions_Within_Node": [],
+                        "Start_Year": 2015.0,
+                        "Target_Disease_State": [
+                            [
+                                "HIV_Negative",
+                                "Not_Have_Intervention"
+                            ]
+                        ],
+                        "Target_Disease_State_Has_Intervention_Name": "Any_MC"
+                    }
+                ],
+                "Intervention_Config": {
+                    "Circumcision_Reduced_Acquire": 0.6,
+                    "Cost_To_Consumer": 0,
+                    "Distributed_Event_Trigger": "Program_VMMC",
+                    "Intervention_Name": "Any_MC",
+                    "class": "MaleCircumcision"
+                },
+                "class": "NChooserEventCoordinatorHIV"
+            },
+            "Event_Name": "NChooser to produce specified number of program VMMCs in Eastern Province, Zambia",
+            "Nodeset_Config": {
+                "Node_List": [
+                    3
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Year": 2008,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "RTRI_BEGIN_FOLLOWUP",
+                            "RTRI_LOST_TO_FOLLOWUP"
+                        ],
+                        "Choice_Probabilities": [
+                            0.95,
+                            0.05
+                        ],
+                        "TODO": "define the actual chances here. Might be node-specific?",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Trigger_Condition_List": [
+                        "ARTStaging9"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Received HIV+ test result. Followed up with an RTRI?",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "TODO": "Likely need to break this out by province, or groups of provinces (more urban vs more rural)",
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "RTRI_ELIGIBLE",
+                        "class": "BroadcastEvent"
+                    },
+                    "Target_Age_Min": 15.0,
+                    "Target_Demographic": "ExplicitAgeRanges",
+                    "Trigger_Condition_List": [
+                        "RTRI_BEGIN_FOLLOWUP"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Broadcast RTRI eligibility (eligible)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "RTRI_INELIGIBLE",
+                        "class": "BroadcastEvent"
+                    },
+                    "Target_Age_Max": 14.999999,
+                    "Target_Demographic": "ExplicitAgeRanges",
+                    "Trigger_Condition_List": [
+                        "RTRI_BEGIN_FOLLOWUP"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Broadcast RTRI eligibility (NOT eligible)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "RTRI_CONSENTED",
+                            "RTRI_REFUSED"
+                        ],
+                        "Choice_Probabilities": [
+                            0.9,
+                            0.1
+                        ],
+                        "TODO": "define the actual chances here. Might be node-specific?",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Trigger_Condition_List": [
+                        "RTRI_ELIGIBLE"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Check if person consents to an RTRI",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "RTRI_TESTED_RECENT",
+                            "RTRI_TESTED_LONGTERM"
+                        ],
+                        "Choice_Probabilities": [
+                            0.85,
+                            0.15
+                        ],
+                        "TODO": "define the actual chances here.",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Property_Restrictions": [
+                        "Recently_Infected:true",
+                        "Ever_Been_On_ART:true"
+                    ],
+                    "Targeting_Config": {
+                        "Logic": [
+                            [
+                                {
+                                    "Is_Equal_To": 1,
+                                    "class": "IsHivPositive"
+                                }
+                            ]
+                        ],
+                        "class": "TargetingLogic"
+                    },
+                    "Trigger_Condition_List": [
+                        "RTRI_CONSENTED"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Perform RTRI test (HIV+, recent, previous ART usage)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "RTRI_TESTED_RECENT",
+                            "RTRI_TESTED_LONGTERM"
+                        ],
+                        "Choice_Probabilities": [
+                            0.8,
+                            0.2
+                        ],
+                        "TODO": "define the actual chances here.",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Property_Restrictions": [
+                        "Recently_Infected:true",
+                        "Ever_Been_On_ART:false"
+                    ],
+                    "Targeting_Config": {
+                        "Logic": [
+                            [
+                                {
+                                    "Is_Equal_To": 1,
+                                    "class": "IsHivPositive"
+                                }
+                            ]
+                        ],
+                        "class": "TargetingLogic"
+                    },
+                    "Trigger_Condition_List": [
+                        "RTRI_CONSENTED"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Perform RTRI test (HIV+, recent, NO previous ART usage)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "RTRI_TESTED_RECENT",
+                            "RTRI_TESTED_LONGTERM"
+                        ],
+                        "Choice_Probabilities": [
+                            0.75,
+                            0.25
+                        ],
+                        "TODO": "define the actual chances here.",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Property_Restrictions": [
+                        "Recently_Infected:false",
+                        "Ever_Been_On_ART:true"
+                    ],
+                    "Targeting_Config": {
+                        "Logic": [
+                            [
+                                {
+                                    "Is_Equal_To": 1,
+                                    "class": "IsHivPositive"
+                                }
+                            ]
+                        ],
+                        "class": "TargetingLogic"
+                    },
+                    "Trigger_Condition_List": [
+                        "RTRI_CONSENTED"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Perform RTRI test (HIV+, longterm, previous ART usage)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "RTRI_TESTED_RECENT",
+                            "RTRI_TESTED_LONGTERM"
+                        ],
+                        "Choice_Probabilities": [
+                            0.7,
+                            0.3
+                        ],
+                        "TODO": "define the actual chances here.",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Property_Restrictions": [
+                        "Recently_Infected:false",
+                        "Ever_Been_On_ART:false"
+                    ],
+                    "Targeting_Config": {
+                        "Logic": [
+                            [
+                                {
+                                    "Is_Equal_To": 1,
+                                    "class": "IsHivPositive"
+                                }
+                            ]
+                        ],
+                        "class": "TargetingLogic"
+                    },
+                    "Trigger_Condition_List": [
+                        "RTRI_CONSENTED"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Perform RTRI test (HIV+, longterm, NO previous ART usage)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Revert": 365,
+                        "Target_Property_Key": "Recently_Infected",
+                        "Target_Property_Value": "true",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Trigger_Condition_List": [
+                        "NewInfectionEvent"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Infections start out recent, transitioning to longterm after 12 months",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 1961,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Target_Property_Key": "Ever_Been_On_ART",
+                        "Target_Property_Value": "true",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Property_Restrictions": [
+                        "Ever_Been_On_ART:false"
+                    ],
+                    "Trigger_Condition_List": [
+                        "OnART1"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Record a person having been on ART at least once in their lives",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 1961,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Target_Property_Key": "Virally_Suppressed",
+                        "Target_Property_Value": "false",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Trigger_Condition_List": [
+                        "NewInfectionEvent"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Set viral suppression status to false upon infection (ignoring VL ramp-up time which is on the order of 1-2 months)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 1961,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Target_Property_Key": "Virally_Suppressed",
+                    "Target_Property_Value": "true",
+                    "class": "PropertyValueChanger"
+                },
+                "Targeting_Config": {
+                    "Logic": [
+                        [
+                            {
+                                "Is_Equal_To": 1,
+                                "class": "IsOnART"
+                            },
+                            {
+                                "More_Or_Less": "MORE",
+                                "Num_Months": 6,
+                                "class": "HasBeenOnArtMoreOrLessThanNumMonths"
+                            }
+                        ]
+                    ],
+                    "class": "TargetingLogic"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Set viral suppression status to true after 6 consecutive months on ART",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 1961,
+            "TODO": "add requirement that a person CANNOT be Virally_Suppressed:true to optimize targeting",
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Target_Property_Key": "Virally_Suppressed",
+                        "Target_Property_Value": "false",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Trigger_Condition_List": [
+                        "OnART3"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Set viral suppression status to false upon ART dropout (ignoring VL ramp-up time which is on the order of 1-2 months)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "REPORT_RECENT_INFECTION",
+                        "class": "BroadcastEvent"
+                    },
+                    "Property_Restrictions": [
+                        "Virally_Suppressed:false"
+                    ],
+                    "Trigger_Condition_List": [
+                        "RTRI_TESTED_RECENT"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Run VL test along with recent RTRI test result (reporting confirmed recent)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "TODO": "pick an appropriate Start_Day",
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "REPORT_LONGTERM_INFECTION",
+                        "class": "BroadcastEvent"
+                    },
+                    "Property_Restrictions": [
+                        "Virally_Suppressed:true"
+                    ],
+                    "Trigger_Condition_List": [
+                        "RTRI_TESTED_RECENT"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Run VL test along with recent RTRI test result (reporting longterm)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "TODO": "pick an appropriate Start_Day",
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "REPORT_LONGTERM_INFECTION",
+                        "class": "BroadcastEvent"
+                    },
+                    "Trigger_Condition_List": [
+                        "RTRI_TESTED_LONGTERM"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Run VL test along with longerm RTRI test result (reporting longterm)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "TODO": "pick an appropriate Start_Day",
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 0.01,
+                "Intervention_Config": {
+                    "Broadcast_Event": "HCTTestingLoop1--retesters",
+                    "class": "BroadcastEvent"
+                },
+                "Number_Repetitions": -1,
+                "TODO": "add a proper value here. Calibrate?",
+                "Targeting_Config": {
+                    "Logic": [
+                        [
+                            {
+                                "Is_Equal_To": 1,
+                                "class": "IsHivPositive"
+                            },
+                            {
+                                "Is_Equal_To": 1,
+                                "class": "IsOnART"
+                            }
+                        ]
+                    ],
+                    "class": "TargetingLogic"
+                },
+                "Timesteps_Between_Repetitions": 1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Send people to test even if they are HIV+ and on ART. E.g., they might just be moving health facilities. Happens.",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever"
+                        ],
+                        "Event_Or_Config": "Event",
+                        "NOTE1": "not changing CascadeState to avoid altering an agent testing trajectory",
+                        "NOTE2": "broadcasting Nothing on Negative test. If it happens, it is false/ignored.",
+                        "Negative_Diagnosis_Event": "Nothing",
+                        "Positive_Diagnosis_Event": "ARTStaging9",
+                        "class": "HIVRapidHIVDiagnostic"
+                    },
+                    "NOTE3": "Targeting_Config added in here to prevent ppl who JUST went off ART in the same timestep from retesting",
+                    "Targeting_Config": {
+                        "Logic": [
+                            [
+                                {
+                                    "Is_Equal_To": 1,
+                                    "class": "IsHivPositive"
+                                },
+                                {
+                                    "Is_Equal_To": 1,
+                                    "class": "IsOnART"
+                                }
+                            ]
+                        ],
+                        "class": "TargetingLogic"
+                    },
+                    "Trigger_Condition_List": [
+                        "HCTTestingLoop1--retesters"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "HCTTestingLoop: state 1 (HIV rapid diagnostic) -- HIV+/OnART retesters",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 2015,
+            "class": "CampaignEventByYear"
+        }
+    ],
+    "Use_Defaults": 1
+}

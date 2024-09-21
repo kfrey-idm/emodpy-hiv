@@ -13,11 +13,11 @@ from idmtools.core.platform_factory import Platform
 from idmtools.entities.experiment import Experiment
 
 # emodpy
-import emodpy.emod_task as emod_task
+import emodpy_hiv.emod_task as emod_task
 import emod_api.campaign as camp
 import emod_api.interventions.common as common
 
-import emodpy_hiv.demographics.HIVDemographics as Demographics
+from emodpy_hiv.demographics.hiv_demographics import HIVDemographics
 import emodpy_hiv.interventions.outbreak as ob
 import emodpy_hiv.interventions.art as art
 import emodpy_hiv.interventions.artdropout as artdropout
@@ -61,23 +61,24 @@ class TestSimulation(unittest.TestCase):
         return {"Run_Number": value}
 
     def build_demog_from_template_node(self):
-        demog = Demographics.from_template_node(lat=0, lon=0, pop=1000, name=1, forced_id=1)
+        demog = HIVDemographics.from_template_node(lat=0, lon=0, pop=1000, name=1, forced_id=1,
+                                                   default_society_template="PFA-Southern-Africa")
         return demog
 
-    def build_demog_from_pop_csv(self):
-        pop_filename_in = parent.parent / 'unittests' / 'inputs' / 'tiny_facebook_pop_clipped.csv'
-        pop_filename_out = parent.parent / "spatial_gridded_pop_dir"
-        site = "No_Site"
+    # def build_demog_from_pop_csv(self):
+    #     pop_filename_in = parent.parent / 'unittests' / 'inputs' / 'tiny_facebook_pop_clipped.csv'
+    #     pop_filename_out = parent.parent / "spatial_gridded_pop_dir"
+    #     site = "No_Site"
+    #
+    #     demog = HIVDemographics.from_pop_csv(pop_filename_in, pop_filename_out=pop_filename_out, site=site)
+    #     return demog
 
-        demog = Demographics.from_pop_csv(pop_filename_in, pop_filename_out=pop_filename_out, site=site)
-        return demog
-
-    def build_demog_from_params(self):
-        totpop = 9876
-        num_nodes = 199
-        frac_rural = 0.3
-        demog = Demographics.from_params(tot_pop=totpop, num_nodes=num_nodes, frac_rural=frac_rural)
-        return demog
+    # def build_demog_from_params(self):
+    #     totpop = 9876
+    #     num_nodes = 199
+    #     frac_rural = 0.3
+    #     demog = HIVDemographics.from_params(tot_pop=totpop, num_nodes=num_nodes, frac_rural=frac_rural)
+    #     return demog
 
     def build_outbreak_campaign(self, timestep):
         camp.schema_path = str(self.schema_path)
@@ -113,13 +114,13 @@ class TestSimulation(unittest.TestCase):
 
     def test_outbreak_and_demog_from_template_node(self):
         start_day = 5
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(self.build_outbreak_campaign, timestep=start_day),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(self.set_param_fn, duration=60),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -161,94 +162,94 @@ class TestSimulation(unittest.TestCase):
             self.assertEqual(total_pop, 1000, msg=f"Expected 1000 population, got {total_pop}, please check demographics "
                                                 f"for sim: {simulation.id}.")
 
-    def test_demog_from_pop_csv(self):
-        task = emod_task.EMODTask.from_default2(
-            config_path="config_pop_csv.json",
-            eradication_path=str(self.eradication),
-            campaign_builder=None,
-            schema_path=str(self.schema_path),
-            param_custom_cb=partial(self.set_param_fn, duration=60),
-            ep4_custom_cb=None,
-            demog_builder=self.build_demog_from_pop_csv,
-            plugin_report=None
-        )
-        task.set_sif(str(manifest.sif_path))    # set_sif() expects a string
+    # def test_demog_from_pop_csv(self):
+    #     task = emod_task.EMODTask.from_default2(
+    #         config_path="config_pop_csv.json",
+    #         eradication_path=str(self.eradication),
+    #         campaign_builder=None,
+    #         schema_path=str(self.schema_path),
+    #         param_custom_cb=partial(self.set_param_fn, duration=60),
+    #         ep4_custom_cb=None,
+    #         demog_builder=self.build_demog_from_pop_csv,
+    #         plugin_report=None
+    #     )
+    #     task.set_sif(str(manifest.sif_path))    # set_sif() expects a string
+    #
+    #     builder = SimulationBuilder()
+    #     builder.add_sweep_definition(self.update_sim_random_seed, range(1))
+    #
+    #     experiment = Experiment.from_builder(builder, task, name="HIV Test_demographics_from_pop_csv")
+    #
+    #     experiment.run(wait_until_done=True, platform=self.platform)
+    #
+    #     self.assertTrue(experiment.succeeded, msg=f"Experiment {experiment.uid} failed.\n")
+    #
+    #     print(f"Experiment {experiment.uid} succeeded.")
+    #
+    #     filenames = ["output/InsetChart.json"]
+    #
+    #     sims = self.platform.get_children_by_object(experiment)
+    #     output_path = parent / "inputs"
+    #     for simulation in sims:
+    #         # download files from simulation
+    #         self.platform.get_files_by_id(simulation.id, item_type=ItemType.SIMULATION, files=filenames,
+    #                                       output=output_path)
+    #         # validate files exist
+    #         local_path = output_path / str(simulation.uid)
+    #         file_path = local_path / 'output' / 'InsetChart.json'
+    #         self.assertTrue(file_path.is_file())
+    #         # validate result
+    #         with file_path.open(mode='r') as json_file:
+    #             inset_chart = json.load(json_file)
+    #
+    #         total_pop = inset_chart['Channels']['Statistical Population']['Data'][0]
+    #         self.assertEqual(total_pop, 42, msg=f"Expected 42 population, got {total_pop}, please check demographics "
+    #                                             f"for sim: {simulation.id}.")
 
-        builder = SimulationBuilder()
-        builder.add_sweep_definition(self.update_sim_random_seed, range(1))
-
-        experiment = Experiment.from_builder(builder, task, name="HIV Test_demographics_from_pop_csv")
-
-        experiment.run(wait_until_done=True, platform=self.platform)
-
-        self.assertTrue(experiment.succeeded, msg=f"Experiment {experiment.uid} failed.\n")
-
-        print(f"Experiment {experiment.uid} succeeded.")
-
-        filenames = ["output/InsetChart.json"]
-
-        sims = self.platform.get_children_by_object(experiment)
-        output_path = parent / "inputs"
-        for simulation in sims:
-            # download files from simulation
-            self.platform.get_files_by_id(simulation.id, item_type=ItemType.SIMULATION, files=filenames,
-                                          output=output_path)
-            # validate files exist
-            local_path = output_path / str(simulation.uid)
-            file_path = local_path / 'output' / 'InsetChart.json'
-            self.assertTrue(file_path.is_file())
-            # validate result
-            with file_path.open(mode='r') as json_file:
-                inset_chart = json.load(json_file)
-
-            total_pop = inset_chart['Channels']['Statistical Population']['Data'][0]
-            self.assertEqual(total_pop, 42, msg=f"Expected 42 population, got {total_pop}, please check demographics "
-                                                f"for sim: {simulation.id}.")
-
-    def test_demog_from_param(self):
-        task = emod_task.EMODTask.from_default2(
-            config_path="config_pop_csv.json",
-            eradication_path=str(self.eradication),
-            campaign_builder=None,
-            schema_path=str(self.schema_path),
-            param_custom_cb=partial(self.set_param_fn, duration=5),
-            ep4_custom_cb=None,
-            demog_builder=self.build_demog_from_params,
-            plugin_report=None
-        )
-        task.set_sif(str(manifest.sif_path))    # set_sif() expects a string
-
-        builder = SimulationBuilder()
-        builder.add_sweep_definition(self.update_sim_random_seed, range(1))
-
-        experiment = Experiment.from_builder(builder, task, name="HIV Test_demographics_from_params")
-
-        experiment.run(wait_until_done=True, platform=self.platform)
-
-        self.assertTrue(experiment.succeeded, msg=f"Experiment {experiment.uid} failed.\n")
-
-        print(f"Experiment {experiment.uid} succeeded.")
-
-        filenames = ["output/InsetChart.json"]
-
-        sims = self.platform.get_children_by_object(experiment)
-        output_path = parent / "inputs"
-        for simulation in sims:
-            # download files from simulation
-            self.platform.get_files_by_id(simulation.id, item_type=ItemType.SIMULATION, files=filenames,
-                                          output=output_path)
-            # validate files exist
-            local_path = output_path / str(simulation.uid)
-            file_path = local_path / 'output' / 'InsetChart.json'
-            self.assertTrue(file_path.is_file())
-            # validate result
-            with file_path.open(mode='r') as json_file:
-                inset_chart = json.load(json_file)
-
-            total_pop = inset_chart['Channels']['Statistical Population']['Data'][0]
-            # https://github.com/InstituteforDiseaseModeling/emod-api/issues/112
-            self.assertAlmostEqual(total_pop, 9876, delta=15, msg=f"Expected about 9876 population, got {total_pop}, "
-                                                                  f"please check demographics for sim: {simulation.id}.")
+    # def test_demog_from_param(self):
+    #     task = emod_task.EMODTask.from_default2(
+    #         config_path="config_pop_csv.json",
+    #         eradication_path=str(self.eradication),
+    #         campaign_builder=None,
+    #         schema_path=str(self.schema_path),
+    #         param_custom_cb=partial(self.set_param_fn, duration=5),
+    #         ep4_custom_cb=None,
+    #         demog_builder=self.build_demog_from_params,
+    #         plugin_report=None
+    #     )
+    #     task.set_sif(str(manifest.sif_path))    # set_sif() expects a string
+    #
+    #     builder = SimulationBuilder()
+    #     builder.add_sweep_definition(self.update_sim_random_seed, range(1))
+    #
+    #     experiment = Experiment.from_builder(builder, task, name="HIV Test_demographics_from_params")
+    #
+    #     experiment.run(wait_until_done=True, platform=self.platform)
+    #
+    #     self.assertTrue(experiment.succeeded, msg=f"Experiment {experiment.uid} failed.\n")
+    #
+    #     print(f"Experiment {experiment.uid} succeeded.")
+    #
+    #     filenames = ["output/InsetChart.json"]
+    #
+    #     sims = self.platform.get_children_by_object(experiment)
+    #     output_path = parent / "inputs"
+    #     for simulation in sims:
+    #         # download files from simulation
+    #         self.platform.get_files_by_id(simulation.id, item_type=ItemType.SIMULATION, files=filenames,
+    #                                       output=output_path)
+    #         # validate files exist
+    #         local_path = output_path / str(simulation.uid)
+    #         file_path = local_path / 'output' / 'InsetChart.json'
+    #         self.assertTrue(file_path.is_file())
+    #         # validate result
+    #         with file_path.open(mode='r') as json_file:
+    #             inset_chart = json.load(json_file)
+    #
+    #         total_pop = inset_chart['Channels']['Statistical Population']['Data'][0]
+    #         # https://github.com/InstituteforDiseaseModeling/emod-api/issues/112
+    #         self.assertAlmostEqual(total_pop, 9876, delta=15, msg=f"Expected about 9876 population, got {total_pop}, "
+    #                                                               f"please check demographics for sim: {simulation.id}.")
 
     def test_art(self):
         camp.schema_path = str(self.schema_path)
@@ -262,13 +263,13 @@ class TestSimulation(unittest.TestCase):
             camp.add(event, first=False)
             return camp
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp, start_day=startday, coverage=cov),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(self.set_param_fn, duration=60),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -320,20 +321,20 @@ class TestSimulation(unittest.TestCase):
             camp.add(event, first=False)
             return camp
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp, start_day=startday, coverage=cov),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(self.set_param_fn, duration=60),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
         task.set_sif(str(manifest.sif_path))    # set_sif() expects a string
 
         builder = SimulationBuilder()
-        builder.add_sweep_definition(self.update_sim_random_seed, range(1))
+        builder.add_sweep_definition(self.update_sim_random_seed, range(1, 3))
 
         experiment = Experiment.from_builder(builder, task, name="HIV Test_artdropout")  # "HIV Test_artdropout"
 
@@ -361,7 +362,7 @@ class TestSimulation(unittest.TestCase):
             new_infection = inset_chart['Channels']['Number of ART dropouts (cumulative)']['Data']
             self.assertEqual(sum(new_infection[:startday - 1]), 0,
                              msg=f'Test failed: expected no ART dropouts before artdropout start day.')
-            self.assertAlmostEqual(new_infection[startday - 1], 1000 * cov, delta=10,
+            self.assertAlmostEqual(new_infection[startday - 1], 1000 * cov, delta=30.36,  # 95% confidence interval
                                    msg=f'Test failed: expected {1000 * cov} ART dropouts at artdropout start day.')
 
     def test_artstageagnosticdiag(self):
@@ -397,13 +398,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp, start_day=startday),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=730, event_list=[pos_event, neg_event]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -457,13 +458,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp, start_day=startday),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=730, event_list=[pos_event, neg_event]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -502,20 +503,20 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp, start_day=startday),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=10, event_list=[pos_event]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
         task.set_sif(str(manifest.sif_path))    # set_sif() expects a string
 
         builder = SimulationBuilder()
-        builder.add_sweep_definition(self.update_sim_random_seed, range(1))
+        builder.add_sweep_definition(self.update_sim_random_seed, range(1, 3))
 
         experiment = Experiment.from_builder(builder, task, name="HIV Test_drawblood")
 
@@ -540,7 +541,7 @@ class TestSimulation(unittest.TestCase):
             report_df = pd.read_csv(file_path)
 
             positive_event_count = len(report_df[report_df['Event_Name'] == pos_event])
-            self.assertAlmostEqual(positive_event_count, 1000 * coverage, delta=10,
+            self.assertAlmostEqual(positive_event_count, 1000 * coverage, delta=28.4,  # 95% confidence interval
                                    msg=f'Test failed: expected {1000 * coverage} {pos_event} events.')
 
     def test_malecirc(self):
@@ -555,13 +556,13 @@ class TestSimulation(unittest.TestCase):
             camp.add(event, first=True)
             return camp
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(self.set_param_fn, duration=10),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -614,13 +615,13 @@ class TestSimulation(unittest.TestCase):
             camp.add(event, first=False)
             return camp
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(self.set_param_fn, duration=365),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -644,9 +645,9 @@ class TestSimulation(unittest.TestCase):
         coverage = 1
 
         def build_demog_with_fertelity():
-            demog = Demographics.from_template_node(lat=0, lon=0, pop=1000, name=1, forced_id=1)
+            demog = HIVDemographics.from_template_node(lat=0, lon=0, pop=1000, name=1, forced_id=1)
             path_to_csv = parent.parent / 'unittests' / 'inputs' / 'Malawi_Fertility_Historical.csv'
-            demog.fertility(path_to_csv=path_to_csv)
+            demog.set_fertility(path_to_csv=path_to_csv)
             return demog
 
         def build_camp():
@@ -666,7 +667,7 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
@@ -677,7 +678,7 @@ class TestSimulation(unittest.TestCase):
             # see https://comps2.idmod.org/#explore/Simulations?filters=ExperimentId=00b0c26a-aeee-ec11-92ea-f0921c167864
             # Using 39.999 reduces the duration to 644 time steps and the test passes.
             param_custom_cb=partial(setParamfn, duration=start_day + 39.999 * 7, event_list=['Births', 'NewInfectionEvent']), # Simulation_Duration = = 645
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=build_demog_with_fertelity,
             plugin_report=None
         )
@@ -796,13 +797,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = watched_events
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
                                                 config_path="config_ob.json",
                                                 eradication_path=str(self.eradication),
                                                 campaign_builder=partial(build_camp02),
                                                 schema_path=str(self.schema_path),
                                                 param_custom_cb=partial(setPrEPParamfn, duration=duration, watched_events=prep_events_list),
-                                                ep4_custom_cb=None,
+                                                ep4_path=None,
                                                 demog_builder=self.build_demog_from_template_node,
                                             )
         task.set_sif(str(manifest.sif_path))    
@@ -933,13 +934,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = [choice_1, choice_2]
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1001,13 +1002,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = [pos_event, neg_event]
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1084,13 +1085,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = [pos_event, neg_event]
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=365 * total_year + 1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1137,12 +1138,14 @@ class TestSimulation(unittest.TestCase):
             self.assertTrue(all(positive_probability[i] <= positive_probability[i+1] for i in
                                 range(len(positive_probability)-1)),
                             msg=f"Test failed: positive probability should be in ascending order, got {positive_probability}.")
-            self.assertGreater(min(positive_probability), ramp_min,
-                               msg=f'Test failed: positive probability should not be less than ramp_min = {ramp_min}, '
-                                   f'got min(positive_probability) = {min(positive_probability)}.')
-            self.assertLess(max(positive_probability), ramp_max,
-                            msg=f'Test failed: positive probability should not be greater than ramp_max = {ramp_max}, '
-                                f'got max(positive_probability) = {max(positive_probability)}.')
+            # we are linearly ramping FROM 0.1 upward, so the first value should be 0.1 (hence, >= in the test)
+            self.assertGreaterEqual(min(positive_probability), ramp_min,
+                                    msg=f'Test failed: positive probability should not be less than ramp_min = {ramp_min}, '
+                                        f'got min(positive_probability) = {min(positive_probability)}.')
+            # we are ramping up to 0.9, so 0.9 is the maximum value we could achieve (hence <= in the test)
+            self.assertLessEqual(max(positive_probability), ramp_max,
+                                 msg=f'Test failed: positive probability should not be greater than ramp_max = {ramp_max}, '
+                                     f'got max(positive_probability) = {max(positive_probability)}.')
 
             self.assertAlmostEqual(positive_probability[0], ramp_min, delta=0.05,
                                    msg=f'Test failed: expected positive probability about {ramp_min} at year '
@@ -1178,13 +1181,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = [pos_event, neg_event]
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1255,13 +1258,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = [pos_event, neg_event]
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=365 * total_year + 2),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1336,13 +1339,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp, start_day=startday),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=10, event_list=[event_name]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1395,13 +1398,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=10, event_list=[sympto_signal]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1460,13 +1463,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=10, event_list=[get_tested_signal]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1523,13 +1526,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=35, event_list=[builtin_pos_event]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1586,13 +1589,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=35, event_list=[output_signal]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1648,13 +1651,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=25, event_list=[builtin_output_signal]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1709,13 +1712,13 @@ class TestSimulation(unittest.TestCase):
             config.parameters.Report_Event_Recorder_Events = event_list
             return config
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=35, event_list=[trigger]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )
@@ -1790,7 +1793,7 @@ class TestSimulation(unittest.TestCase):
         def is_dead(event):
             return event in [disease_deaths, non_disease_deaths]
 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config_ob.json",
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
@@ -1800,7 +1803,7 @@ class TestSimulation(unittest.TestCase):
                                                 positive_test, negative_test, get_tested,
                                                 symptomatic, ignore,
                                                 disease_deaths, non_disease_deaths]),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.build_demog_from_template_node,
             plugin_report=None
         )

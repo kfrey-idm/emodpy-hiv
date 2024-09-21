@@ -31,7 +31,8 @@ def seed_infection( camp, timestep, coverage ):
 # TODO: need to decide: use kwargs or custom pass-through params that go to TriggerdCampaignEvent (e.g. target_age_max)
 def triggered_event_common(camp, in_trigger, out_iv, coverage=1.0, target_sex="All",
                            property_restrictions: List[str] = None, event_name="", node_ids: List[int] = None,
-                           start_day: int = 1, target_age_min: float = 0, target_age_max: float = 365*200, delay: float = None):
+                           start_day: int = 1, target_age_min: float = 0, target_age_max: float = 365*200, delay: float = None,
+                           duration: float = -1.0):
     """
         Parameterized utility function used by rest of functions in this submodule; listens for a trigger (signal)
         and distributes an intervention (or list thereof) as a result, based on coverage and targeting. 
@@ -47,6 +48,7 @@ def triggered_event_common(camp, in_trigger, out_iv, coverage=1.0, target_sex="A
             event_name (str): The name of the event (default is an empty string).
             node_ids: (list[int]) A list of node ids to apply the event to. None means all nodes.
             start_day: (int) The model simulation time to start the event.
+            duration: How long this listen-and-distribute should last.
         Returns:
             New campaign event.
     """
@@ -57,7 +59,8 @@ def triggered_event_common(camp, in_trigger, out_iv, coverage=1.0, target_sex="A
                                         Nodeset_Config=utils.do_nodes(camp.schema_path, node_ids=node_ids),
                                         Triggers=in_triggers, Intervention_List=out_ivs, Demographic_Coverage=coverage,
                                         Target_Gender=target_sex, Property_Restrictions=property_restrictions,
-                                        Target_Age_Min=target_age_min, Target_Age_Max=target_age_max, Delay=delay)
+                                        Target_Age_Min=target_age_min, Target_Age_Max=target_age_max, Delay=delay,
+                                        Duration=duration)
     # TODO: ask, should we ALWAYS pop these targeting configs? I think not, once they are implemented...
     event.Event_Coordinator_Config.pop("Targeting_Config", None)
     event.Event_Coordinator_Config.Intervention_Config.pop("Targeting_Config", None)

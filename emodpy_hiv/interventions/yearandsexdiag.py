@@ -28,7 +28,6 @@ def new_diagnostic(
     """
     intervention = s2c.get_class_with_defaults( "HIVPiecewiseByYearAndSexDiagnostic", camp.schema_path )
 
-
     intervention.Positive_Diagnosis_Event = camp.get_send_trigger(Positive_Event, True)
     intervention.Negative_Diagnosis_Event = camp.get_send_trigger(Negative_Event, True)
     hiv_utils.set_tvmap_lists_from_map( TVMap, intervention.Time_Value_Map )

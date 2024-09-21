@@ -1,0 +1,1113 @@
+{
+    "Events": [
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Default_Value": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Interpolation_Order": 1,
+                        "Intervention_Name": "HIVPiecewiseByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "None",
+                        "New_Property_Value": "",
+                        "Positive_Diagnosis_Event": "Commercial_DelayFromDebutToUptake",
+                        "Time_Value_Map": {
+                            "Times": [
+                                1960.5
+                            ],
+                            "Values": [
+                                0.125
+                            ]
+                        },
+                        "class": "HIVPiecewiseByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Female",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "STIDebut"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Female: Will ever become FSW in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Uptake",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "UNIFORM_DISTRIBUTION",
+                        "Delay_Period_Max": 1825,
+                        "Delay_Period_Min": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Female",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_DelayFromDebutToUptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Female): Delay to Uptake in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Dropout",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "WEIBULL_DISTRIBUTION",
+                        "Delay_Period_Kappa": 3.312,
+                        "Delay_Period_Lambda": 2215,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Female",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Uptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Female): Delay to Dropout in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Default_Value": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Interpolation_Order": 1,
+                        "Intervention_Name": "HIVPiecewiseByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "None",
+                        "New_Property_Value": "",
+                        "Positive_Diagnosis_Event": "Commercial_DelayFromDebutToUptake",
+                        "Time_Value_Map": {
+                            "Times": [
+                                1961.0
+                            ],
+                            "Values": [
+                                0.195
+                            ]
+                        },
+                        "class": "HIVPiecewiseByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "STIDebut"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Male: Will ever become FSW client in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Uptake",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "UNIFORM_DISTRIBUTION",
+                        "Delay_Period_Max": 3650,
+                        "Delay_Period_Min": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_DelayFromDebutToUptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Male): Delay to Uptake in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Dropout",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "UNIFORM_DISTRIBUTION",
+                        "Delay_Period_Max": 10950,
+                        "Delay_Period_Min": 730,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Uptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Male): Delay to Dropout in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Daily_Probability": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "PropertyValueChanger",
+                        "Maximum_Duration": 1,
+                        "New_Property_Value": "",
+                        "Revert": 0,
+                        "Target_Property_Key": "Risk",
+                        "Target_Property_Value": "HIGH",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Uptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex: Uptake in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Daily_Probability": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "PropertyValueChanger",
+                        "Maximum_Duration": 1,
+                        "New_Property_Value": "",
+                        "Revert": 0,
+                        "Target_Property_Key": "Risk",
+                        "Target_Property_Value": "MEDIUM",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Dropout"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex: Dropout in node(s) [1, 2, 3, 7, 9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    7,
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Default_Value": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Interpolation_Order": 1,
+                        "Intervention_Name": "HIVPiecewiseByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "None",
+                        "New_Property_Value": "",
+                        "Positive_Diagnosis_Event": "Commercial_DelayFromDebutToUptake",
+                        "Time_Value_Map": {
+                            "Times": [
+                                1960.5
+                            ],
+                            "Values": [
+                                0.05
+                            ]
+                        },
+                        "class": "HIVPiecewiseByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Female",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "STIDebut"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Female: Will ever become FSW in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Uptake",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "UNIFORM_DISTRIBUTION",
+                        "Delay_Period_Max": 1825,
+                        "Delay_Period_Min": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Female",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_DelayFromDebutToUptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Female): Delay to Uptake in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Dropout",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "WEIBULL_DISTRIBUTION",
+                        "Delay_Period_Kappa": 3.312,
+                        "Delay_Period_Lambda": 2215,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Female",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Uptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Female): Delay to Dropout in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Default_Value": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Interpolation_Order": 1,
+                        "Intervention_Name": "HIVPiecewiseByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "None",
+                        "New_Property_Value": "",
+                        "Positive_Diagnosis_Event": "Commercial_DelayFromDebutToUptake",
+                        "Time_Value_Map": {
+                            "Times": [
+                                1961.0
+                            ],
+                            "Values": [
+                                0.0781
+                            ]
+                        },
+                        "class": "HIVPiecewiseByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "STIDebut"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Male: Will ever become FSW client in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Uptake",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "UNIFORM_DISTRIBUTION",
+                        "Delay_Period_Max": 3650,
+                        "Delay_Period_Min": 0,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_DelayFromDebutToUptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Male): Delay to Uptake in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Actual_IndividualIntervention_Configs": [
+                            {
+                                "Broadcast_Event": "Commercial_Dropout",
+                                "Disqualifying_Properties": [],
+                                "Dont_Allow_Duplicates": 0,
+                                "Intervention_Name": "BroadcastEvent",
+                                "New_Property_Value": "",
+                                "class": "BroadcastEvent"
+                            }
+                        ],
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "UNIFORM_DISTRIBUTION",
+                        "Delay_Period_Max": 10950,
+                        "Delay_Period_Min": 730,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "DelayedIntervention",
+                        "New_Property_Value": "",
+                        "class": "DelayedIntervention"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Uptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex (Male): Delay to Dropout in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Daily_Probability": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "PropertyValueChanger",
+                        "Maximum_Duration": 1,
+                        "New_Property_Value": "",
+                        "Revert": 0,
+                        "Target_Property_Key": "Risk",
+                        "Target_Property_Value": "HIGH",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Uptake"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex: Uptake in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Daily_Probability": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "PropertyValueChanger",
+                        "Maximum_Duration": 1,
+                        "New_Property_Value": "",
+                        "Revert": 0,
+                        "Target_Property_Key": "Risk",
+                        "Target_Property_Value": "MEDIUM",
+                        "class": "PropertyValueChanger"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Commercial_Dropout"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Commercial Sex: Dropout in node(s) [4, 5, 6, 8, 10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4,
+                    5,
+                    6,
+                    8,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 1,
+            "class": "CampaignEvent"
+        }
+    ],
+    "Use_Defaults": 1
+}

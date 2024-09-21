@@ -10,8 +10,7 @@ from idmtools.builders import SimulationBuilder
 from idmtools.core.platform_factory import Platform
 from idmtools.entities.experiment import Experiment
 
-# emodpy
-import emodpy.emod_task as emod_task
+import emodpy_hiv.emod_task as emod_task
 from emodpy.utils import EradicationBambooBuilds
 from emodpy.bamboo import get_model_files
 import emod_api.config.default_from_schema_no_validation as dfs
@@ -104,6 +103,9 @@ def set_config_parameters(config):
     config.parameters.Maternal_Infection_Transmission_Probability = 0
     config.parameters['logLevel_default'] = "WARNING" # 'LogLevel_Default' is not in scheme, so need to use the old style dict keys_
 
+    config.parameters.Incubation_Period_Distribution = 'EXPONENTIAL_DISTRIBUTION'
+    config.parameters.Incubation_Period_Exponential = 30
+
     return config
 
 
@@ -115,9 +117,10 @@ def build_demographics():
     TBD: Pass the config (or a 'pointer' thereto) to the demog functions or to the demog class/module.
 
     """
-    import emodpy_hiv.demographics.HIVDemographics as Demographics  # OK to call into emod-api
+    from emodpy_hiv.demographics.hiv_demographics import HIVDemographics  # OK to call into emod-api
 
-    demographics = Demographics.from_template_node(lat=0, lon=0, pop=10000, name=1, forced_id=1)
+    demographics = HIVDemographics.from_template_node(lat=0, lon=0, pop=10000, name=1, forced_id=1,
+                                                      default_society_template='PFA-Southern-Africa')
     return demographics
 
 
@@ -135,16 +138,17 @@ def sim():
 
     # create EMODTask 
     print("Creating EMODTask (from files)...")
-    task = emod_task.EMODTask.from_default2(
+    task = emod_task.EMODHIVTask.from_default(
         config_path="config.json",
         eradication_path=manifest.eradication_path,
         campaign_builder=build_camp,
         schema_path=manifest.schema_file,
-        ep4_custom_cb=None,
+        ep4_path=None,
         param_custom_cb=set_config_parameters,
         demog_builder=build_demographics
     )
     task.common_assets.add_directory(assets_directory=manifest.assets_input_dir)
+    task.set_sif(str(manifest.sif_path))
 
     # Create simulation sweep with builder
     # sweeping over start day AND killing effectiveness - this will be a cross product

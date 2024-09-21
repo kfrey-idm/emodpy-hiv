@@ -2,7 +2,7 @@ import os
 import pathlib
 dirs = os.listdir()
 input_files = list()
-skips = [ "rakai-optimtool", "rakai", "demo_scenario", "campaign_sweep", "demographics_sweep", "start_here--cluster" ]
+skips = ["start_here--cluster"]
 for dir in dirs:
     if dir in skips:
         continue
@@ -46,12 +46,10 @@ rule demo_scenario:
         expand("{use_vpn}", use_vpn=config["use_vpn"])
     output: str(pathlib.PurePath( "demo_scenario", "COMPS_ID"))
     run:
-        try:
-            os.chdir( "demo_scenario" )
-            import example
-            example.run()
-        finally:
-            os.chdir( home_base )
+        if os.name == "nt":
+            shell( "pushd demo_scenario && python example.py && popd" )
+        else:
+            shell( "pushd demo_scenario && python3 example.py && popd" )
 rule campaign_sweep:
     """run campaign_sweep example"""
     input:
@@ -59,12 +57,10 @@ rule campaign_sweep:
         expand("{use_vpn}", use_vpn=config["use_vpn"])
     output: str(pathlib.PurePath( "campaign_sweep", "COMPS_ID"))
     run:
-        try:
-            os.chdir( "campaign_sweep" )
-            import example
-            example.run()
-        finally:
-            os.chdir( home_base )
+        if os.name == "nt":
+            shell( "pushd campaign_sweep && python example.py && popd" )
+        else:
+            shell( "pushd campaign_sweep && python3 example.py && popd" )
 rule demographics_sweep:
     """run demographics_sweep example"""
     input:
@@ -72,12 +68,10 @@ rule demographics_sweep:
         expand("{use_vpn}", use_vpn=config["use_vpn"])
     output: str(pathlib.PurePath( "demographics_sweep", "COMPS_ID"))
     run:
-        try:
-            os.chdir( "demographics_sweep" )
-            import example
-            example.run()
-        finally:
-            os.chdir( home_base )
+        if os.name == "nt":
+            shell( "pushd demographics_sweep && python example.py && popd" )
+        else:
+            shell( "pushd demographics_sweep && python3 example.py && popd" )
 rule rakai:
     """run rakai example"""
     input:
@@ -85,12 +79,10 @@ rule rakai:
         expand("{use_vpn}", use_vpn=config["use_vpn"])
     output: str(pathlib.PurePath( "rakai", "COMPS_ID"))
     run:
-        try:
-            os.chdir( "rakai" )
-            import example
-            example.run()
-        finally:
-            os.chdir( home_base )
+        if os.name == "nt":
+            shell( "pushd rakai && python example.py && popd" )
+        else:
+            shell( "pushd rakai && python3 example.py && popd" )
 rule clean:
     input:
     output:

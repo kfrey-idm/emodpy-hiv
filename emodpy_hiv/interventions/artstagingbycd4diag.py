@@ -27,10 +27,8 @@ def new_diagnostic(
             ReadOnlyDict: Schema-based smart dictionary representing a new
     """
     intervention = s2c.get_class_with_defaults( "HIVARTStagingByCD4Diagnostic", camp.schema_path )
-    intervention.Positive_Diagnosis_Event = camp.get_event( Positive_Event, True )
-    intervention.Negative_Diagnosis_Event = camp.get_event( Negative_Event, True ) 
-    #intervention.Positive_Diagnosis_Event = camp.get_event( Positive_Event )
-    #intervention.Negative_Diagnosis_Event = camp.get_event( Negative_Event )
+    intervention.Positive_Diagnosis_Event = camp.get_send_trigger( Positive_Event, True )
+    intervention.Negative_Diagnosis_Event = camp.get_send_trigger( Negative_Event, True )
 
     hiv_utils.set_tvmap_lists_from_map( IP_TVMap, intervention.If_Pregnant )
     hiv_utils.set_tvmap_lists_from_map( IAT_TVMap, intervention.If_Active_TB )

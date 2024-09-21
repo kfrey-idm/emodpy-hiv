@@ -12,9 +12,11 @@ from idmtools_platform_comps.utils.python_requirements_ac.requirements_to_asset_
 from idmtools_models.templated_script_task import get_script_wrapper_unix_task
 
 # emodpy
-from emodpy.emod_task import EMODTask
+from emodpy_hiv.emod_task import EMODHIVTask
 from emodpy.utils import EradicationBambooBuilds
 from emodpy.bamboo import get_model_files
+
+from emodpy_hiv.demographics.relationship_types import RelationshipTypes
 from emodpy_hiv.interventions.cascade_helpers import *
 import emodpy_hiv.interventions.utils as hiv_utils
 import emod_api.interventions.common as comm
@@ -41,7 +43,8 @@ def _add_sti_by_risk_and_coverage( camp, risk, coverage, include_ongoing=True ):
     camp.add( event )
 
     if include_ongoing:
-        add_triggered_event( camp, in_trigger="STIDebut", out_iv=[set_sti_coinf,signal], coverage=coverage, target_risk=risk, event_name="STI Co-Infection Setup" )
+        add_triggered_event(camp, in_trigger="STIDebut", out_iv=[set_sti_coinf,signal], coverage=coverage,
+                            property_restrictions=[risk], event_name="STI Co-Infection Setup")
 
 
 def add_sti_coinfection_complex( camp, low_coverage=0.1, med_coverage=0.3, high_coverage=0.3 ):
@@ -60,7 +63,8 @@ def add_sti_coinfection_complex( camp, low_coverage=0.1, med_coverage=0.3, high_
 
 def add_csw( camp ):
     # STIDebut -(HIVDelay)-> Uptake -(PVC)-> Dropout (PVC)
-    male_delayed_uptake = hiv_utils.broadcast_event_delayed( camp, "CSW_Uptake", delay={ "Delay_Period_Mean": ck.CSW_Male_Uptake_Delay, "Delay_Period_Std_Dev": 30.0 } )
+    male_delayed_uptake = hiv_utils.broadcast_event_delayed(camp, "CSW_Uptake",
+                                                            delay={ "Delay_Period_Gaussian_Mean": ck.CSW_Male_Uptake_Delay, "Delay_Period_Gaussian_Std_Dev": 30.0 } )
     female_delayed_uptake = hiv_utils.broadcast_event_delayed( camp, "CSW_Uptake", delay={ "Delay_Period_Constant": ck.CSW_Male_Uptake_Delay } )
 
     # 1: STIDebut->Uptake delay (males)
@@ -221,31 +225,37 @@ def build_demog():
     """
         Build a demographics input file for the DTK using emod_api. 
     """
-    import emodpy_hiv.demographics.HIVDemographics as Demographics # OK to call into emod-api
-    import emodpy_hiv.demographics.DemographicsTemplates as DT
-    import emod_api.demographics.Demographics as demo
+    from emodpy_hiv.demographics.hiv_demographics import HIVDemographics
 
-    demog = Demographics.from_template_node( lat=0, lon=0, pop=100000, name=1, forced_id=1 )
-    DT.add_society_from_template(demog, "PFA-Southern-Africa") # sorry for clunky revese of DT and demog here.
-    demog.SetEquilibriumAgeDistFromBirthAndMortRates()
-    demog.fertility( manifest.fertility )
-    demog.mortality( manifest.male_mortality, manifest.female_mortality )
+    demog = HIVDemographics.from_template_node(lat=0, lon=0, pop=100000, name='some place', forced_id=1,
+                                               default_society_template="PFA-Southern-Africa")
+    demog.SetEquilibriumAgeDistFromBirthAndMortRates(node_ids=[None])
 
-    demog.AddIndividualPropertyAndHINT( Property="Accessibility", Values=["Easy","Hard"], InitialDistribution=[0.0, 1.0] )
-    demog.AddIndividualPropertyAndHINT( Property="TestingStatus", Values=["INELIGIBLE","ELIGIBLE"], InitialDistribution=[1.0, 0 ] )
-    demog.apply_assortivity( "COMMERCIAL", [ [1,1,1],[1,1,1],[1,1,1] ] )
-    demog.apply_assortivity( "INFORMAL", [
-        [ 0.6097767084, 0.3902232916, 0 ],
-        [ 0.3902232916, 0.6097767084, 0.6097767084 ],
-        [ 0, 0.6097767084, 0.3902232916 ] ] )
-    demog.apply_assortivity( "MARITAL", [ 
-        [ 0.6097767084, 0.3902232916, 0 ], 
-        [ 0.3902232916, 0.6097767084, 0.6097767084 ], 
-        [ 0, 0.6097767084, 0.3902232916 ] ] )
-    demog.apply_assortivity( "TRANSITORY", [ 
-        [ 0.6097767084, 0.3902232916, 0 ], 
-        [ 0.3902232916, 0.6097767084, 0.6097767084 ], 
-        [ 0, 0.6097767084, 0.3902232916 ] ] )
+    # TODO: this is a WORKAROUND of emod-api bug that doesn't swap out the age distributions properly
+    #  https://github.com/InstituteforDiseaseModeling/emod-api/issues/705
+    demog.default_node.individual_attributes.age_distribution_flag = None
+
+    demog.set_fertility(manifest.fertility)
+    demog.set_mortality(manifest.male_mortality, manifest.female_mortality)
+
+    demog.AddIndividualPropertyAndHINT(Property="Accessibility", Values=["Easy", "Hard"],
+                                       InitialDistribution=[0.0, 1.0])
+    demog.AddIndividualPropertyAndHINT(Property="TestingStatus", Values=["INELIGIBLE", "ELIGIBLE"],
+                                       InitialDistribution=[1.0, 0])
+    demog.set_pair_formation_parameters(relationship_type=RelationshipTypes.commercial.value,
+                                        assortivity_matrix=[[1, 1, 1], [1, 1, 1], [1, 1, 1]])
+    demog.set_pair_formation_parameters(relationship_type=RelationshipTypes.informal.value,
+                                        assortivity_matrix=[[0.6097767084, 0.3902232916, 0],
+                                                            [0.3902232916, 0.6097767084, 0.6097767084],
+                                                            [0, 0.6097767084, 0.3902232916]])
+    demog.set_pair_formation_parameters(relationship_type=RelationshipTypes.marital.value,
+                                        assortivity_matrix=[[0.6097767084, 0.3902232916, 0],
+                                                            [0.3902232916, 0.6097767084, 0.6097767084],
+                                                            [0, 0.6097767084, 0.3902232916]])
+    demog.set_pair_formation_parameters(relationship_type=RelationshipTypes.transitory.value,
+                                        assortivity_matrix=[[0.6097767084, 0.3902232916, 0],
+                                                            [0.3902232916, 0.6097767084, 0.6097767084],
+                                                            [0, 0.6097767084, 0.3902232916]])
 
     demog.set_concurrency_params_by_type_and_risk( "COMMERCIAL", "HIGH", 59, 59, 1, 1 )
     demog.set_concurrency_params_by_type_and_risk( "COMMERCIAL", "MEDIUM", 0, 0, 1, 1 )
@@ -263,25 +273,29 @@ def build_demog():
     demog.set_concurrency_params_by_type_and_risk( "TRANSITORY", "MEDIUM", 2.738, 2.738, 0.588, 0.584 )
     demog.set_concurrency_params_by_type_and_risk( "TRANSITORY", "LOW", 1.5, 1.5, 0.260, 0.137 )
 
-    demog.set_pair_form_params( "COMMERCIAL", 0.15 )
-    demog.set_pair_form_params( "INFORMAL", 0.0010841069 )
-    demog.set_pair_form_params( "MARITAL", 5.47945e-05 )
-    demog.set_pair_form_params( "TRANSITORY", 0.0010478386 )
+    demog.set_pair_formation_parameters( "COMMERCIAL", 0.15 )
+    demog.set_pair_formation_parameters( "INFORMAL", 0.0010841069 )
+    demog.set_pair_formation_parameters( "MARITAL", 5.47945e-05 )
+    demog.set_pair_formation_parameters( "TRANSITORY", 0.0010478386 )
 
-    demog.set_coital_act_rate ( "COMMERCIAL", 0.00274 )
-    demog.set_coital_act_rate ( "INFORMAL", 0.33 )
-    demog.set_coital_act_rate ( "MARITAL", 0.33 )
-    demog.set_coital_act_rate ( "TRANSITORY", 0.33 )
+    demog.set_relationship_parameters("COMMERCIAL", coital_act_rate=0.00274)
+    demog.set_relationship_parameters("INFORMAL", coital_act_rate=0.33)
+    demog.set_relationship_parameters("MARITAL", coital_act_rate=0.33)
+    demog.set_relationship_parameters("TRANSITORY", coital_act_rate=0.33)
 
-    demog.set_condom_usage_probs( "COMMERCIAL", 0.5, 1999.5, 0.85, 1 )
-    demog.set_condom_usage_probs( "INFORMAL", 0, 1998.5140953411, 0.3276293852, 1.4303827593 )
-    demog.set_condom_usage_probs( "MARITAL", 0, 1997.7147536264, 0.223467644, 2.8631895001 )
-    demog.set_condom_usage_probs( "TRANSITORY", 0, 2006.3329995924, 0.6093379311, 3.0 )
+    demog.set_relationship_parameters("COMMERCIAL", condom_usage_min=0.5, condom_usage_mid=1999.5,
+                                      condom_usage_max=0.85, condom_usage_rate=1)
+    demog.set_relationship_parameters("INFORMAL", condom_usage_min=0, condom_usage_mid=1998.5140953411,
+                                      condom_usage_max=0.3276293852, condom_usage_rate=1.4303827593)
+    demog.set_relationship_parameters("MARITAL", condom_usage_min=0, condom_usage_mid=1997.7147536264,
+                                      condom_usage_max=0.223467644, condom_usage_rate=2.8631895001)
+    demog.set_relationship_parameters("TRANSITORY", condom_usage_min=0, condom_usage_mid=2006.3329995924,
+                                      condom_usage_max=0.6093379311, condom_usage_rate=3.0)
 
-    demog.set_relationship_duration("COMMERCIAL", weibull_heterogeneity=1, weibull_scale=0.01917808219)
-    demog.set_relationship_duration("INFORMAL", weibull_heterogeneity=0.75, weibull_scale=2.03104913138)
-    demog.set_relationship_duration("MARITAL", weibull_heterogeneity=0.666666667, weibull_scale=22.154455184937)
-    demog.set_relationship_duration("TRANSITORY", weibull_heterogeneity=0.833333333, weibull_scale=0.956774771214)
+    demog.set_relationship_parameters("COMMERCIAL", duration_heterogeneity=1, duration_scale=0.01917808219)
+    demog.set_relationship_parameters("INFORMAL", duration_heterogeneity=0.75, duration_scale=2.03104913138)
+    demog.set_relationship_parameters("MARITAL", duration_heterogeneity=0.666666667, duration_scale=22.154455184937)
+    demog.set_relationship_parameters("TRANSITORY", duration_heterogeneity=0.833333333, duration_scale=0.956774771214)
 
     return demog
 
@@ -304,10 +318,15 @@ def sim():
     # Show how to dynamically set priority and node_group
     platform = Platform("Calculon", node_group="idm_48cores", priority="Highest")
 
-    task = EMODTask.from_default2(config_path="config.json", eradication_path=manifest.eradication_path, campaign_builder=build_camp, demog_builder=build_demog, schema_path=manifest.schema_file, param_custom_cb=set_param_fn, ep4_custom_cb=None)
+    task = EMODHIVTask.from_default(config_path="config.json",
+                                    eradication_path=manifest.eradication_path,
+                                    campaign_builder=build_camp,
+                                    demog_builder=build_demog,
+                                    schema_path=manifest.schema_file,
+                                    param_custom_cb=set_param_fn,
+                                    ep4_path=None)
     task.config.parameters.Run_Number = 55 # just to demo this because people ask about it.  
-
-    task.set_sif( "dtk_centos.id" )
+    task.set_sif(str(manifest.sif_path))
 
     # Set task.campaign to None to not send any campaign to comps since we are going to override it later with
     # dtk-pre-process.

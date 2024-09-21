@@ -1,0 +1,492 @@
+{
+    "Events": [
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging",
+                            "CascadeState:TestingOnSymptomatic"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Intervention_Name": "HIVSigmoidByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "None",
+                        "New_Property_Value": "CascadeState:TestingOnANC",
+                        "Positive_Diagnosis_Event": "Needs_PMTCT_Diagnostic_Test",
+                        "Ramp_Max": 0.975,
+                        "Ramp_MidYear": 2005.87,
+                        "Ramp_Min": 0,
+                        "Ramp_Rate": 0.7136,
+                        "class": "HIVSigmoidByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [
+                        "Accessibility:Yes"
+                    ],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Female",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "TwelveWeeksPregnant"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Availability of PMTCT diagnostic test",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Base_Sensitivity": 1,
+                        "Base_Specificity": 1,
+                        "Cost_To_Consumer": 1,
+                        "Days_To_Diagnosis": 0,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging",
+                            "CascadeState:TestingOnSymptomatic"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Enable_Is_Symptomatic": 0,
+                        "Intervention_Name": "HIVRapidHIVDiagnostic",
+                        "Negative_Diagnosis_Event": "None",
+                        "New_Property_Value": "CascadeState:TestingOnANC",
+                        "Positive_Diagnosis_Event": "HIV_Positive_at_ANC",
+                        "Probability_Received_Result": 1,
+                        "Sensitivity_Type": "SINGLE_VALUE",
+                        "class": "HIVRapidHIVDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Needs_PMTCT_Diagnostic_Test"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "PMTCT diagnostic test",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "ARTStaging1",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.8,
+                            0.2
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging",
+                            "CascadeState:TestingOnSymptomatic"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "CascadeState:TestingOnANC",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "HIV_Positive_at_ANC"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Linking from PMTCT positive result to ART",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging",
+                            "CascadeState:TestingOnSymptomatic"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Intervention_Name": "HIVSigmoidByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "Needs_Combination_PMTCT",
+                        "New_Property_Value": "CascadeState:TestingOnANC",
+                        "Positive_Diagnosis_Event": "Needs_sdNVP_PMTCT",
+                        "Ramp_Max": 1,
+                        "Ramp_MidYear": 2008.4,
+                        "Ramp_Min": 0,
+                        "Ramp_Rate": -1,
+                        "class": "HIVSigmoidByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "HIV_Positive_at_ANC"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ANC/PMTCT: Choose Single-Dose Nevirapine (sdNVP) or Combination (Option A/B)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Efficacy": 0.66,
+                        "Intervention_Name": "PMTCT",
+                        "New_Property_Value": "",
+                        "class": "PMTCT"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Needs_sdNVP_PMTCT"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ANC/PMTCT: Less Effective PMTCT (sdNVP)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Default_Value": 0,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging",
+                            "CascadeState:TestingOnSymptomatic"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Interpolation_Order": 0,
+                        "Intervention_Name": "HIVPiecewiseByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "Needs_Option_A",
+                        "New_Property_Value": "CascadeState:TestingOnANC",
+                        "Positive_Diagnosis_Event": "Needs_Option_B",
+                        "Time_Value_Map": {
+                            "Times": [
+                                2013.249
+                            ],
+                            "Values": [
+                                1
+                            ]
+                        },
+                        "class": "HIVPiecewiseByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Needs_Combination_PMTCT"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ANC/PMTCT: Combination Option A or B?",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Efficacy": 0.9,
+                        "Intervention_Name": "PMTCT",
+                        "New_Property_Value": "",
+                        "class": "PMTCT"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Needs_Option_A"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ANC/PMTCT (Option A)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Efficacy": 0.96667,
+                        "Intervention_Name": "PMTCT",
+                        "New_Property_Value": "",
+                        "class": "PMTCT"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Needs_Option_B"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ANC/PMTCT (Option B)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        }
+    ],
+    "Use_Defaults": 1
+}

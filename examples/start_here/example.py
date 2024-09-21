@@ -12,7 +12,7 @@ from idmtools_platform_comps.utils.python_requirements_ac.requirements_to_asset_
 from idmtools_models.templated_script_task import get_script_wrapper_unix_task
 
 # emodpy
-from emodpy.emod_task import EMODTask
+from emodpy_hiv.emod_task import EMODHIVTask
 from emodpy.utils import EradicationBambooBuilds
 from emodpy.bamboo import get_model_files
 
@@ -63,7 +63,7 @@ def set_param_fn( config ):
     return config
 
 
-def build_camp():
+def build_camp(schema_path):
     """
     Build a campaign input file for the DTK using emod_api.
     Right now this function creates the file and returns the filename. If calling code just needs an asset that's fine.
@@ -71,12 +71,12 @@ def build_camp():
     import emod_api.campaign as camp
     import emodpy_hiv.interventions.outbreak as ob 
 
-    print(f"Telling emod-api to use {manifest.schema_file} as schema.")
-    camp.schema_path = manifest.schema_file
+    print(f"Telling emod-api to use {schema_path} as schema.")
+    camp.set_schema(schema_path)
     
     # importation pressure
     event = ob.new_intervention( timestep=365, camp=camp, coverage=0.01 )
-    camp.add( event, first=True )
+    camp.add(event, first=True)
     return camp
 
 def build_demog():
@@ -87,9 +87,10 @@ def build_demog():
     TBD: Pass the config (or a 'pointer' thereto) to the demog functions or to the demog class/module.
 
     """
-    import emodpy_hiv.demographics.HIVDemographics as Demographics # OK to call into emod-api
+    from emodpy_hiv.demographics.hiv_demographics import HIVDemographics # OK to call into emod-api
 
-    demog = Demographics.from_template_node( lat=0, lon=0, pop=10000, name=1, forced_id=1 )
+    demog = HIVDemographics.from_template_node( lat=0, lon=0, pop=10000, name=1, forced_id=1,
+                                                default_society_template='PFA-Southern-Africa')
     return demog
 
 def run_test():
@@ -102,7 +103,13 @@ def run_test():
     platform = Platform("Calculon", node_group="idm_48cores", priority="Highest") 
     pl = RequirementsToAssetCollection( platform, requirements_path=manifest.requirements ) 
 
-    task = EMODTask.from_default2(config_path="config.json", eradication_path=manifest.eradication_path, campaign_builder=build_camp, demog_builder=build_demog, schema_path=manifest.schema_file, param_custom_cb=set_param_fn, ep4_custom_cb=None)
+    task = EMODHIVTask.from_default(config_path="config.json",
+                                    eradication_path=manifest.eradication_path,
+                                    campaign_builder=build_camp,
+                                    demog_builder=build_demog,
+                                    schema_path=manifest.schema_file,
+                                    param_custom_cb=set_param_fn,
+                                    ep4_path=None)
     task.set_sif(str(manifest.sif_path))  # set_sif() expects a string
 
     #task.common_assets.add_asset( demog_path )

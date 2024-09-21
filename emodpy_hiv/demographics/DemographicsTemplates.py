@@ -1,10 +1,14 @@
 from copy import deepcopy
+from typing import Dict
 
+# TODO: consider removing the current 'default' entry and using PFA-Southern-Africa as the actual default, as
+#  the current 'default' is not properly functional (in a full sense) anyway. (e.g. missing risk based assortivity)
+#  https://github.com/InstituteforDiseaseModeling/emodpy-hiv/issues/214
 
 societies = dict()
 societies["default"] = {
     "Society": {
-        "Concurrency_Configuration": 
+        "Concurrency_Configuration":
         {
             "Probability_Person_Is_Behavioral_Super_Spreader": 0,
             "Individual_Property_Name": "NONE",
@@ -275,13 +279,6 @@ societies["default"] = {
 }
 
 societies["PFA-Southern-Africa"] = {
-    "IndividualProperties": [
-        {
-            "Property": "Risk",
-            "Values": ["LOW", "MEDIUM", "HIGH"],
-            "Initial_Distribution": [0.6669671396606822, 0.3330328603393178, 0]
-        }
-    ],
     "Society": {
         "Concurrency_Configuration": {
             "Probability_Person_Is_Behavioral_Super_Spreader": 0,
@@ -1912,12 +1909,13 @@ societies["PFA-Southern-Africa"] = {
 }
 
 
-def add_society_from_template(demog, key="default"):
-    demog.raw['Defaults'].update(deepcopy(societies[key]))
+def get_society_dict(society_name: str) -> Dict:
+    if society_name in societies:
+        society = deepcopy(societies[society_name]['Society'])
+    else:
+        raise ValueError(f"Unknown society template: {society_name}")
+    return society
 
 
-def add_default_society(demog):
-    """
-    Adds a PFA config based on IDM defaults.
-    """
-    add_society_from_template(demog)
+def get_default_society_dict() -> Dict:
+    return get_society_dict(society_name='default')

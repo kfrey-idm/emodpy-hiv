@@ -12,13 +12,13 @@ from idmtools.core.platform_factory import Platform
 from idmtools.entities.experiment import Experiment
 
 # emodpy
-import emodpy.emod_task as emod_task
+import emodpy_hiv.emod_task as emod_task
 from emodpy.utils import EradicationBambooBuilds
 import emod_api.campaign as camp
 import emod_api.interventions.common as common
 import emod_api.schema_to_class
 
-import emodpy_hiv.demographics.HIVDemographics as Demographics
+from emodpy_hiv.demographics.hiv_demographics import HIVDemographics
 import emodpy_hiv.interventions.outbreak as ob
 import emodpy_hiv.interventions.stipostdebut as stipostdebut
 import emodpy_hiv.interventions.setsexualdebut as setsexualdebut
@@ -31,6 +31,7 @@ import manifest
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 import emod_hiv.bootstrap as dtk
+
 
 class TC:
         # Test Case parameters - generic
@@ -58,9 +59,12 @@ class TestDebutInterventions(unittest.TestCase):
     def setUpClass(cls) -> None:
         # this test will use the latest eradication build saved in the repo under latest folder
         print("Test class started")
+        starting_dir = os.getcwd()
         dtk.setup(manifest.emod_hiv_path)
+        os.chdir(starting_dir)  # because of dumb bug in emod-hiv chdirs in setup
 
     def setUp(self):
+
         self.example_path = os.path.dirname(os.path.realpath(__file__))
         self.eradication = manifest.emod_hiv_eradication
         self.schema_path = manifest.emod_hiv_schema
@@ -78,17 +82,18 @@ class TestDebutInterventions(unittest.TestCase):
         return {"PFA_RelForm_Case": value}
     
     def global_build_demog_from_template_node(self):
-        demog = Demographics.from_template_node(lat=0, lon=0, pop=1000, name=1, forced_id=1)
-        # print(demog.to_dict())
+        demog = HIVDemographics.from_template_node(lat=0, lon=0, pop=1000, name=1, forced_id=1,
+                                                   default_society_template="PFA-Southern-Africa")
         return demog
 
-    def global_build_demog_from_params(self):
-        totpop = 9876
-        num_nodes = 199
-        frac_rural = 0.3
-        demog = Demographics.from_params(tot_pop=totpop, num_nodes=num_nodes, frac_rural=frac_rural)
-        # print(demog.to_dict())
-        return demog
+    # def global_build_demog_from_params(self):
+    #     totpop = 9876
+    #     num_nodes = 199
+    #     frac_rural = 0.3
+    #     demog = HIVDemographics.from_params(tot_pop=totpop, num_nodes=num_nodes, frac_rural=frac_rural)
+    #     # print(demog.to_dict())
+    #     return demog
+
     @staticmethod
     def global_set_param_fn(config, duration=24000, timestep=30):  
         config.parameters.Simulation_Type = "HIV_SIM" # this should be set in the package.
@@ -175,13 +180,13 @@ class TestDebutInterventions(unittest.TestCase):
 
             return config
         
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -244,13 +249,13 @@ class TestDebutInterventions(unittest.TestCase):
             config.parameters.Sexual_Debut_Age_Setting_Type = "FROM_INTERVENTION"
             return config
         
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -303,13 +308,13 @@ class TestDebutInterventions(unittest.TestCase):
             config.parameters.Sexual_Debut_Age_Setting_Type= "FROM_INTERVENTION"
             return config
         
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -389,13 +394,13 @@ class TestDebutInterventions(unittest.TestCase):
             config.parameters.Sexual_Debut_Age_Setting_Type= "FROM_INTERVENTION"
             return config
         
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -472,13 +477,13 @@ class TestDebutInterventions(unittest.TestCase):
 
             return config
         
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -511,14 +516,13 @@ class TestDebutInterventions(unittest.TestCase):
     
     def test_track_sexual_debut_intervention_CURRENTAGE(self):
         # TODO: Bugs logged: 1) - Wrong Start and End Year data type, 2)- Target_Age_Max not used. 
-        
         camp.schema_path = str(self.schema_path)
         start_day = 2
         test_name = self.id().split('.')[-1]
         args = [[1, {"1960": 0.1, "1970": 0.1, "1980": 0.1}],
                 [2, {"1960": 0.3, "1970": 0.3, "1980": 0.3}],
                 [3, {"1960": 0.8, "1970": 0.5, "1980": 0.2}]]
-        
+
         def build_camp(args = [0, {"1960": 0.1, "1970": 0.1, "1980": 0.1}]):
             """
             -- DEFAULTS--
@@ -563,13 +567,13 @@ class TestDebutInterventions(unittest.TestCase):
             return {"Test_Case": tag_value}
         
                 
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -577,7 +581,6 @@ class TestDebutInterventions(unittest.TestCase):
         # get the path of this script
         CURRENT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
         INPUT_DEMOG_PATH = os.path.join(CURRENT_DIRECTORY, "inputs", "demographic_files")
-
         demog_files = [os.path.join(INPUT_DEMOG_PATH, "demographics_Normal_PFARates.json"),
                       os.path.join(INPUT_DEMOG_PATH, "demographics_Low_PFARates.json"),
                       os.path.join(INPUT_DEMOG_PATH, "demographics_High_PFARates.json")]
@@ -640,12 +643,12 @@ class TestDebutInterventions(unittest.TestCase):
                                                                 )
             camp.add(event=sexdeb_iv_event_male, first=False)
             return camp
-    
-        def build_demog(self, case="Normal"):
-            demog = Demographics.from_file(f"demographics_{case}_PFARates.json")
 
-            # print(demog.to_dict())
-            return demog
+        # def build_demog(self, case="Normal"):
+        #     demog = HIVDemographics.from_file(f"demographics_{case}_PFARates.json")
+        #
+        #     # print(demog.to_dict())
+        #     return demog
 
 
         def setParamfn(config, duration):
@@ -654,13 +657,13 @@ class TestDebutInterventions(unittest.TestCase):
             config.parameters.Report_HIV_ByAgeAndGender_Collect_Age_Bins_Data= [ 13, 15, 16, 17, 18, 19, 20, 25, 30 ]
             return config
         
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -714,11 +717,11 @@ class TestDebutInterventions(unittest.TestCase):
             camp.add(event=sexdeb_iv_event_male, first=False)
             return camp
     
-        def build_demog(self, case="Normal"):
-            demog = Demographics.from_file(f"demographics_{case}_PFARates.json")
-
-            # print(demog.to_dict())
-            return demog
+        # def build_demog(self, case="Normal"):
+        #     demog = HIVDemographics.from_file(f"demographics_{case}_PFARates.json")
+        #
+        #     # print(demog.to_dict())
+        #     return demog
 
 
         def setParamfn(config, duration):
@@ -728,13 +731,13 @@ class TestDebutInterventions(unittest.TestCase):
             config.parameters.Report_HIV_ByAgeAndGender_Collect_Age_Bins_Data= [ 13, 15, 16, 17, 18, 19, 20, 25, 30 ]
             return config
         
-        task = emod_task.EMODTask.from_default2(
+        task = emod_task.EMODHIVTask.from_default(
             config_path="config.json", 
             eradication_path=str(self.eradication),
             campaign_builder=partial(build_camp),
             schema_path=str(self.schema_path),
             param_custom_cb=partial(setParamfn, duration=start_day+1),
-            ep4_custom_cb=None,
+            ep4_path=None,
             demog_builder=self.global_build_demog_from_template_node,
             plugin_report=None
         )
@@ -824,8 +827,8 @@ class TestDebutInterventions(unittest.TestCase):
             print(f"Gender: {gender}: Mean of Has Debuted: {hasdeb_mean}, Mean of Had First Coital Act: {hadfirst_mean}\n\n")
 
             # print(df['Has Debuted'].to_list(),  df['Had First Coital Act'].to_list())
-            self.assertGreater(hasdeb_mean, 0, f'Test failed: "Has Debuted" should not be 0 \n\n Age: CurrentAge Gender: {gender}')
-            self.assertGreater(hadfirst_mean, 0, f'Test failed: "Had First Coital Act" should Not be 0 \n\n Age: CurrentAge Gender: {gender}')       
+            self.assertGreater(hasdeb_mean, 0, f'Test failed: "Has Debuted" should not be 0 \n\n Age: CurrentAge Gender: {gender} file: {file_path}')
+            self.assertGreater(hadfirst_mean, 0, f'Test failed: "Had First Coital Act" should Not be 0 \n\n Age: CurrentAge Gender: {gender} file: {file_path}')
         return  
 
     def validate_HIVByAgegender_UserSpecified(self, local_path,  target_gender = ['Male', 'Female']):
@@ -922,7 +925,8 @@ class TestDebutInterventions(unittest.TestCase):
             self.assertEqual(hasdeb_mean, 0, f'Test failed: "Has Debuted" should be 0 \n\n For age less than: {specified_age} and Gender: {gender}')
             self.assertEqual(hadfirst_mean, 0, f'Test failed: "Had First Coital Act" should be 0 \n\n For age less than: {specified_age} and Gender: {gender}')       
         return
-    
+
+
 if __name__ == '__main__':
     unittest.main()
 

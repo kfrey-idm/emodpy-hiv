@@ -12,3 +12,5 @@ plugins_folder = "download/reporter_plugins"
 
 ep4_path="python_scripts"
 #requirements = "./requirements.txt"
+
+sif_path = "../production_sif.id"

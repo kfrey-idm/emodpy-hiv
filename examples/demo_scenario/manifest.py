@@ -4,3 +4,5 @@ schema_file="stash/schema.json"
 eradication_path="stash/Eradication"
 assets_input_dir="Assets"
 plugins_folder="stash"
+
+sif_path = "../production_sif.id"

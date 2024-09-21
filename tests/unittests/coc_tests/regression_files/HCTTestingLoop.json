@@ -1,0 +1,415 @@
+{
+    "Events": [
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "HCTTestingLoop1",
+                        "Broadcast_On_Expiration_Event": "",
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "EXPONENTIAL_DISTRIBUTION",
+                        "Delay_Period_Exponential": 730,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Expiration_Period": 3.40282e+38,
+                        "Intervention_Name": "HIVMuxer",
+                        "Max_Entries": 1,
+                        "Muxer_Name": "HCTTestingLoop",
+                        "New_Property_Value": "CascadeState:HCTTestingLoop",
+                        "class": "HIVMuxer"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "HCTTestingLoop0"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "HCTTestingLoop: state 0 (delay to next HCT): Default",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    6,
+                    7
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "HCTTestingLoop1",
+                        "Broadcast_On_Expiration_Event": "",
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "EXPONENTIAL_DISTRIBUTION",
+                        "Delay_Period_Exponential": 365,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Expiration_Period": 3.40282e+38,
+                        "Intervention_Name": "HIVMuxer",
+                        "Max_Entries": 1,
+                        "Muxer_Name": "HCTTestingLoop",
+                        "New_Property_Value": "CascadeState:HCTTestingLoop",
+                        "class": "HIVMuxer"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "HCTTestingLoop0"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "HCTTestingLoop: state 0 (delay to next HCT): Lusaka, Southern, Western",
+            "Nodeset_Config": {
+                "Node_List": [
+                    5,
+                    9,
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "HCTTestingLoop1",
+                        "Broadcast_On_Expiration_Event": "",
+                        "Coverage": 1,
+                        "Delay_Period_Distribution": "EXPONENTIAL_DISTRIBUTION",
+                        "Delay_Period_Exponential": 1100,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Expiration_Period": 3.40282e+38,
+                        "Intervention_Name": "HIVMuxer",
+                        "Max_Entries": 1,
+                        "Muxer_Name": "HCTTestingLoop",
+                        "New_Property_Value": "CascadeState:HCTTestingLoop",
+                        "class": "HIVMuxer"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "HCTTestingLoop0"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "HCTTestingLoop: state 0 (delay to next HCT): Northern",
+            "Nodeset_Config": {
+                "Node_List": [
+                    8
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Base_Sensitivity": 1,
+                        "Base_Specificity": 1,
+                        "Cost_To_Consumer": 1,
+                        "Days_To_Diagnosis": 0,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Enable_Is_Symptomatic": 0,
+                        "Intervention_Name": "HIVRapidHIVDiagnostic",
+                        "Negative_Diagnosis_Event": "HCTTestingLoop2",
+                        "New_Property_Value": "CascadeState:HCTTestingLoop",
+                        "Positive_Diagnosis_Event": "ARTStaging9",
+                        "Probability_Received_Result": 1,
+                        "Sensitivity_Type": "SINGLE_VALUE",
+                        "class": "HIVRapidHIVDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "HCTTestingLoop1"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "HCTTestingLoop: state 1 (HIV rapid diagnostic)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "HCTTestingLoop0",
+                            "HCTUptakePostDebut1"
+                        ],
+                        "Choice_Probabilities": [
+                            0.95,
+                            0.05
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "CascadeState:HCTTestingLoop",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "HCTTestingLoop2"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "HCTTestingLoop: state 2 (HCT Testing retention/dropout)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Default_Value": 0,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART",
+                            "CascadeState:ARTStaging"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Interpolation_Order": 0,
+                        "Intervention_Name": "HIVPiecewiseByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "ARTStaging1",
+                        "New_Property_Value": "CascadeState:HCTTestingLoop",
+                        "Positive_Diagnosis_Event": "OnART1",
+                        "Time_Value_Map": {
+                            "Times": [
+                                1990.0,
+                                2016.0
+                            ],
+                            "Values": [
+                                0,
+                                0
+                            ]
+                        },
+                        "class": "HIVPiecewiseByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "ARTStaging9"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Consider immediate ART (after 2016?)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        }
+    ],
+    "Use_Defaults": 1
+}

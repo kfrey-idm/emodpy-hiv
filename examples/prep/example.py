@@ -12,7 +12,7 @@ from idmtools_platform_comps.utils.python_requirements_ac.requirements_to_asset_
 from idmtools_models.templated_script_task import get_script_wrapper_unix_task
 
 # emodpy
-from emodpy.emod_task import EMODTask
+from emodpy_hiv.emod_task import EMODHIVTask
 from emodpy.utils import EradicationBambooBuilds
 from emodpy.bamboo import get_model_files
 from emodpy_hiv.interventions.cascade_helpers import *
@@ -113,9 +113,10 @@ def build_demog():
     """
     Build demographics.
     """
-    import emodpy_hiv.demographics.HIVDemographics as Demographics # OK to call into emod-api
+    from emodpy_hiv.demographics.hiv_demographics import HIVDemographics # OK to call into emod-api
 
-    demog = Demographics.from_template_node( lat=0, lon=0, pop=10000, name=1, forced_id=1 )
+    demog = HIVDemographics.from_template_node(lat=0, lon=0, pop=10000, name='1', forced_id=1,
+                                               default_society_template="PFA-Southern-Africa")
     return demog
 
 def run_test():
@@ -127,7 +128,13 @@ def run_test():
     # Show how to dynamically set priority and node_group
     platform = Platform("Calculon", node_group="idm_48cores", priority="Highest") 
 
-    task = EMODTask.from_default2(config_path="config.json", eradication_path=manifest.eradication_path, campaign_builder=build_camp, demog_builder=build_demog, schema_path=manifest.schema_file, param_custom_cb=set_param_fn, ep4_custom_cb=None)
+    task = EMODHIVTask.from_default(config_path="config.json",
+                                    eradication_path=manifest.eradication_path,
+                                    campaign_builder=build_camp,
+                                    demog_builder=build_demog,
+                                    schema_path=manifest.schema_file,
+                                    param_custom_cb=set_param_fn,
+                                    ep4_path=None)
     task.set_sif(str(manifest.sif_path))  # set_sif() expects a string
 
     # Create simulation sweep with builder

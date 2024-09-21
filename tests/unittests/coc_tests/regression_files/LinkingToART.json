@@ -1,0 +1,65 @@
+{
+    "Events": [
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Female_Multiplier": 1,
+                        "Intervention_Name": "HIVSigmoidByYearAndSexDiagnostic",
+                        "Negative_Diagnosis_Event": "HCTUptakePostDebut3",
+                        "New_Property_Value": "CascadeState:LinkingToART",
+                        "Positive_Diagnosis_Event": "OnART0",
+                        "Ramp_Max": 0.8507390283,
+                        "Ramp_MidYear": 1997.4462231708,
+                        "Ramp_Min": 0,
+                        "Ramp_Rate": 1,
+                        "class": "HIVSigmoidByYearAndSexDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "LinkingToART0"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "LinkingToART: state 0 (Linking probability)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        }
+    ],
+    "Use_Defaults": 1
+}

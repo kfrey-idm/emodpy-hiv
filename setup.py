@@ -32,8 +32,9 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/InstituteforDiseaseModeling/emodpy-hiv",
-    packages=setuptools.find_packages(),
-    include_package_data=True,
+    packages=setuptools.find_packages(exclude=['*tests*', '*notebooks*', '*examples*']),
+    package_data={'emodpy_hiv.country_data': ['**/*.csv']},
+    exclude_package_data={'': ['tests', '*notebooks*', 'examples']},
     setup_requires=['wheel'],
     install_requires=requirements,
     classifiers=[

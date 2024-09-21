@@ -1,0 +1,470 @@
+{
+    "Events": [
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "ARTStaging2",
+                            "HCTUptakePostDebut3"
+                        ],
+                        "Choice_Probabilities": [
+                            0.85,
+                            0.15
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "CascadeState:ARTStaging",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "ARTStaging1"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ARTStaging: state 1 (random choice: linking from positive diagnostic test)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Broadcast_Event": "ARTStaging3",
+                        "Broadcast_On_Expiration_Event": "",
+                        "Coverage": 1,
+                        "Delay_Period_Constant": 1,
+                        "Delay_Period_Distribution": "CONSTANT_DISTRIBUTION",
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Expiration_Period": 3.40282e+38,
+                        "Intervention_Name": "HIVMuxer",
+                        "Max_Entries": 1,
+                        "Muxer_Name": "ARTStaging",
+                        "New_Property_Value": "CascadeState:ARTStaging",
+                        "class": "HIVMuxer"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "ARTStaging2"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ARTStaging: state 2 (Muxer to make sure only one entry per DT)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVDrawBlood",
+                        "New_Property_Value": "CascadeState:ARTStaging",
+                        "Positive_Diagnosis_Event": "ARTStaging4",
+                        "class": "HIVDrawBlood"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "ARTStaging3"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ARTStaging: state 3 (draw blood)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Adult_By_Pregnant": {
+                            "Times": [
+                                2002.0,
+                                2013.95
+                            ],
+                            "Values": [
+                                0,
+                                1
+                            ]
+                        },
+                        "Adult_By_TB": {
+                            "Times": [
+                                2002.0
+                            ],
+                            "Values": [
+                                1
+                            ]
+                        },
+                        "Adult_By_WHO_Stage": {
+                            "Times": [
+                                2002.0,
+                                2007.45,
+                                2016.0
+                            ],
+                            "Values": [
+                                4,
+                                3,
+                                0
+                            ]
+                        },
+                        "Adult_Treatment_Age": 5,
+                        "Child_By_TB": {
+                            "Times": [
+                                2002.0,
+                                2010.5
+                            ],
+                            "Values": [
+                                0,
+                                1
+                            ]
+                        },
+                        "Child_By_WHO_Stage": {
+                            "Times": [
+                                2002.0,
+                                2007.45,
+                                2016.0
+                            ],
+                            "Values": [
+                                4,
+                                3,
+                                0
+                            ]
+                        },
+                        "Child_Treat_Under_Age_In_Years_Threshold": {
+                            "Times": [
+                                2002.0,
+                                2013.95
+                            ],
+                            "Values": [
+                                5,
+                                15
+                            ]
+                        },
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Individual_Property_Active_TB_Key": "UNINITIALIZED",
+                        "Individual_Property_Active_TB_Value": "UNINITIALIZED",
+                        "Intervention_Name": "HIVARTStagingCD4AgnosticDiagnostic",
+                        "Negative_Diagnosis_Event": "ARTStaging5",
+                        "New_Property_Value": "CascadeState:ARTStaging",
+                        "Positive_Diagnosis_Event": "LinkingToART0",
+                        "class": "HIVARTStagingCD4AgnosticDiagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "ARTStaging4"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ARTStaging: state 4 (check eligibility for ART, CD4 agnostic)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "ARTStaging6",
+                            "HCTUptakePostDebut9"
+                        ],
+                        "Choice_Probabilities": [
+                            1,
+                            0
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "CascadeState:ARTStaging",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "ARTStaging5"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ARTStaging: state 5 (random choice: Return for CD4 or LTFU)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [
+                            "CascadeState:LostForever",
+                            "CascadeState:OnART",
+                            "CascadeState:LinkingToART",
+                            "CascadeState:OnPreART",
+                            "CascadeState:LinkingToPreART"
+                        ],
+                        "Dont_Allow_Duplicates": 0,
+                        "If_Active_TB": {
+                            "Times": [
+                                2002.0,
+                                2010.5
+                            ],
+                            "Values": [
+                                200,
+                                2000
+                            ]
+                        },
+                        "If_Pregnant": {
+                            "Times": [
+                                2002.0,
+                                2010.5,
+                                2013.95
+                            ],
+                            "Values": [
+                                200,
+                                350,
+                                2000
+                            ]
+                        },
+                        "Individual_Property_Active_TB_Key": "UNINITIALIZED",
+                        "Individual_Property_Active_TB_Value": "UNINITIALIZED",
+                        "Intervention_Name": "HIVARTStagingByCD4Diagnostic",
+                        "Negative_Diagnosis_Event": "LinkingToPreART0",
+                        "New_Property_Value": "CascadeState:ARTStaging",
+                        "Positive_Diagnosis_Event": "LinkingToART0",
+                        "Threshold": {
+                            "Times": [
+                                2002.0,
+                                2010.5,
+                                2013.95
+                            ],
+                            "Values": [
+                                200,
+                                350,
+                                500
+                            ]
+                        },
+                        "class": "HIVARTStagingByCD4Diagnostic"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Demographic": "Everyone",
+                    "Target_Gender": "All",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "ARTStaging6"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "ARTStaging: state 6 (check eligibility for ART by CD4)",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 10767.0,
+            "class": "CampaignEvent"
+        }
+    ],
+    "Use_Defaults": 1
+}

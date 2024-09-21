@@ -12,10 +12,13 @@ from idmtools_platform_comps.utils.python_requirements_ac.requirements_to_asset_
 from idmtools_models.templated_script_task import get_script_wrapper_unix_task
 
 # emodpy
-from emodpy.emod_task import EMODTask
+from emodpy_hiv.emod_task import EMODHIVTask
 from emodpy.utils import EradicationBambooBuilds
 from emodpy.bamboo import get_model_files
+
+from emodpy_hiv.demographics.relationship_types import RelationshipTypes
 from emodpy_hiv.interventions.cascade_helpers import *
+import conf
 
 import params
 import manifest
@@ -44,7 +47,7 @@ def update_sim_random_seed(simulation, value):
     """
         Update the value of the Run_Number as part of the most basic configuration sweep example.
     """
-    simulation.task.config.parameters.Run_Number = 3
+    simulation.task.config.parameters.Run_Number = value
 
 def print_params():
     """
@@ -73,8 +76,8 @@ def set_param_fn( config ):
     config.parameters.pop( "Serialized_Population_Filenames" )
     config.parameters.pop( "Serialization_Time_Steps" )
 
-    import conf
-    conf.set_config( config )
+
+    conf.set_config(config)
     return config
 
 def timestep_from_year( year ):
@@ -135,22 +138,28 @@ def build_camp():
 
     return camp
 
+
 def build_demog():
     """
         Build a demographics input file for the DTK using emod_api. 
     """
-    import emodpy_hiv.demographics.HIVDemographics as Demographics # OK to call into emod-api
-    import emod_api.demographics.Demographics as demo
-    import emod_api.demographics.DemographicsTemplates as DT
+    from emodpy_hiv.demographics.hiv_demographics import HIVDemographics
 
-    demog = Demographics.from_template_node( lat=0, lon=0, pop=100000, name=1, forced_id=1 )
-    demog.SetEquilibriumAgeDistFromBirthAndMortRates()
-    demog.fertility( "Malawi_Fertility_Historical.csv" )
-    demog.mortality( "Malawi_male_mortality.csv", "Malawi_female_mortality.csv" )
+    demog = HIVDemographics.from_template_node(lat=0, lon=0, pop=100000, name='some place', forced_id=1,
+                                               default_society_template="PFA-Southern-Africa")
+    demog.SetEquilibriumAgeDistFromBirthAndMortRates(node_ids=[None])
 
-    demog.AddIndividualPropertyAndHINT( Property="Accessibility", Values=["Easy","Hard"], InitialDistribution=[0.9, 0.1] )
-    demog.AddIndividualPropertyAndHINT( Property="Risk", Values=["LOW","MEDIUM","HIGH"], InitialDistribution=[0.99, 0, 0.01] )
-    demog.apply_assortivity( "COMMERCIAL", [ [1,1,1],[1,1,1],[1,1,1] ] )
+    # TODO: this is a WORKAROUND of emod-api bug that doesn't swap out the age distributions properly
+    #  https://github.com/InstituteforDiseaseModeling/emod-api/issues/705
+    demog.default_node.individual_attributes.age_distribution_flag = None
+
+    demog.set_fertility("Malawi_Fertility_Historical.csv")
+    demog.set_mortality("Malawi_male_mortality.csv", "Malawi_female_mortality.csv")
+
+    demog.add_or_update_initial_health_care_accessibility_distribution(distribution=[0.9, 0.1])
+    demog.add_or_update_initial_risk_distribution(distribution=[0.99, 0, 0.01])
+    demog.set_pair_formation_parameters(relationship_type=RelationshipTypes.commercial.value,
+                                        assortivity_matrix=[[1, 1, 1], [1, 1, 1], [1, 1, 1]])
 
     return demog
 
@@ -167,13 +176,22 @@ def sim():
     platform = Platform("Calculon", node_group="idm_48cores", priority="Highest") 
     # pl = RequirementsToAssetCollection( platform, requirements_path=manifest.requirements ) 
 
-    task = EMODTask.from_default2(config_path="config.json", eradication_path=manifest.eradication_path, campaign_builder=build_camp, demog_builder=build_demog, schema_path=manifest.schema_file, param_custom_cb=set_param_fn, ep4_custom_cb=None)
+    task = EMODHIVTask.from_default(config_path="config.json",
+                                    eradication_path=manifest.eradication_path,
+                                    campaign_builder=build_camp,
+                                    demog_builder=build_demog,
+                                    schema_path=manifest.schema_file,
+                                    param_custom_cb=set_param_fn,
+                                    ep4_path=None)
+    task.set_sif(str(manifest.sif_path))
+	
+	# Add reports here after task has been created
+    conf.config_reports(task, manifest)
 
     #task.common_assets.add_asset( demog_path )
 
     #print("Adding asset dir...")
     #task.common_assets.add_directory(assets_directory=manifest.assets_input_dir)
-    task.set_sif( "dtk_centos.id" )
 
     # Set task.campaign to None to not send any campaign to comps since we are going to override it later with
     # dtk-pre-process.

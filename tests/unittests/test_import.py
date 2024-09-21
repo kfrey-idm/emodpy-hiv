@@ -41,18 +41,18 @@ class HIVTestImports(unittest.TestCase):
 
     # region demographics
     def test_demographics_imports(self):
-        import emodpy_hiv.demographics.HIVDemographics as Demographics
+        from emodpy_hiv.demographics.hiv_demographics import HIVDemographics
 
         self.expected_items = [
-            "HIVDemographics", "from_template_node", "from_pop_csv", "from_params"
+            "from_template_node", "from_population_dataframe"
         ]
-        self.verify_expected_items_present(namespace=Demographics)
+        self.verify_expected_items_present(namespace=HIVDemographics)
 
     def test_demographics_template_imports(self):
         import emodpy_hiv.demographics.DemographicsTemplates as DemographicsTemplates
 
         self.expected_items = [
-            "add_society_from_template", "add_default_society"
+            "get_society_dict", "get_default_society_dict"
         ]
         self.verify_expected_items_present(namespace=DemographicsTemplates)
 

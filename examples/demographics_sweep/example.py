@@ -11,13 +11,13 @@ from idmtools.core.platform_factory import Platform
 from idmtools.entities.experiment import Experiment
 
 # emodpy
-import emodpy.emod_task as emod_task
+import emodpy_hiv.emod_task as emod_task
 from emodpy.utils import EradicationBambooBuilds
 from emodpy.bamboo import get_model_files
 
 import manifest
 
-
+from emodpy_hiv.demographics.relationship_types import RelationshipTypes
 
 """
     We create an intervention that sweeps over demographics parameters
@@ -61,11 +61,13 @@ def set_config_parameters(config):
     config.parameters.Maternal_Infection_Transmission_Probability = 0
     config.parameters['logLevel_default'] = "WARNING" # 'LogLevel_Default' is not in scheme, so need to use the old style dict keys
 
+    config.parameters.Incubation_Period_Distribution = 'EXPONENTIAL_DISTRIBUTION'
+    config.parameters.Incubation_Period_Exponential = 30
 
     return config
 
 
-def build_demographics(birth_rate=0.0004, total_population=300, rural_fraction=0.21):
+def build_demographics(params: dict = None):
     """
     Build a demographics input file for the DTK using emod_api.
     Right now this function creates the file and returns the filename. If calling code just needs an asset that's fine.
@@ -73,11 +75,22 @@ def build_demographics(birth_rate=0.0004, total_population=300, rural_fraction=0
     TBD: Pass the config (or a 'pointer' thereto) to the demog functions or to the demog class/module.
 
     """
-    import emodpy_hiv.demographics.HIVDemographics as Demographics  # OK to call into emod-api
+    from emodpy_hiv.demographics.hiv_demographics import HIVDemographics  # OK to call into emod-api
+
+    params = {} if params is None else params
 
     # creates a demographic file with 5k total people (randomly?) spread between 5 nodes
-    demographics = Demographics.from_params(tot_pop=total_population, num_nodes=1,
-                                            frac_rural=rural_fraction, id_ref="from_params")
+    # demographics = HIVDemographics.from_params(tot_pop=total_population, num_nodes=1,
+    #                                            frac_rural=rural_fraction, id_ref="from_params")
+
+    demographics = HIVDemographics.from_template_node(lat=0, lon=0, pop=10000, name='some node name', forced_id=1,
+                                                      default_society_template='PFA-Southern-Africa')
+
+    # TODO: redocument all functions and explain why we don't build the demographics at the beginning, too
+    demographics.set_relationship_parameters(relationship_type=RelationshipTypes.transitory.value,
+                                             condom_usage_min=params.get('condom_usage_min', None),
+                                             condom_usage_max=params.get('condom_usage_max', None),
+                                             condom_usage_mid=params.get('condom_usage_mid', None))
 
     # TBD: update birth rate 
     # this only has the defaults and not the information for individual nodes yet
@@ -86,7 +99,7 @@ def build_demographics(birth_rate=0.0004, total_population=300, rural_fraction=0
     return demographics
 
 
-def update_demographics_multiple_params(simulation, values):
+def update_demographics_multiple_params(simulation, params: dict):
     """
         This callback function modifies several demographics parameters
     Args:
@@ -96,9 +109,8 @@ def update_demographics_multiple_params(simulation, values):
     Returns:
         tag that will be used with the simulation
     """
-    build_demog_partial = partial(build_demographics, birth_rate=values[0], rural_fraction=values[1], total_population=values[2])
-    simulation.task.create_demog_from_callback(build_demog_partial, from_sweep=True)
-    return {"birth_rate": values[0], "rural_fraction": values[1], "total_population": values[2]}
+    simulation.task.create_demog_from_callback(build_demographics, from_sweep=True, params=params)
+    return params
 
 
 def sim():
@@ -115,16 +127,17 @@ def sim():
     experiment_name = "Demographics Sweep example"
     # create EMODTask 
     print("Creating EMODTask (from files)...")
-    task = emod_task.EMODTask.from_default2(
+    task = emod_task.EMODHIVTask.from_default(
         config_path="config.json",
         eradication_path=manifest.eradication_path,
         campaign_builder=build_camp,
         schema_path=manifest.schema_file,
-        ep4_custom_cb=None,
+        ep4_path=None,
         param_custom_cb=set_config_parameters,
-        demog_builder=build_demographics
+        #demog_builder=build_demographics
     )
     task.common_assets.add_directory(assets_directory=manifest.assets_input_dir)
+    task.set_sif(str(manifest.sif_path))
 
     # Create simulation sweep with builder
     # sweeping over start day AND killing effectiveness - this will be a cross product
@@ -143,8 +156,15 @@ def sim():
     # so, 2x3x2 = 12 simulations
     import itertools
     # "birth_rate": values[0], "rural_fraction": values[1],"total_population": values[2]
-    builder.add_sweep_definition(update_demographics_multiple_params,
-                                 list(itertools.product([0.000412, 0.000422], [0.95, 0.87, 0.58], [10000, 20000])))
+    condom_settings = []
+    for condom_max in [0.6, 0.8]:
+        for condom_min in [0.2, 0.4]:
+            for condom_mid in [1995.0, 2000.0]:
+                condom_settings.append({'condom_usage_min': condom_min, 'condom_usage_max': condom_max,
+                                        'condom_usage_mid': condom_mid})
+
+    builder.add_sweep_definition(function=update_demographics_multiple_params, params=condom_settings)
+                                 # list(itertools.product([0.000412, 0.000422], [0.95, 0.87, 0.58], [10000, 20000])))
 
     # create experiment from builder
     experiment = Experiment.from_builder(builder, task, name=experiment_name)

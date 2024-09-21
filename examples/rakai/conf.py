@@ -82,9 +82,9 @@ def config_non_schema_params( conf ):
 
 def set_config ( conf ):
     # 'Useless' params (not actually used by HIV) -- will be gone after merging in multi-parent depends-on solution from G-O.
-    conf.parameters.Base_Incubation_Period = 0
-    conf.parameters.Incubation_Period_Distribution = "FIXED_DURATION"
- 
+    conf.parameters.Incubation_Period_Distribution = 'CONSTANT_DISTRIBUTION'
+    conf.parameters.Incubation_Period_Constant = 0
+
     # HIV Science Params
     conf.parameters.Simulation_Type = "HIV_SIM"
     conf.parameters.Base_Infectivity = 0.002327836
@@ -111,7 +111,7 @@ def set_config ( conf ):
     conf.parameters.Sexual_Debut_Age_Male_Weibull_Scale = 17.72188303
 
     # Simulation Setup
-    conf.parameters.Base_Population_Scale_Factor = 0.05
+    conf.parameters.x_Base_Population = 0.05
     conf.parameters.Individual_Sampling_Type = "FIXED_SAMPLING"
     conf.parameters.Load_Balance_Filename = ""
     conf.parameters.Node_Grid_Size = 0.009 

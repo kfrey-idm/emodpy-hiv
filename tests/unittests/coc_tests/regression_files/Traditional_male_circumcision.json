@@ -1,0 +1,1625 @@
+{
+    "Events": [
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.054978651,
+                        0.9450213
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [1]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.054978651,
+                            0.9450213
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [1]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [1]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    1
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.139462861,
+                        0.8605371
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [2]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    2
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.139462861,
+                            0.8605371
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [2]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    2
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [2]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    2
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.028676043,
+                        0.971324
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [3]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    3
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.028676043,
+                            0.971324
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [3]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    3
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [3]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    3
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.091349358,
+                        0.9086506
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [4]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.091349358,
+                            0.9086506
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [4]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [4]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    4
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.12318707,
+                        0.8768129
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [5]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    5
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.12318707,
+                            0.8768129
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [5]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    5
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [5]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    5
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.039308099,
+                        0.9606919
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [6]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    6
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.039308099,
+                            0.9606919
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [6]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    6
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [6]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    6
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.727917322,
+                        0.2720827
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [7]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    7
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.727917322,
+                            0.2720827
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [7]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    7
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [7]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    7
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.041105263,
+                        0.9588947
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [8]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    8
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.041105263,
+                            0.9588947
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [8]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    8
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [8]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    8
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.044388102,
+                        0.9556119
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.044388102,
+                            0.9556119
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [9]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    9
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Choice_Names": [
+                        "WillReceiveTraditionalMaleCircumcision",
+                        "DummyTrigger"
+                    ],
+                    "Choice_Probabilities": [
+                        0.398239794,
+                        0.6017602
+                    ],
+                    "Cost_To_Consumer": 1,
+                    "Disqualifying_Properties": [],
+                    "Dont_Allow_Duplicates": 0,
+                    "Intervention_Name": "HIVRandomChoice",
+                    "New_Property_Value": "",
+                    "class": "HIVRandomChoice"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Target_Age_Max": 9.3228e+35,
+                "Target_Age_Min": 0,
+                "Target_Demographic": "ExplicitAgeRangesAndGender",
+                "Target_Gender": "Male",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision initialization in node(s) [10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Choice_Names": [
+                            "WillReceiveTraditionalMaleCircumcision",
+                            "DummyTrigger"
+                        ],
+                        "Choice_Probabilities": [
+                            0.398239794,
+                            0.6017602
+                        ],
+                        "Cost_To_Consumer": 1,
+                        "Disqualifying_Properties": [],
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "HIVRandomChoice",
+                        "New_Property_Value": "",
+                        "class": "HIVRandomChoice"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "Births"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Traditional male circumcision at birth in node(s) [10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 5292.001,
+            "class": "CampaignEvent"
+        },
+        {
+            "Event_Coordinator_Config": {
+                "Demographic_Coverage": 1,
+                "Individual_Selection_Type": "DEMOGRAPHIC_COVERAGE",
+                "Intervention_Config": {
+                    "Actual_IndividualIntervention_Config": {
+                        "Apply_If_Higher_Reduced_Acquire": 0,
+                        "Circumcision_Reduced_Acquire": 0.6,
+                        "Cost_To_Consumer": 0,
+                        "Disqualifying_Properties": [],
+                        "Distributed_Event_Trigger": "Non_Program_MC",
+                        "Dont_Allow_Duplicates": 0,
+                        "Intervention_Name": "Any_MC",
+                        "New_Property_Value": "",
+                        "class": "MaleCircumcision"
+                    },
+                    "Blackout_Event_Trigger": "",
+                    "Blackout_On_First_Occurrence": 0,
+                    "Blackout_Period": 0,
+                    "Demographic_Coverage": 1,
+                    "Disqualifying_Properties": [],
+                    "Distribute_On_Return_Home": 0,
+                    "Dont_Allow_Duplicates": 0,
+                    "Duration": -1,
+                    "Intervention_Name": "NodeLevelHealthTriggeredIV",
+                    "New_Property_Value": "",
+                    "Node_Property_Restrictions": [],
+                    "Property_Restrictions": [],
+                    "Target_Age_Max": 9.3228e+35,
+                    "Target_Age_Min": 0,
+                    "Target_Demographic": "ExplicitAgeRangesAndGender",
+                    "Target_Gender": "Male",
+                    "Target_Residents_Only": 0,
+                    "Trigger_Condition_List": [
+                        "WillReceiveTraditionalMaleCircumcision"
+                    ],
+                    "class": "NodeLevelHealthTriggeredIV"
+                },
+                "Node_Property_Restrictions": [],
+                "Number_Repetitions": 1,
+                "Property_Restrictions": [],
+                "Property_Restrictions_Within_Node": [],
+                "Target_Demographic": "Everyone",
+                "Target_Gender": "All",
+                "Target_Residents_Only": 0,
+                "Timesteps_Between_Repetitions": -1,
+                "class": "StandardInterventionDistributionEventCoordinator"
+            },
+            "Event_Name": "Apply traditional male circumcision intervention in node(s) [10]",
+            "Nodeset_Config": {
+                "Node_List": [
+                    10
+                ],
+                "class": "NodeSetNodeList"
+            },
+            "Start_Day": 182.0,
+            "class": "CampaignEvent"
+        }
+    ],
+    "Use_Defaults": 1
+}

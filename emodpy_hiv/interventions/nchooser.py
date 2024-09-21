@@ -198,7 +198,7 @@ def add_nchooser_event(
 
 
 def add_nchooser_distributed_circumcision_event(camp: campaign,
-                                                target_disease_state: list,
+                                                target_disease_state: List[List[str]],
                                                 has_intervention_name_exclusion: str,
                                                 distributions: pd.DataFrame,
                                                 property_restrictions: List[Dict[str, Any]] = None,
@@ -277,8 +277,8 @@ def add_nchooser_distributed_circumcision_event(camp: campaign,
 
         target_distribution = new_target_distribution(camp,
                                                       age_ranges_years=age_ranges_years,
-                                                      start_year=year,
-                                                      end_year=year + 0.999,
+                                                      start_year=float(year),
+                                                      end_year=float(year) + 0.999,
                                                       num_targeted_females=num_targeted_females,
                                                       num_targeted_males=num_targeted_males,
                                                       property_restrictions_within_node=property_restrictions,

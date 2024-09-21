@@ -18,6 +18,9 @@ class TestDownloadFromPackage(unittest.TestCase):
         dtk.setup(manifest.package_folder)
         pass
 
+    def setUp(self):
+        print(f"running test {self._testMethodName}")
+
     def test_eradication(self):
         target_path = manifest.eradication_path
         self.assertTrue(os.path.exists(target_path), msg=f"Failed to get {target_path}")

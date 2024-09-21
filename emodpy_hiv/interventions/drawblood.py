@@ -22,7 +22,7 @@ def new_diagnostic(
             ReadOnlyDict: Schema-based smart dictionary representing a new
     """
     intervention = s2c.get_class_with_defaults( "HIVDrawBlood", camp.schema_path )
-    intervention.Positive_Diagnosis_Event = camp.get_event( Positive_Event, True )
+    intervention.Positive_Diagnosis_Event = camp.get_send_trigger( Positive_Event, True )
     set_intervention_properties(intervention,
                                 intervention_name=intervention_name,
                                 disqualifying_properties=disqualifying_properties,
