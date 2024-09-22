@@ -56,7 +56,7 @@ jobs:
       - name: twine upload
         run: twine upload --verbose --repository-url https://packages.idmod.org/api/pypi/idm-pypi-staging/ --username ${{ secrets.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_TOKEN }} ${{ steps.build-install.outputs.wheel-file }}
       - name: Add wheel artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: emodpy-hiv.wheel
           path: ${{ steps.build-install.outputs.wheel-file }}
