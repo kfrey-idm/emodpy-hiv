@@ -160,7 +160,7 @@ I pip installed |EMODPY_hiv|, but I want to make changes. How should I do that?
 
 Install at a command prompt using the following::
 
-    python package_setup.py develop
+    python setup.py develop
 
 This method is the most popular and proven, though there are some other
 options. Installing this way means that the |EMODPY_hiv| module in

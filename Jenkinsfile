@@ -43,7 +43,7 @@ podTemplate(
 		stage('Build') {
 			sh 'pwd'
 			sh 'ls -a'
-			sh 'python3 package_setup.py bdist_wheel'
+			sh 'python3 setup.py bdist_wheel'
 			 
 		}
 		stage('Install') {
@@ -52,7 +52,7 @@ podTemplate(
 			
 			echo "Installing emodpy-hiv from wheel file built from code."
 			def wheelFile = sh(returnStdout: true, script: "find ./dist -name '*.whl'").toString().trim()
-			//def wheelFile = sh(returnStdout: true, script: "python3.6 ./.github/scripts/get_wheel_filename.py --package-file package_setup.py").toString().trim()
+			//def wheelFile = sh(returnStdout: true, script: "python3.6 ./.github/scripts/get_wheel_filename.py --package-file setup.py").toString().trim()
 			echo "Package file: ${wheelFile}"
 			sh "pip3 install $wheelFile --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple"
 			sh "pip3 install dataclasses"
