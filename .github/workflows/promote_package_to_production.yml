@@ -22,12 +22,13 @@ jobs:
           echo "PROD_REGISTRY=https://packages.idmod.org/api/pypi/idm-pypi-production/" >> $GITHUB_ENV
           echo "PACKAGE_NAME=emodpy_hiv" >> $GITHUB_ENV
 
-      - name: Checkout sources
+      - name: Checkout sources with LFS
         uses: actions/checkout@v4
         with:
+          lfs: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-python@master
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
