@@ -1,7 +1,5 @@
-# Made publicly available with the MIT license.
-
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -21,11 +19,12 @@ authors = [
 keywords=["modeling", "IDM"]
 
 dependencies = [
-    "emodpy>=2.0",
+    "emodpy>=2.1.19",
     "pandas",
     "scikit-learn",
     "python-calamine",
-    "emod-hiv==2.30.0"]
+    "emod-hiv==2.30.0"
+]
 
 license = "MIT"
 
