@@ -1,7 +1,5 @@
-# Made publicly available with the MIT license.
-
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -16,25 +14,32 @@ authors = [
     {name = "Clark Kirkman IV", email = "clark.kirkmand@gatesfoundation.org"},
     {name = "Daniel Bridenbecker", email = "daniel.bridenbecker@gatesfoundation.org"},
     {name = "Svetlana Titova", email = "svetlana.titova@gatesfoundation.org"},
-    {name = "Ye Chen", email = "ye.chen@gatesfoundation.org"}]
-
+    {name = "Ye Chen", email = "ye.chen@gatesfoundation.org"},
+]
 keywords=["modeling", "IDM"]
-
 dependencies = [
-    "emodpy>=2.0",
+    "emodpy~=2.1.0",
     "pandas",
     "scikit-learn",
     "python-calamine",
-    "emod-hiv==2.30.0"]
-
+    "emod-hiv==2.30.0",
+]
 license = "MIT"
-
 classifiers=[
-        "Programming Language :: Python :: 3.9",
-        "Framework:: IDM-Tools :: models",
-        "Operating System :: OS Independent"]
+    "Programming Language :: Python :: 3.9",
+    "Framework:: IDM-Tools :: models",
+    "Operating System :: OS Independent",
+]
 
 [project.optional-dependencies]
+packaging = [
+    "build",
+    "flake8",
+    "coverage",
+    "py-make",
+    "bump2version",
+    "twine",
+]
 test = [
     "emod-hiv",
     "pytest",
@@ -44,15 +49,8 @@ test = [
     "pytest-cache",
     "flake8",
     "coverage",
-    "py-make"]
-
-packaging = [
-    "build",
-    "flake8",
-    "coverage",
     "py-make",
-    "bump2version",
-    "twine"]
+]
 
 [project.urls]
 Repository="https://github.com/EMOD-Hub/emodpy-hiv"
