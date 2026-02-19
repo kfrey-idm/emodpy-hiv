@@ -77,7 +77,7 @@ If you have feature requests, issues, or new code, please see our
 [CONTRIBUTING](https://github.com/EMOD-Hub/emodpy-hiv/blob/main/CONTRIBUTING.rst) page
 for how to provide your feedback.
 
-Questions or comments can be directed to [idmsupport@gatesfoundation.org](<mailto:idmsupport@gatesfoundation.org>).
+Questions or comments are welcome in [Discussions](https://github.com/orgs/EMOD-Hub/discussions).
 
 <a id="disclaimer"></a>
 # Disclaimer
