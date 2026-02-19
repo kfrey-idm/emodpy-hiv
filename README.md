@@ -11,7 +11,6 @@ are also provided to aid in exploring model output.
   - [Software Prerequisites](#software-prerequisites)
   - [Install](#install)
 - [Training Resources](#training-resources)
-- [Community](#community)
 - [FAQ](#faq)
 - [Support and Contributions](#support)
 - [Disclaimer](#disclaimer)
@@ -63,17 +62,8 @@ Tutorial Python code can be found in the [tutorials](tutorials) directory.
 
 Frequently asked questions are answered in https://docs.idmod.org/projects/emodpy-hiv/en/latest/faq.html.
 
-<a id="community"></a>
-# Community
-
-The EMOD Community is made up of researchers and software developers, primarily focused on malaria and HIV research.
-We value mutual respect, openness, and a collaborative spirit. If these values resonate with you, 
-we invite you to join our EMOD Slack Community by completing this form:
-
-https://forms.office.com/r/sjncGvBjvZ
-
 <a id="support"></a>
-# Support and contributions
+# Support and Contributions
 
 The code in this repository was developed by IDM to support our research in disease
 transmission and managing epidemics. We’ve made it publicly available under the MIT
@@ -84,7 +74,7 @@ requests. You are welcome to create your own fork and modify the code to suit yo
 modeling needs as contemplated under the MIT License.
 
 If you have feature requests, issues, or new code, please see our
-'CONTRIBUTING <https://github.com/EMOD-Hub/emodpy-hiv/blob/main/CONTRIBUTING.rst>' page
+[CONTRIBUTING](https://github.com/EMOD-Hub/emodpy-hiv/blob/main/CONTRIBUTING.rst) page
 for how to provide your feedback.
 
 Questions or comments can be directed to [idmsupport@gatesfoundation.org](<mailto:idmsupport@gatesfoundation.org>).
