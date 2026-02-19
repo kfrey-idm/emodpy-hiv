@@ -24,12 +24,17 @@ included in the following README files:
 
    -  `Project README <https://github.com/EMOD-Hub/emodpy-hiv/blob/main/README.md>`__: Setup and project overview.
 
+Discussions
+===========
+
+Have a comment or a question? Check out our `Discussions <https://github.com/orgs/EMOD-Hub/discussions>`__ space.
+
 Contribution types
 ===================
 
 We welcome the following types of contributions:
 
-1. Issues:
+1. `Issues: <https://github.com/EMOD-Hub/issues-and-discussions/issues>`__
 
     * Bug reports.
     * Feature requests.
