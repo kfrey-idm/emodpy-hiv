@@ -61,7 +61,7 @@ If you notice unexpected behavior or a limitation in emodpy-hiv, follow the step
 
 .. _documentation: https://docs.idmod.org/projects/emodpy-hiv/en/latest/
 
-.. _issues: https://github.com/EMOD-Hub/emodpy-hiv/issues
+.. _issues: https://github.com/EMOD-Hub/issues-and-discussions/issues/
 
 
 Open a feature request
