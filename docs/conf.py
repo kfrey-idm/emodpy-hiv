@@ -53,9 +53,8 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
     'sphinx.ext.autodoc',
-    'sphinxcontrib.napoleon',
+    'sphinx.ext.napoleon',
     'sphinx.ext.todo',
-    'plantweb.directive',
     'sphinxcontrib.programoutput',
     'sphinx.ext.intersphinx',
     'sphinxext.remoteliteralinclude',
@@ -82,8 +81,6 @@ myst_enable_extensions = [
     "substitution",
     "tasklist",
 ]
-
-plantuml = 'plantweb'
 
 autodoc_default_options = {
     'member-order': 'bysource',
@@ -235,6 +232,22 @@ html_context = {
 # Add customizations
 def setup(app):
     app.add_css_file("theme_overrides.css")
+
+    # Patch sphinx.ext.autodoc.type_comment.signature_from_ast to handle IndexError
+    # raised with Python 3.13. Sphinx 7.x's update_annotations_using_type_comments
+    # handler does not catch IndexError, which occurs when type_comment argtypes has
+    # fewer items than the function parameters. Converting to SyntaxError causes
+    # get_type_comment() to return None gracefully instead of emitting a warning.
+    from sphinx.ext.autodoc import type_comment as _tc
+    _orig_sig_from_ast = _tc.signature_from_ast
+
+    def _patched_sig_from_ast(node, bound_method, type_comment):
+        try:
+            return _orig_sig_from_ast(node, bound_method, type_comment)
+        except IndexError:
+            raise SyntaxError("IndexError in signature_from_ast (Python 3.13 compatibility)")
+
+    _tc.signature_from_ast = _patched_sig_from_ast
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]

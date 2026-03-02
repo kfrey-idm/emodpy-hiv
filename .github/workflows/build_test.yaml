@@ -3,18 +3,24 @@ on:
   pull_request:
     branches:
       - 'main'
+    paths:
+      - 'emodpy_hiv/**'
+      - 'pyproject.toml'
   push:
     branches-ignore:
       - 'main'
+    paths:
+      - 'emodpy_hiv/**'
+      - 'pyproject.toml'
 
 jobs:
   build_test:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '***SKIPBUILD***')"
     strategy:
-      max-parallel: 1
+      max-parallel: 3
       matrix:
-        python-version: [ 3.9 ]
+        python-version: ['3.10', '3.13', '3.14']
     steps:
       - name: Checkout sources with LFS
         uses: actions/checkout@v4
@@ -35,8 +41,8 @@ jobs:
           pyproject_file: 'pyproject.toml'
       - name: install test packages
         run: |
-          python -m pip install --upgrade -r requirements.txt 
-        working-directory: ./tests
+          wheel=$(python -c "import glob; print(glob.glob('dist/*.whl')[0])")
+          pip install "${wheel}[test]" --extra-index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
       - name: run unit, sim, and country tests
         run: |
           pytest unittests/test_emod_hiv_package.py

@@ -1,4 +1,5 @@
 import json
+import types
 import unittest
 import pytest
 import sys
@@ -54,7 +55,23 @@ class TestReportersHIV(unittest.TestCase):
 
     def tearDown(self) -> None:
         # Check if the test failed and leave the data in the folder if it did
-        if any(error[1] for error in self._outcome.errors):
+        # Compatible with unittest (Python 3.9-3.13) and pytest
+        test_failed = False
+        try:
+            if hasattr(self._outcome, 'errors'):
+                # unittest Python 3.10 and earlier
+                test_failed = any(error[1] for error in self._outcome.errors)
+            elif hasattr(self._outcome, 'result'):
+                # unittest Python 3.11+
+                result = self._outcome.result
+                if hasattr(result, 'errors') and hasattr(result, 'failures'):
+                    test_failed = len(result.errors) > 0 or len(result.failures) > 0
+        except (AttributeError, TypeError):
+            # When running under pytest or if _outcome structure is different,
+            # assume test passed (pytest has its own failure handling)
+            test_failed = False
+
+        if test_failed:
             if hasattr(self, "task"):  # don't need to do this for error checking tests
                 if self.task:
                     # writing data to be looked at in the failed_tests folder
@@ -561,7 +578,8 @@ class TestReportersHIV(unittest.TestCase):
         self.assertEqual(task.config.parameters.Report_HIV_ByAgeAndGender_Event_Counter_List,
                          [])
         self.assertEqual(str(task.config.parameters.Report_HIV_ByAgeAndGender_Collect_Targeting_Config_Data),
-                         str([targeting_config.HasIntervention(self.random_string1).to_schema_dict(self.reporter)]))
+                         str([targeting_config.HasIntervention(self.random_string1).to_schema_dict(
+                             types.SimpleNamespace(get_schema=self.reporter.get_schema_json))]))
         # we validate that the targeting config converts and works correctly in test_sim_with_reporters.py
         self.assertEqual(task.config.parameters.Report_HIV_Period, 38 * 2) # see reporter for explanation
         # ReportFilter
@@ -610,7 +628,8 @@ class TestReportersHIV(unittest.TestCase):
         self.assertEqual(task.config.parameters.Report_HIV_ByAgeAndGender_Event_Counter_List,
                          self.event_list)
         self.assertEqual(str(task.config.parameters.Report_HIV_ByAgeAndGender_Collect_Targeting_Config_Data),
-                         str([targeting_config.HasIntervention(self.random_string1).to_schema_dict(self.reporter)]))
+                         str([targeting_config.HasIntervention(self.random_string1).to_schema_dict(
+                             types.SimpleNamespace(get_schema=self.reporter.get_schema_json))]))
         # we validate that the targeting config converts and works correctly in test_sim_with_reporters.py
         self.assertEqual(task.config.parameters.Report_HIV_Period, 38 * 2) # see reporter for explanation
         # ReportFilter

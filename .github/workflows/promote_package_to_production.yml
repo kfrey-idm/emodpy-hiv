@@ -14,7 +14,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        python-version: [ '3.9' ]
+        python-version: [ '3.13' ]
     steps:
       - name: Set package variables
         run: |
@@ -42,11 +42,10 @@ jobs:
 
       - name: install staging package
         run: |
-          pip install ./dist/${{ env.PACKAGE_NAME }}-${{ github.event.inputs.package_version }}-py3-none-any.whl --extra-index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
-      
+          pip install "./dist/${{ env.PACKAGE_NAME }}-${{ github.event.inputs.package_version }}-py3-none-any.whl[test]" --extra-index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
+
       - name: run unit, sim, and country tests
         run: |
-          pip install -r requirements.txt
           pytest unittests/test_emod_hiv_package.py
           pytest --dist loadfile -v -m unit --junitxml="test_results_unit.xml"
           pytest --dist loadfile -v -m container --junitxml="test_results_container.xml"
