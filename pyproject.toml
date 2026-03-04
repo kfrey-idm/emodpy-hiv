@@ -54,14 +54,6 @@ docs = [
 lint = [
     "flake8",
 ]
-packaging = [
-    "build",
-    "flake8",
-    "coverage",
-    "py-make",
-    "bump2version",
-    "twine",
-]
 test = [
     "emod-hiv",
     "pytest",
@@ -96,8 +88,12 @@ emodpy_hiv = [
     "countries/**/*.XLSX"
 ]
 
-[tool.pip]
-extra-index-url = "https://packages.idmod.org/api/pypi/pypi-production/simple"
+[tool.bumpversion]
+current_version = "3.0.1"
+commit = true
 
-[tool.uv]
-extra-index-url = ["https://packages.idmod.org/api/pypi/pypi-production/simple"]
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+
+[[tool.bumpversion.files]]
+filename = "emodpy_hiv/__init__.py"
