@@ -7,7 +7,7 @@ name = "emodpy-hiv"
 version = "3.0.2"
 description = "IDM's HIV-specific EMOD-API binding code"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 authors = [
     {name = "Sharon Chen", email = "sharon.chen@gatesfoundation.org"},
     {name = "Zhaowei Du", email = "zhaowei.du@gatesfoundation.org"},
@@ -19,16 +19,15 @@ authors = [
 keywords = ["modeling", "IDM"]
 dependencies = [
     "emodpy~=3.0",
-    "pandas",
-    "scikit-learn",
-    "python-calamine",
+    "pandas~=3.0",
+    "scikit-learn~=1.8",
+    "python-calamine~=0.6",
     "emod-hiv==2.30.0",
 ]
 license = "MIT"
 classifiers=[
     "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -69,7 +68,7 @@ test = [
 
 [project.urls]
 Repository="https://github.com/EMOD-Hub/emodpy-hiv"
-Issues="https://github.com/EMOD-Hub/emodpy-hiv/issues"
+Issues="https://github.com/EMOD-Hub/issues-and-discussions/issues"
 
 [tool.setuptools.packages]
 find = {include = ["emodpy_hiv*"]}
@@ -77,16 +76,14 @@ find = {include = ["emodpy_hiv*"]}
 [tool.setuptools.package-data]
 emodpy_hiv = [
     "countries/*.csv",
-    "countries/**/*.csv",
-    "countries/*.xls",
-    "countries/**/*.xls",
-    "countries/*.xlsx",
-    "countries/**/*.xlsx",
-    "countries/*.XLS",
-    "countries/**/*.XLS",
-    "countries/*.XLSX",
-    "countries/**/*.XLSX"
+    "countries/**/*.csv"
 ]
+
+[tool.setuptools.exclude-package-data]
+# ...except the source files which have been compiled (C extensions):
+"*" = ["*.xlsx", "*.XLS"]
+
+
 
 [tool.bumpversion]
 current_version = "3.0.2"
