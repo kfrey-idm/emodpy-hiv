@@ -54,16 +54,15 @@ lint = [
     "flake8",
 ]
 test = [
-    "emod-hiv",
     "pytest",
     "pytest-xdist",
     "pytest-runner",
     "pytest-timeout",
     "pytest-cache",
-    "flake8",
     "coverage",
     "py-make",
     "pillow",
+    "snakemake",
 ]
 
 [project.urls]
