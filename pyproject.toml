@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "emodpy-hiv"
-version = "3.0.3"
+version = "3.0.4"
 description = "IDM's HIV-specific EMOD-API binding code"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -85,7 +85,7 @@ emodpy_hiv = [
 
 
 [tool.bumpversion]
-current_version = "3.0.3"
+current_version = "3.0.4"
 commit = true
 
 [[tool.bumpversion.files]]
