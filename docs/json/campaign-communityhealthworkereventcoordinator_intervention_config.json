@@ -1,6 +1,0 @@
-{
-  "Intervention_Config": {
-    "class": "BroadcastEvent",
-    "Broadcast_Event": "EventFromIntervention"
-  }
-}

@@ -10,11 +10,11 @@ individuals with interventions. For example, you might want to put individuals i
 bins and then target interventions to individuals in a particular age bin. Another common use is to
 configure treatment coverage to be higher for nodes that are easy to access and lower for nodes that
 are difficult to access. For more information on creating campaign interventions, see
-[model-campaign](model-campaign.md).
+[Creating campaigns](model-campaign.md).
 
 For HIV simulations, transmission is configured using mechanistic parameter settings, such as parasite
 density, viral load, biting frequency, and other measures relevant to the disease being modeled. See
-[parameter-configuration-infectivity](parameter-configuration-infectivity.md) for more information.
+[Infectivity configuration](parameter-configuration-infectivity.md) for more information.
 
 The following sections describe how to define individual properties and assign different values to
 individuals in a simulation. However, with the exception of setting up age bins, you can use the
@@ -24,7 +24,7 @@ parameters, see [NodeProperties and IndividualProperties](parameter-demographics
 ## Create individual properties other than age
 
 Assigning property values to individuals uses the **IndividualProperties** parameter in the
-demographics file. See [parameter-demographics](parameter-demographics.md) for a list of supported properties. The values
+demographics file. See [Demographics parameters](parameter-demographics.md) for a list of supported properties. The values
 you assign to properties are user-defined and can be applied to individuals in all nodes or only in
 particular nodes in a simulation.
 
@@ -52,10 +52,10 @@ the different properties are merely suggestions and can be used to track any pro
 1.  If you want to add another property and associated values, add a new JSON object in the
     **IndividualProperties** array as above.
 
-> **NOTE:**
-> Multiple properties must be defined in one file. They can be defined in either the base
-> layer demographics file or an overlay file, but they cannot be split between the files.
-> The maximum number of property types that can be added is two.
+!!! note
+    Multiple properties must be defined in one file. They can be defined in either the base
+    layer demographics file or an overlay file, but they cannot be split between the files.
+    The maximum number of property types that can be added is two.
 
 ## Create properties for age ranges
 

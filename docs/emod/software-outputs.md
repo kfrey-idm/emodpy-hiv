@@ -22,11 +22,11 @@ and logging files to help troubleshoot any issues you may encounter.
 InsetChart.json, for example, contains per-time step values accumulated over the simulation
 in a variety of reporting channels, such as new infections, prevalence, and recovered. EMOD provides
 several other built-in reports that you can enable in the *configuration file* using the
-[parameter-configuration-output](parameter-configuration-output.md) parameters.
+[Output configuration](parameter-configuration-output.md) parameters.
 Reports are generally in JSON or CSV format.
 
 In order to interpret the output of EMOD simulations, you will find it useful to parse the output
-reports into an analyzable structure. For example, you can use a Python or MATLAB script to create graphs
+reports into an analyzable structure. For example, you can use a Python or R script to create graphs
 and charts for analysis.
 
 For a full reference of available reports, see [Reports reference](parameter-reports-overview.md).

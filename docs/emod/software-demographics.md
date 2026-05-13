@@ -12,14 +12,14 @@ individuals or nodes. For example, you might want to divide a population up into
 based on age so you can target interventions to individuals in a particular age range. Another
 common use is to configure treatment coverage to be higher for individuals in easily accessible
 regions and lower for individuals in areas that are difficult to access. for more information,
-see [model-properties](model-properties.md).
+see [Individual and node properties](model-properties.md).
 
 You can also simulate a complex health care system using property values that represent the
 intervention status for each individual. For example, consider a disease that has a second-line
 treatment that is not used unless the first-line treatment has proven ineffective. You can assign a
 property value after receiving the first-line treatment and prevent anyone from receiving the
 second-line treatment unless they have that property value and are still symptomatic. For more
-information, see [model-care-cascade](model-care-cascade.md).
+information, see [Care cascade](model-care-cascade.md).
 
 You do have the option to run a simulation *without* a demographics
 file if you set **Enable_Demographics_Builtin** to 1 in the configuration file. However, this option
@@ -27,4 +27,4 @@ is primarily used for software testing. It will not provide meaningful simulatio
 not represent the population of a real geographic location.
 
 The demographics file structure and parameters are described in more detail in
-[parameter-demographics](parameter-demographics.md).
+[Demographics parameters](parameter-demographics.md).

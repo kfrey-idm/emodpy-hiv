@@ -6,11 +6,7 @@ The HIV disease progression report (ReportHIVInfection.csv) provides information
 
 To generate the report, the following parameters must be configured in the config.json file:
 
-| Parameter | Data type | Min | Max | Default | Description |
-|---|---|---|---|---|---|
-| Report_HIV_Infection | boolean | NA | NA | 0 | Set this to 1 to generate the report. |
-| Report_HIV_Infection_Start_Year | float | 1900 | 2200 | 1900 | Simulation time in years to start collecting data. |
-| Report_HIV_Infection_Stop_Year | float | 1900 | 2200 | 2200 | Simulation time in years to start collecting data. |
+{{ read_csv('../csv/report-hivinfection.csv', keep_default_na=False) }}
 
 ```json
 {
@@ -47,7 +43,7 @@ The output report will contain the following information.
 | ModTransmit | float | Multiplicative modifier on disease transmission; will be set to 1 by default for HIV, but can be impacted by the **IndividualImmunityChanger** intervention. |
 | ModMortality | float | Multiplicative modifier on disease mortality; will be set to 1 by default for HIV, but can be impacted by the **IndividualImmunityChanger** intervention. |
 | ArtStatus | integer | Describes the individual's ART status. Possible values are:<br><br>* 1 = The individual is not currently receiving ART.<br>* 5 = The individual is on ART, but their viral load is not yet suppressed.<br>* 6 = The individual is on ART, and their viral load is suppressed.<br>* 7 = The individual is on ART, but is experiencing virological failure.<br>* 8 = The individual has had poor adherence to ART.<br>* 9 = The individual has dropped out of ART. |
-| InfectivitySuppression | float | The multiplier acting on **Base_Infectivity** to determine the per-act transmission probability of a virally suppressed HIV-positive individual. This can be reduced from **ART_Viral_Suppression_Multiplier** due to **ARTBasic**'s **Days_To_Achieve_Viral_Suppression**. |
+| InfectivitySuppression | float | The multiplier acting on **Base_Infectivity** to determine the per-act transmission probability of a virally suppressed HIV-positive individual. This can be reduced from **ART_Viral_Suppression_Multiplier** due to **AntiretroviralTherapy**'s **Days_To_Achieve_Viral_Suppression**. |
 | DurationOnArt | integer | The number of days since the individual most recently started ART. Set to -1 if they are not on ART. |
 | ProbMaternalTransmissionModifier | float | The better maternal transmission multiplier provided by **PMTCT**, or zero. |
 | OnArtQuery | boolean | Describes whether the individual is on ART or not: 0 if individual is not on ART, and 1 if they are. |
@@ -63,4 +59,4 @@ The output report will contain the following information.
 
 The following is an example of a ReportHIVInfection.csv file.
 
-{{ read_csv('ReportHIVInfection-Example.csv') }}
+{{ read_csv('ReportHIVInfection-Example.csv', keep_default_na=False) }}

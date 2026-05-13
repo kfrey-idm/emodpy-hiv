@@ -10,14 +10,7 @@ contained in the file (see the example charts provided at the end of this page.)
 
 To generate the report, the following parameters must be configured in the config.json file:
 
-| Parameter | Data type | Min | Max | Default | Description |
-|---|---|---|---|---|---|
-| Enable_Default_Reporting | boolean | NA | NA | 1 | Set this to 1 (default value) to generate the report. |
-| Report_HIV_Event_Channels_List | array of strings | NA | NA | [] | The list of events to be included in the report. For each event specified with this parameter, one channel will be added to the report. See [parameter-campaign-event-list](parameter-campaign-event-list.md) for possible values. If no events are listed, a 'Number of Events' channel will be included on the report and display the total number of all events that occurred during the simulation. |
-| Inset_Chart_Include_Coital_Acts | boolean | NA | NA | 0 | When set to 1, the report will include channels about the number of coital acts per relationship type per day—in total, and those using condoms (eight channels added). |
-| Inset_Chart_Has_Interventions | array of strings | NA | NA | [] | A list of interventions to be included in the report. For each intervention listed, one channel is added to the report showing the fraction of the population that has that intervention at that time step. Note: the values specified here must match the **Intervention_Name** parameters listed in the campaign.json file. See [parameter-campaign-individual-interventions](parameter-campaign-individual-interventions.md) for information on configuring these parameters. |
-| Inset_Chart_Has_IP | array of strings | NA | NA | [] | A list of individual property (IP) keys to be included in the report. For each value of each IP key provided, one channel is added to the report showing the fraction of the population with that Key:Value pair, at that time step (for example, the fractions in Risk:LOW, Risk:MEDIUM, and Risk:HIGH). See [model-properties](model-properties.md) for additional information on configuring IPs. |
-| Inset_Chart_Include_Pregnancies | boolean | NA | NA | 0 | If set to 1, three channels are included in the report showing counts of new pregnancies, current pregnancies, and possible mothers at each time step. |
+{{ read_csv('../csv/report-inset-chart.csv', keep_default_na=False) }}
 
 ```json
 {
@@ -52,7 +45,7 @@ When running HIV simulations, the header section will contain the following para
 
 When running HIV simulations, the following channels are included in the InsetChart.json file.
 For channels related to the HIV stage (latent, acute, AIDS), these definitions are described in more
-detail in [hiv-model-intrahost](hiv-model-intrahost.md).
+detail in [HIV intrahost model](hiv-model-intrahost.md).
 
 | Channel | Description |
 |---|---|
@@ -81,7 +74,7 @@ detail in [hiv-model-intrahost](hiv-model-intrahost.md).
 | Number of (untreated) Individuals with Acute HIV | The number of individuals not on ART with acute HIV. |
 | Number of (untreated) Individuals with Latent HIV | The number of individuals not on ART with latent HIV. |
 | Number of ART dropouts (cumulative) | The number of individuals who started and dropped ART, cumulative up to that day. |
-| Number of Circumcised Males | The number of male individuals that are circumcised via the [parameter-campaign-individual-malecircumcision](parameter-campaign-individual-malecircumcision.md) intervention. |
+| Number of Circumcised Males | The number of male individuals that are circumcised via the [MaleCircumcision](parameter-campaign-individual-malecircumcision.md) intervention. |
 | Number of Events | The total number of events (births, new infections, etc.) cumulative up to that day. |
 | Number of Individuals Ever in a Relationship | The number of individuals who have ever been in a relationship cumulative up to that day. |
 | Number of Individuals HIV+ w/ CD4 &lt; 200 (non-ART) | The number of individuals who are HIV+ with CD4 count less than 200 and NOT on ART on that day. |

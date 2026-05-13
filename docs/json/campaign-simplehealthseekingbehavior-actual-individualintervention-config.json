@@ -1,0 +1,10 @@
+{
+    "Event_Or_Config": "Config",
+    "Actual_IndividualIntervention_Config": {
+        "class": "SimpleDiagnostic",
+        "Base_Sensitivity": 0.9,
+        "Base_Specificity": 0.8,
+        "Event_Or_Config": "Event",
+        "Positive_Diagnosis_Event": "TestedPositive"
+    }
+}

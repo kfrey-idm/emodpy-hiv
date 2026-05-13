@@ -7,22 +7,78 @@ broadcasted that will trigger some sort of response by the healthcare system.
 distribute this intervention to the node. The node intervention could then broadcast its event 
 that a **TriggeredEventCoordinator** is listening for. One can use the 
 **Report_Coordinator_Event_Recorder** to report on the events broadcasted by this intervention. 
-Note, this coordinator class must be used with listeners that are operating on the same core. For more information, see [emod:dev-architecture-core](emod:dev-architecture-core.md).
+Note, this coordinator class must be used with listeners that are operating on the same core..
 
-> **NOTE:**
-> Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
-> Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
-> that parameter.
->
-> EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
->
-> JSON format does not permit comments, but you can add "dummy" parameters to add contextual
-> information to your files. Any keys that are not EMOD parameter names will be ignored by the
-> model.
+!!! note
+    Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
+    Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
+    that parameter.
+
+    EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
+
+    JSON format does not permit comments, but you can add "dummy" parameters to add contextual
+    information to your files. Any keys that are not EMOD parameter names will be ignored by the
+    model.
 
 The table below describes all possible parameters with which this class can be configured. The JSON
 example that follows shows one potential configuration.
 
-{{ read_csv('../csv/campaign-broadcastcoordinatoreventfromnode.csv') }}
+{{ read_csv('../csv/campaign-broadcastcoordinatoreventfromnode.csv', keep_default_na=False) }}
 
-*See example: [campaign-broadcastcoordinatoreventfromnode.json](../json/campaign-broadcastcoordinatoreventfromnode.json)*
+```json
+{
+    "Events": [
+        {
+            "class": "CampaignEventByYear",
+            "Start_Year": 1990.0,
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Event_Coordinator_Config": {
+                "class": "StandardInterventionDistributionEventCoordinator",
+                "Intervention_Config": {
+                    "class": "NodeLevelHealthTriggeredIV",
+                    "Trigger_Condition_List": [
+                        "NonDiseaseDeaths",
+                        "DiseaseDeaths"
+                    ],
+                    "Demographic_Coverage": 1.0,
+                    "Actual_NodeIntervention_Config": {
+                        "class": "BroadcastCoordinatorEventFromNode",
+                        "Broadcast_Event" : "Distribute_Vaccine"
+                    }
+                }
+            }
+        },
+        {
+            "class": "CampaignEventByYear",
+            "Start_Year": 1990.0,
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Event_Coordinator_Config": {
+                "class": "TriggeredEventCoordinator",
+                "Coordinator_Name": "VaccineDistributor",
+                "Start_Trigger_Condition_List": [ "Distribute_Vaccine" ],
+                "Stop_Trigger_Condition_List": [],
+                "Number_Repetitions": 1,
+                "Target_Demographic": "Everyone",
+                "Demographic_Coverage": 0.5,
+                "Intervention_Config": {
+                    "class": "SimpleVaccine",
+                    "Cost_To_Consumer": 2,
+                    "Vaccine_Take": 1,
+                    "Vaccine_Type": "AcquisitionBlocking",
+                    "Waning_Config": {
+                        "class": "WaningEffectBox",
+                        "Initial_Effect": 1.0,
+                        "Box_Duration": 100
+                    }
+                },
+                "Completion_Event": "Vaccine_Was_Distributed"
+            }
+        }
+    ],
+    "Use_Defaults": 1
+}
+```

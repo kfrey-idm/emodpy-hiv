@@ -9,24 +9,70 @@ intervention to reach the desired prevalence. This coordinator is similar to the
 allows an *attribute* in the population to be polled, not only the intervention itself having been received. This allows for
 tracking overall coverage when, potentially, multiple routes exist for individuals to have acquired the same target attribute.
 
-> **NOTE:**
-> Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
-> Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
-> that parameter.
->
-> EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
->
-> JSON format does not permit comments, but you can add "dummy" parameters to add contextual
-> information to your files. Any keys that are not EMOD parameter names will be ignored by the
-> model.
+!!! note
+    Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
+    Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
+    that parameter.
+
+    EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
+
+    JSON format does not permit comments, but you can add "dummy" parameters to add contextual
+    information to your files. Any keys that are not EMOD parameter names will be ignored by the
+    model.
 
 The table below describes all possible parameters with which this class can be configured. The JSON
 example that follows shows one potential configuration.
 
-{{ read_csv('../csv/campaign-referencetrackingeventcoordinatortrackingconfig.csv') }}
+{{ read_csv('../csv/campaign-referencetrackingeventcoordinatortrackingconfig.csv', keep_default_na=False) }}
 
 Example: Use **Tracking_Config** to look at men who are not circumcised (by any route, not only via the **MaleCircumcision** 
 intervention); if coverage is below the target level at the time of polling, apply the **MaleCircumcision** 
 intervention to uncircumcised men to reach the target coverage.
 
-*See example: [campaign-referencetrackingeventcoordinatortrackingconfig.json](../json/campaign-referencetrackingeventcoordinatortrackingconfig.json)*
+```json
+{
+    "Use_Defaults": 1,
+    "Events": [
+        {
+            "class": "CampaignEventByYear",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Year": 1960,
+            "Event_Coordinator_Config": {
+                "class": "ReferenceTrackingEventCoordinatorTrackingConfig",
+                "Target_Demographic": "ExplicitGender",
+                "Target_Gender": "Male",
+                "Update_Period": 182,
+                "End_Year": 1965,
+                "Time_Value_Map": {
+                    "Times": [
+                        1960,
+                        1961,
+                        1962,
+                        1963,
+                        1964
+                    ],
+                    "Values": [
+                        0.25,
+                        0.375,
+                        0.4,
+                        0.4375,
+                        0.46875
+                    ]
+                },
+                "Tracking_Config": {
+                    "class": "IsCircumcised",
+                    "Is_Equal_To": 1
+                },
+                "Intervention_Config": {
+                    "class": "MaleCircumcision",
+                    "Cost_To_Consumer": 10.0,
+                    "Circumcision_Reduced_Acquire": 0.6,
+                    "Distributed_Event_Trigger": "VMMC_1"
+                }
+            }
+        }
+    ]
+}
+```

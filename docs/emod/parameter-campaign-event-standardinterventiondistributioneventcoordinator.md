@@ -1,5 +1,6 @@
 # StandardInterventionDistributionEventCoordinator
 
+
 The **StandardInterventionDistributionEventCoordinator** coordinator class distributes an individual-level or
 node-level intervention to a specified fraction of individuals or nodes within a node set. Recurring
 campaigns can be created by specifying the number of times distributions should occur and the time
@@ -12,20 +13,41 @@ restrictions.
 See the following JSON example and table, which shows all available parameters
 for this event coordinator.
 
-> **NOTE:**
-> Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
-> Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
-> that parameter.
->
-> EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
->
-> JSON format does not permit comments, but you can add "dummy" parameters to add contextual
-> information to your files. Any keys that are not EMOD parameter names will be ignored by the
-> model.
+!!! note
+    Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
+    Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
+    that parameter.
 
+    EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
+
+    JSON format does not permit comments, but you can add "dummy" parameters to add contextual
+    information to your files. Any keys that are not EMOD parameter names will be ignored by the
+    model.
 The table below describes all possible parameters with which this class can be configured. The JSON
 example that follows shows one potential configuration.
 
-{{ read_csv('../csv/campaign-standardinterventiondistributioneventcoordinator.csv') }}
+{{ read_csv('../csv/campaign-standardinterventiondistributioneventcoordinator.csv', keep_default_na=False) }}
 
-*See example: [campaign-standardinterventiondistributioneventcoordinator.json](../json/campaign-standardinterventiondistributioneventcoordinator.json)*
+```json
+{
+    "Use_Defaults": 1,
+    "Events": [
+        {
+            "Event_Name": "Outbreak",
+            "class": "CampaignEvent",
+            "Nodeset_Config": {
+                "class": "NodeSetAll"
+            },
+            "Start_Day": 1,
+            "Event_Coordinator_Config": {
+                "class": "StandardInterventionDistributionEventCoordinator",
+                "Demographic_Coverage": 0.005,
+                "Intervention_Config": {
+                    "class": "OutbreakIndividual",
+                    "Outbreak_Source": "PrevalenceIncrease"
+                }
+            }
+        }
+    ]
+}
+```

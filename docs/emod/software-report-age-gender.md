@@ -14,25 +14,7 @@ See the [Configuration](#configuration) section, below, for customization option
 
 To generate this report, the following parameters must be configured in the config.json file:
 
-| Parameter | Data type | Min | Max | Default | Description |
-|---|---|---|---|---|---|
-| Report_HIV_ByAgeAndGender | boolean | NA | NA | 0 | Set to 1 to generate the report. |
-| Report_HIV_ByAgeAndGender_Start_Year | float | 1900 | 2200 | 1900 | The simulation time in years to start collecting data. |
-| Report_HIV_ByAgeAndGender_Stop_Year | float | 1900 | 2200 | 2200 | The simulation time in years to stop collecting data. |
-| Report_HIV_ByAgeAndGender_Collect_Gender_Data | boolean | NA | NA | 0 | When set to 1, the output report will be stratified by gender. |
-| Report_HIV_ByAgeAndGender_Collect_Age_Bins_Data | array of floats | -3.40282e+38 | 3.40282e+38 | [] | A list of bins used to stratify the report by age. Each value defines the minimum value (inclusive) of that bin, while the next value defines the maximum value (exclusive) of the bin. The values cannot be equal and must be listed in ascending order. Leave the array empty to not stratify the report by age. The maximum number of age bins is 100. |
-| Report_HIV_ByAgeAndGender_Collect_Circumcision_Data | boolean | NA | NA | 0 | When set to 1, the IsCircumcised column is included in the output report. The report data will by stratified by those who do or do not have the MaleCircumcision intervention. Note: setting this to 1 doubles the number of rows in the output report. |
-| Report_HIV_ByAgeAndGender_Collect_HIV_Data | boolean | NA | NA | 0 | When set to 1, the HasHIV column is included in the output report. The report data will stratified by those who do or do not have HIV. Cannot be used with **Report_HIV_ByAgeAndGender_Collect_HIV_Stage_Data**. Note: setting this to 1 doubles the number of rows in the output report. |
-| Report_HIV_ByAgeAndGender_Collect_HIV_Stage_Data | boolean | NA | NA | 0 | When set to 1, the HIV_Stage column is included in the output report. The report data will be stratified by HIV Infection Stage (NOT_INFECTED, ACUTE, LATENT, AIDS, ON_ART). Cannot be used with **Report_HIV_ByAgeAndGender_Collect_HIV_Data** or **Report_HIV_ByAgeAndGender_Collect_On_Art_Data**. |
-| Report_HIV_ByAgeAndGender_Collect_On_Art_Data | boolean | NA | NA | 0 | When set to 1, the On_Art_Dim column is included in the output report. The report data will be stratified by those individuals who are on ART and those who are not. Cannot be used with **Report_HIV_ByAgeAndGender_Collect_HIV_Stage_Data**. Note: setting this to 1 doubles the number of rows in the output report. |
-| Report_HIV_ByAgeAndGender_Collect_IP_Data | array of strings | NA | NA | [] | A list of individual property (IP) keys used to stratify the report. A column will be added to the report for each IP listed. Specify the IP values by adding an **IndividualProperties** parameter in the demographics file. See [model-properties](model-properties.md) for details on setting individual properties. Note: each IP key included here will also increase the number of rows in the report by several fold (once for each possible IP Key:Value pair). |
-| Report_HIV_ByAgeAndGender_Collect_Intervention_Data | array of strings | NA | NA | [] | A list of interventions used to stratify the report. This allows for reporting on a subset (or all) of the interventions that an individual has been on, of those listed in the **Intervention_Name** campaign parameter. Note: this can only be used with interventions that remain with an individual for a period of time, such as VMMC, vaccine/PrEP, or those with a delay state in the cascade of care. See [parameter-campaign-individual-interventions](parameter-campaign-individual-interventions.md) for a list of possible interventions. |
-| Report_HIV_ByAgeAndGender_Add_Transmitters | boolean | NA | NA | 0 | When set to 1, the Transmitters column is included in the output report. For a given row, this value indicates how many individuals that have transmitted the disease meet the specifications of that row. |
-| Report_HIV_ByAgeAndGender_Stratify_Infected_By_CD4 | boolean | NA | NA | 0 | When set to 1, the number of infected individuals will be segregated into four columns based on CD4 count. When set to 0, the number of infected individuals are aggregated into one column regardless of CD4 count. Note: this creates additional polling columns, not more stratification rows. |
-| Report_HIV_ByAgeAndGender_Has_Intervention_With_Name | string | NA | NA | "" | This parameter is being deprecated. Use **Report_HIV_ByAgeAndGender_Collect_Intervention_Data** instead. If an intervention is listed for this parameter, one column will be added to the report, indicating how many individuals in the row have the intervention. See [parameter-campaign-individual-interventions](parameter-campaign-individual-interventions.md) for possible intervention values. Note: this only works for interventions that remain with an individual for a period of time, such as VMMC, vaccine/PrEP, or those with a delay state in the cascade of care. |
-| Report_HIV_ByAgeAndGender_Event_Counter_List | array of strings | NA | NA | [] | A list of events used to stratify the report. A column will be added to the report for each event listed, showing the number of times the event occurred during the reporting period. To be counted, the individual must qualify for the row stratification at the time the event occurred, not necessarily at the end of the reporting period. See [parameter-campaign-event-list](parameter-campaign-event-list.md) for possible event values. |
-| Report_HIV_ByAgeAndGender_Add_Relationships | boolean | NA | NA | 0 | When set to 1, the report will contain data on the population currently in a relationship and ever in a relationship for each relationship type (TRANSITORY, INFORMAL, MARITAL, and COMMERCIAL), eight columns total. Additionally, columns containing a sum of individuals in two or more partnerships (Has Concurrent Partners) and a sum of the lifetime number of relationships (Lifetime Partners) will be included. |
-| Report_HIV_ByAgeAndGender_Add_Concordant_Relationships | boolean | NA | NA | 0 | When set to 1, a Concordant column for each relationship type (TRANSITORY, INFORMAL, MARITAL, and COMMERCIAL) is included in the output report. These contain totals for each relationship of each type where both partners have the same HIV status. |
+{{ read_csv('../csv/report-age-gender.csv', keep_default_na=False) }}
 
 ```json
 {
@@ -74,7 +56,7 @@ Data columns of each type are as follows.
 | Data channel | Data type | Description |
 |---|---|---|
 | Year | float | The year at the end of the semiannual interval being recorded. For example, 1980.5 means that the counts in this row were aggregated over the first half of 1980, reported as a snapshot in the middle of the year 1980. |
-| NodeId | integer | The numerical identifier of the node as defined in the demographics. See [parameter-demographics](parameter-demographics.md) for details on configuring the NodeID values. |
+| NodeId | integer | The numerical identifier of the node as defined in the demographics. See [Demographics parameters](parameter-demographics.md) for details on configuring the NodeID values. |
 | Gender | boolean | The gender of the individual. 0 indicates male, 1 indicates female. |
 | Age | float | The age of the individual, as configured by the **Report_HIV_ByAgeAndGender_Collect_Age_Bins_Data** parameter. |
 | IP_Key:&lt;IP_Key&gt; | string | For each IP key in the **Report_HIV_ByAgeAndGender_Collect_IP_Data** list, there will be a corresponding IP_Key column in the report. The individuals counted in that row will have that value for that key. See the [Configuration](#configuration) section, above, for details on setting the **Report_HIV_ByAgeAndGender_Collect_IP_Data** values. |
@@ -83,6 +65,7 @@ Data columns of each type are as follows.
 | HasHIV | integer | If the **Report_HIV_ByAgeAndGender_Collect_HIV_Data** parameter is set to 1, then this column will be added to the report. The column values will be 0 or 1, where 0 indicates that all individuals in that row are not infected with HIV, and 1 indicates they are. |
 | HIV_Stage | enum | If the **Report_HIV_ByAgeAndGender_Collect_HIV_Stage_Data** parameter is set to 1, then this column will be added to the report. The values of the column will be NOT_INFECTED, ACUTE, LATENT, AIDS, and ON_ART, indicating the HIV stage of all individuals in that row. |
 | On_Art_Dim | integer | If the **Report_HIV_ByAgeAndGender_Collect_On_Art_Data** parameter is set to 1, then this column will be added to the report. The values will be 0 or 1, where 0 indicates that all individuals in the row are not on ART, and 1 indicates they are. |
+| MeetsTargetingConfig_X | integer | For each entry in **Report_HIV_ByAgeAndGender_Collect_Targeting_Config_Data**, a corresponding column is added to the report. The values will be 0 or 1, where 0 indicates that all individuals in the row do not qualify based on the targeting config, and 1 indicates they do. X is the zero-based index of the targeting config in the array. |
 
 ### Polling columns
 
@@ -135,4 +118,4 @@ Data columns of each type are as follows.
 
 The following is an example of a ReportHIVByAgeAndGender.csv report:
 
-{{ read_csv('ReportHIVByAgeAndGender-Example.csv') }}
+{{ read_csv('ReportHIVByAgeAndGender-Example.csv', keep_default_na=False) }}

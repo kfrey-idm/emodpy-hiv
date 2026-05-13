@@ -1,20 +1,20 @@
-# Demographics
+# Demographics parameters
 
-The parameters described in this reference section can be added to the *JSON (JavaScript Object Notation)* formatted demographics file to determine the demographics of the population within
-each geographic *node* in a simulation. For example, the number of individuals and the
+The parameters described in this reference section can be added to the JSON (JavaScript Object Notation) formatted demographics file to determine the demographics of the population within
+each geographic node in a simulation. For example, the number of individuals and the
 distribution for age, gender, immunity, risk, and mortality. These parameters work closely with the
-[parameter-configuration-population](parameter-configuration-population.md) parameters in the *configuration file*, which are simulation-wide and
+[Population dynamics](parameter-configuration-population.md) parameters in the configuration file, which are simulation-wide and
 generally control whether certain events, such as births or deaths, are enabled in a simulation.
 
 Generally, you will download a demographics file and modify it to meet the needs of your
-simulation. You can use COmputational Modeling Platform Service (COMPS) to generate demographics and climate files for a particular
+simulation. You can use COMPS to generate demographics and climate files for a particular
 region. By convention, these are named using the name of the region appended with
 "_demographics.json", but you may name the file anything you like.
 
 Additionally, you can use more than one demographics file, with one serving as the base layer and
 the one or more others acting as overlays that override the values in the base layer. This can be
 helpful if you want to experiment with different values in the overlay without modifying your base
-file. For more information, see [software-demographics](software-demographics.md).
+file. For more information, see [Demographics file](software-demographics.md).
 
 At least one demographics file is required for every simulation unless you set the parameter
 **Enable_Demographics_Builtin** to 1 (one) in the *configuration file*. This setting does not
@@ -24,7 +24,34 @@ than actual modeling of disease.
 Demographics files are organized into four main sections: **Metadata**, **NodeProperties**,
 **Defaults**, and **Nodes**. The following example shows the skeletal format of a demographics file.
 
-*See example: [demographics-skeletal.json](../json/demographics-skeletal.json)*
+```json
+{
+    "Metadata": {
+        "DateCreated": "dateTime",
+        "Tool": "scriptUsedToGenerate",
+        "Author": "author",
+        "IdReference": "Gridded world grump2.5arcmin",
+        "NodeCount": 2
+    },
+    "NodeProperties": [{}],
+    "Defaults": {
+        "NodeAttributes": {},
+        "IndividualAttributes": {},
+        "IndividualProperties": {}
+    },
+    "Nodes": [{
+        "NodeID": 1,
+        "NodeAttributes": {},
+        "IndividualAttributes": {},
+        "IndividualProperties": {}
+    }, {
+        "NodeID": 2,
+        "NodeAttributes": {},
+        "IndividualAttributes": {},
+        "IndividualProperties": {}
+    }]
+}
+```
 
 All parameters except those in the **Metadata** and **NodeProperties** sections below can appear in
 either the **Defaults** section or the **Nodes** section of the demographics file. Parameters under
@@ -34,16 +61,16 @@ the **Nodes** section is identified using a unique **NodeID**.
 
 The tables below contain only parameters available when using the HIV *simulation type*.
 
-> **NOTE:**
-> Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
-> Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
-> that parameter.
->
-> EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
->
-> JSON format does not permit comments, but you can add "dummy" parameters to add contextual
-> information to your files. Any keys that are not EMOD parameter names will be ignored by the
-> model.
+!!! note
+    Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
+    Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
+    that parameter.
+
+    EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
+
+    JSON format does not permit comments, but you can add "dummy" parameters to add contextual
+    information to your files. Any keys that are not EMOD parameter names will be ignored by the
+    model.
 
 ## Metadata
 
@@ -53,7 +80,7 @@ own reference. For example, author, date created, tool used, NodeCount and more 
 in the **Metadata** section. You can include any information you like here provided it is
 in valid JSON format.  **IDReference** is used to connect the files together; the climate, migration, and demographics files all have **IdReference** so that there is some way to know that they go together (i.e. know about the same nodes).
 
-If you generate *input files* using COMPS, the following **IdReference** values are
+If you generate input files using COMPS, the following **IdReference** values are
 possible and indicate how the **NodeID** values are generated:
 
 Gridded world grump30arcsec
@@ -78,7 +105,7 @@ This generates a **NodeID** that is a 4-byte unsigned integer; the first two byt
 longitude of the node and the second two bytes represent the latitude. To reserve 0 to be used as a
 null value, 1 is added to the **NodeID** as part of the final calculation.
 
-{{ read_csv('../csv/demo-metadata-hiv.csv') }}
+{{ read_csv('../csv/demo-metadata-hiv.csv', keep_default_na=False) }}
 
 ## NodeProperties and IndividualProperties
 
@@ -99,9 +126,9 @@ that contains parameters that assign properties to nodes in a simulation. The
 **IndividualProperties** section is under either **Defaults** or **Nodes** and contains parameters
 that assign properties to individuals in a simulation.
 
-[model-properties](model-properties.md) provides more guidance.
+[Individual and node properties](model-properties.md) provides more guidance.
 
-{{ read_csv('../csv/demo-properties-hiv.csv') }}
+{{ read_csv('../csv/demo-properties-hiv.csv', keep_default_na=False) }}
 
 ## NodeAttributes
 
@@ -109,7 +136,7 @@ The **NodeAttributes** section contains parameters that add or modify informatio
 regarding the location, migration, habitat, and population of node. Some **NodeAttributes**
 depend on values set in the configuration parameters.
 
-{{ read_csv('../csv/demo-nodeattributes-hiv.csv') }}
+{{ read_csv('../csv/demo-nodeattributes-hiv.csv', keep_default_na=False) }}
 
 ## IndividualAttributes
 
@@ -120,7 +147,7 @@ configured using a simple flag system of three parameters or a complex system of
 many more parameters. The following table contains the parameters that can be used with either
 distribution system.
 
-{{ read_csv('../csv/demo-individualattributes-hiv.csv') }}
+{{ read_csv('../csv/demo-individualattributes-hiv.csv', keep_default_na=False) }}
 
 ### Simple distributions
 
@@ -129,7 +156,7 @@ and the other two are used to further define the distribution. For example, if y
 to a uniform distribution, the initial ages of individuals in the simulation will be evenly
 distributed between some minimum and maximum value as defined by the other two parameters.
 
-{{ read_csv('../csv/demo-simpledistro-hiv.csv') }}
+{{ read_csv('../csv/demo-simpledistro-hiv.csv', keep_default_na=False) }}
 
 ### Complex distributions
 
@@ -139,7 +166,7 @@ linear distribution. The distribution is configured using arrays of axes (such a
 values at points along each of these axes. This allows you to have different distributions for
 different groups in the population.
 
-{{ read_csv('../csv/demo-complexdistro-hiv.csv') }}
+{{ read_csv('../csv/demo-complexdistro-hiv.csv', keep_default_na=False) }}
 
 ## Society
 
@@ -157,7 +184,7 @@ settings for the specific relationship type they are nested under.
 The **Concurrency_Configuration** section defines how the simultaneous relationship parameters are
 used across all relationship types.
 
-{{ read_csv('../csv/demo-society-hiv.csv') }}
+{{ read_csv('../csv/demo-society-hiv.csv', keep_default_na=False) }}
 
 ### Concurrency_Configuration
 
@@ -166,14 +193,14 @@ defines how the simultaneous relationship parameters are used across all relatio
 example, how flags that allow an individual to seek out different types of extra-relational
 partnerships are distributed.
 
-{{ read_csv('../csv/demo-concurrency-config-hiv.csv') }}
+{{ read_csv('../csv/demo-concurrency-config-hiv.csv', keep_default_na=False) }}
 
 ### Relationship_Parameters
 
 The **Relationship_Parameters** section defines basic attributes such as relationship duration, what
 happens if one member of a relationship migrates, and condom usage.
 
-{{ read_csv('../csv/demo-relationship-hiv.csv') }}
+{{ read_csv('../csv/demo-relationship-hiv.csv', keep_default_na=False) }}
 
 ### Pair_Formation_Parameters
 
@@ -181,7 +208,7 @@ The **Pair_Formation_Parameters** section defines the rate at which new relation
 partnership preference using the main pair forming algorithm that finds potential
 partners based on their age and the **Joint_Probabilities** matrix.
 
-{{ read_csv('../csv/demo-pairing-hiv.csv') }}
+{{ read_csv('../csv/demo-pairing-hiv.csv', keep_default_na=False) }}
 
 #### Assortivity
 
@@ -189,7 +216,7 @@ The **Assortivity** section refines who partners with whom. After the main pair 
 reduces the set of potential partners to a subset based on age, **Assortivity** allows for selection
 based on other criteria.
 
-{{ read_csv('../csv/demo-assortivity-hiv.csv') }}
+{{ read_csv('../csv/demo-assortivity-hiv.csv', keep_default_na=False) }}
 
 ### Concurrency_Parameters
 
@@ -205,4 +232,4 @@ parameters for that relationship type. In this section, all parameters should be
 name of the individual property relevant for setting concurrency. Again, if the properties are irrelevant,
 use "NONE".
 
-{{ read_csv('../csv/demo-concurrency-params-hiv.csv') }}
+{{ read_csv('../csv/demo-concurrency-params-hiv.csv', keep_default_na=False) }}

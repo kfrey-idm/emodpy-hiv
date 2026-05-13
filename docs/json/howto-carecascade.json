@@ -1,6 +1,7 @@
 {
     "Use_Defaults": 1,
-    "Events": [{
+    "Events": [
+        {
             "class": "CampaignEvent",
             "Start_Day": 1,
             "Nodeset_Config": {
@@ -47,7 +48,7 @@
                     "New_Property_Value": "InterventionStatus:OnMeds",
                     "Demographic_Coverage": 1.0,
                     "Actual_IndividualIntervention_Config": {
-                        "class": "ARTBasic",
+                        "class": "AntiretroviralTherapy",
                         "Viral_Suppression": 1,
                         "Days_To_Achieve_Viral_Suppression": 1000000
                     }

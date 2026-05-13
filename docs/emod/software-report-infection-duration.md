@@ -10,10 +10,7 @@ interest.
 
 To generate this report, configure the following parameters in the custom_reports.json file:
 
-| Parameter | Data type | Min | Max | Default | Description |
-|-----------|-----------|-----|-----|---------|-------------|
-| **Start_Day** | float | 0 | 3.40E+38 | 0 | The day of the simulation to start collecting data. |
-| **End_Day** | float | 0 | 3.40E+38 | 3.40E+38 | The day of the simulation to stop collecting data. |
+{{ read_csv('../csv/report-infection-duration.csv', keep_default_na=False) }}
 
 ```json
 {
@@ -43,4 +40,4 @@ The output file is named `ReportInfectionDuration.csv`. The report contains the 
 
 ## Example
 
-{{ read_csv('../csv/ReportInfectionDuration.csv') }}
+{{ read_csv('../csv/ReportInfectionDuration.csv', keep_default_na=False) }}

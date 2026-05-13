@@ -1,7 +1,0 @@
-{
-  "Tracking_Config": {
-    "Intervention_Name": "MaleCircumcision",
-    "Is_Equal_To": 1,
-    "class": "HasIntervention"
-  }
-}

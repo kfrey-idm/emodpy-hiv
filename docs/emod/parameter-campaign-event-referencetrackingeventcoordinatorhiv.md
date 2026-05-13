@@ -9,20 +9,55 @@ desired coverage. This coordinator is similar to the **ReferenceTrackingEventCoo
 HIV-specific disease state qualifiers, such that individuals must be in particular disease states to
 qualify for the intervention.
 
-> **NOTE:**
-> Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
-> Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
-> that parameter.
->
-> EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
->
-> JSON format does not permit comments, but you can add "dummy" parameters to add contextual
-> information to your files. Any keys that are not EMOD parameter names will be ignored by the
-> model.
+!!! note
+    Parameters are case-sensitive. For Boolean parameters, set to 1 for true or 0 for false.
+    Minimum, maximum, or default values of "NA" indicate that those values are not applicable for
+    that parameter.
+
+    EMOD does not use true defaults; that is, if the dependency relationships indicate that a parameter is required, you must supply a value for it. However, many of the tools used to work with EMOD will use the default values provided below.
+
+    JSON format does not permit comments, but you can add "dummy" parameters to add contextual
+    information to your files. Any keys that are not EMOD parameter names will be ignored by the
+    model.
 
 The table below describes all possible parameters with which this class can be configured. The JSON
 example that follows shows one potential configuration.
 
-{{ read_csv('../csv/campaign-referencetrackingeventcoordinatorhiv.csv') }}
+{{ read_csv('../csv/campaign-referencetrackingeventcoordinatorhiv.csv', keep_default_na=False) }}
 
-*See example: [campaign-referencetrackingeventcoordinatorhiv.json](../json/campaign-referencetrackingeventcoordinatorhiv.json)*
+```json
+{
+    "Use_Defaults": 1,
+    "Events": [{
+        "class": "CampaignEventByYear",
+        "Nodeset_Config": {
+            "class": "NodeSetAll"
+        },
+        "Start_Year": 1960,
+        "Event_Coordinator_Config": {
+            "class": "ReferenceTrackingEventCoordinatorHIV",
+            "Target_Demographic": "ExplicitGender",
+            "Target_Gender": "Male",
+            "Target_Disease_State": "HIV_Negative",
+            "Update_Period": 182,
+            "End_Year": 1965,
+            "Time_Value_Map": {
+                "Times": [1960, 1961, 1962, 1963, 1964],
+                "Values": [
+                    0.25,
+                    0.375,
+                    0.4,
+                    0.4375,
+                    0.46875
+                ]
+            },
+            "Intervention_Config": {
+                "class": "MaleCircumcision",
+                "Cost_To_Consumer": 10.0,
+                "Circumcision_Reduced_Acquire": 0.6,
+                "Distributed_Event_Trigger": "VMMC_1"
+            }
+        }
+    }]
+}
+```
