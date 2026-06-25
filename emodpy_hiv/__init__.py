@@ -1,5 +1,5 @@
 # flake8: noqa F821
-__version__ = "3.2.3"
+__version__ = "3.3.0"
 
 from emodpy_hiv.campaign import *
 from emodpy_hiv.demographics import *
